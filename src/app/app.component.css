@@ -1,0 +1,25 @@
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+mat-drawer {
+  width: 35vw;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.menu-bar {
+  display: flex;
+}
+
+.menu-bar input {
+  flex: 1 1 auto
+}
+
+.main {
+  margin: 0 10em;
+}
+
+button {
+  border-radius: 100em;
+}
