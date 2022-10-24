@@ -20,7 +20,7 @@ import {MatInputModule} from "@angular/material/input";
   imports: [
     BrowserModule,
     QuillModule.forRoot(),
-    FormsModule
+    FormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
