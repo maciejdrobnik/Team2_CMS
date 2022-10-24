@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+
+$pl-red: (
+  100: #c2402c,
+  500: #8b0002,
+  700: #580000,
+
+  contrast: (
+    100: #fff,
+    500: #fff,
+    700: #fff,
+  )
+);
+
+$pl-gray: (
+  100: #bdbdbd,
+  500: #efefef,
+  700: #ffffff,
+
+  contrast: (
+    100: #000,
+    500: #000,
+    700: #000,
+  )
+);
+
+$primary: mat.define-palette($pl-gray);
+$accent: mat.define-palette($pl-red);
+
+$pl-light-theme: mat.define-light-theme(
+    (
+      color: (
+        primary: $primary,
+        accent: $accent,
+      ),
+    )
+);
+
+@include mat.all-component-themes($pl-light-theme);
