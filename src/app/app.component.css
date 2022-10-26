@@ -1,7 +1,3 @@
-.flex-spacer {
-  flex: 1 1 auto;
-}
-
 mat-drawer {
   width: 35vw;
   background-color: rgba(0, 0, 0, 0.8);
@@ -17,9 +13,21 @@ mat-drawer {
 }
 
 .main {
-  margin: 0 10em;
+  font-size: 1.2rem;
+  margin: 0 20vw;
+  text-align: justify;
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin: 0 3em;
+  }
 }
 
 button {
   border-radius: 100em;
+}
+
+p {
+  text-indent: 20px;
 }
