@@ -1,3 +1,23 @@
 button {
   overflow: hidden;
 }
+
+
+mat-drawer {
+  width: 30vw;
+}
+
+
+@media (max-width: 768px) {
+  mat-drawer {
+    width: 100%;
+  }
+}
+
+.menu-bar {
+  display: flex;
+}
+
+mat-form-field {
+  flex: 1 1 auto;
+}

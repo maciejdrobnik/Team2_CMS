@@ -1,13 +1,13 @@
 <mat-drawer #menu mode="over">
   <div class="menu-bar">
-    <button mat-icon-button>
-      <mat-icon>search</mat-icon>
+    <button mat-icon-button (click)="menu.close()">
+      <mat-icon>close</mat-icon>
     </button>
     <mat-form-field appearance="fill">
       <input matInput>
     </mat-form-field>
-    <button mat-icon-button (click)="menu.close()">
-      <mat-icon>close</mat-icon>
+    <button mat-icon-button>
+      <mat-icon>search</mat-icon>
     </button>
   </div>
 </mat-drawer>
