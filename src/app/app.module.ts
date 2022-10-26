@@ -19,6 +19,7 @@ import { PageComponent } from './pages/page/page.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'editor', component: TextEditorComponent},
   {path: ':id', component: PageComponent},
 ];
 
