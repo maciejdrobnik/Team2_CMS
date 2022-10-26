@@ -1,6 +1,6 @@
 <mat-drawer-container>
-  <app-toolbar></app-toolbar>
-  <app-drawer></app-drawer>
+  <app-toolbar (menuOpened)="menu?.toggle()"></app-toolbar>
+  <app-drawer (init)="menu = $event"></app-drawer>
   <div class="main">
     <h1>What is this site?</h1>
     <p>On this site you can inspect the official tables of formulas used and approved by TUL. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dolore ea quod ratione. Ab consectetur dolore eius inventore nostrum recusandae rem sequi. Aliquam aperiam blanditiis consequatur culpa dicta doloremque doloribus eos exercitationem fuga illo iusto magni, maiores mollitia obcaecati odio officiis omnis optio possimus quam sed temporibus totam ullam. Dolore eos in inventore, laboriosam maiores molestias, neque nostrum, quam quibusdam quis repellendus rerum saepe suscipit? Aperiam beatae dolores ducimus eligendi enim laborum nisi praesentium, quaerat vel voluptas. Aperiam asperiores aspernatur corporis doloremque fugit iusto labore odit officia, praesentium quas! Amet debitis error facilis hic impedit, maiores neque quod reiciendis repellat.</p>

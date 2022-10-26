@@ -2,10 +2,10 @@ mat-toolbar {
   height: 6em;
 }
 
-button {
-  overflow: hidden;
-}
-
 img {
   height: 100%;
+}
+
+button {
+  overflow: hidden;
 }
