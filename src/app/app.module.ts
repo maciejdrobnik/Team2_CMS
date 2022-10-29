@@ -11,11 +11,14 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTreeModule} from "@angular/material/tree";
 import {MatInputModule} from "@angular/material/input";
+import {MatDialogModule} from "@angular/material/dialog";
+import { LatechWindowComponent } from './latech-window/latech-window.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TextEditorComponent
+    TextEditorComponent,
+    LatechWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,8 @@ import {MatInputModule} from "@angular/material/input";
     MatButtonModule,
     MatSidenavModule,
     MatTreeModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

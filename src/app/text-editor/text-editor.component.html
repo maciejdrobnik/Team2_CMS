@@ -1,9 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-nd-12">
-      <quill-editor [styles]="{height: '200px'}" (onEditorChanged)="changedEditor($event)"></quill-editor>
+      <quill-editor [styles]="{height: '200px'}" (onEditorChanged)="changedEditor($event)"
+                    [modules]="modules"></quill-editor>
     </div>
   </div>
+  <button (click)="openDialog()"><mat-icon> functions</mat-icon></button>
   <div class="row">
     <div class="col-nd-8">
       <p></p>
