@@ -1,0 +1,11 @@
+mat-toolbar {
+  height: 6em;
+}
+
+img {
+  height: 100%;
+}
+
+button {
+  overflow: hidden;
+}

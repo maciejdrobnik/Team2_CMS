@@ -1,10 +1,15 @@
 @use '@angular/material' as mat;
 
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600&display=swap');
+
+* {
+  font-family: 'Titillium Web', sans-serif;
+}
+
 $pl-red: (
   100: #c2402c,
   500: #8b0002,
   700: #580000,
-
   contrast: (
     100: #fff,
     500: #fff,
@@ -16,7 +21,6 @@ $pl-gray: (
   100: #bdbdbd,
   500: #efefef,
   700: #ffffff,
-
   contrast: (
     100: #000,
     500: #000,
