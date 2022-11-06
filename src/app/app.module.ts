@@ -11,6 +11,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTreeModule} from "@angular/material/tree";
 import {MatInputModule} from "@angular/material/input";
+import {MatDialogModule} from "@angular/material/dialog";
+import { LatechWindowComponent } from './latech-window/latech-window.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {DrawerComponent} from './drawer/drawer.component';
 import {RouterModule, Routes} from "@angular/router";
@@ -26,11 +28,13 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    TextEditorComponent,
+    LatechWindowComponent,
     ToolbarComponent,
     DrawerComponent,
     HomeComponent,
     PageComponent,
-    TextEditorComponent,
+    TextEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +47,7 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatTreeModule,
     MatInputModule,
+    MatDialogModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
