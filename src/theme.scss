@@ -28,16 +28,41 @@ $pl-gray: (
   )
 );
 
-$primary: mat.define-palette($pl-gray);
+$pl-dark-gray: (
+  100: #333,
+  500: #222,
+  700: #111,
+  contrast: (
+    100: #eee,
+    500: #eee,
+    700: #eee,
+  )
+);
+
+$primary-light: mat.define-palette($pl-gray);
+$primary-dark: mat.define-dark-theme($pl-dark-gray);
 $accent: mat.define-palette($pl-red);
 
 $pl-light-theme: mat.define-light-theme(
     (
       color: (
-        primary: $primary,
+        primary: $primary-light,
+        accent: $accent,
+      ),
+    )
+);
+
+$pl-dark-theme: mat.define-dark-theme(
+    (
+      color: (
+        primary: $primary-dark,
         accent: $accent,
       ),
     )
 );
 
 @include mat.all-component-themes($pl-light-theme);
+
+.darkMode {
+  @include mat.all-component-themes($pl-dark-theme);
+}
