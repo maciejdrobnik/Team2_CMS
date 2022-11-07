@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {QuillModule} from 'ngx-quill'
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {TextEditorComponent} from './text-editor/text-editor.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
@@ -18,7 +18,8 @@ import {DrawerComponent} from './drawer/drawer.component';
 import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from './pages/home/home.component';
 import {PageComponent} from './pages/page/page.component';
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MenuComponent} from './menu/menu.component';
+
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     DrawerComponent,
     HomeComponent,
     PageComponent,
-    TextEditorComponent
+    TextEditorComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -50,8 +52,6 @@ const appRoutes: Routes = [
     MatInputModule,
     MatDialogModule,
     RouterModule.forRoot(appRoutes),
-    MatSlideToggleModule,
-    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
