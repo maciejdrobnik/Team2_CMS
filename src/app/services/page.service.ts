@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
 export class PageService {
 
   constructor(
-    private http: HttpClient,
+    private http: HttpClient
   ) { }
 
   getPage(id: string): Observable<string> {
