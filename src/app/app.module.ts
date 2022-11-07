@@ -12,13 +12,14 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTreeModule} from "@angular/material/tree";
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
-import { LatechWindowComponent } from './latech-window/latech-window.component';
+import {LatechWindowComponent} from './latech-window/latech-window.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {DrawerComponent} from './drawer/drawer.component';
 import {RouterModule, Routes} from "@angular/router";
-import { HomeComponent } from './pages/home/home.component';
-import { PageComponent } from './pages/page/page.component';
-import { MenuComponent } from './menu/menu.component';
+import {HomeComponent} from './pages/home/home.component';
+import {PageComponent} from './pages/page/page.component';
+import {MenuComponent} from './menu/menu.component';
+
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -50,7 +51,7 @@ const appRoutes: Routes = [
     MatTreeModule,
     MatInputModule,
     MatDialogModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]
