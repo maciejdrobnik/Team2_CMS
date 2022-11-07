@@ -1,7 +1,8 @@
 export interface Page {
   id: number,
   name: string,
-  subpages?: Page[]
+  subpages?: Page[],
+  filename?: string
 }
 
 export const MENU_DATA: Page[] = [
