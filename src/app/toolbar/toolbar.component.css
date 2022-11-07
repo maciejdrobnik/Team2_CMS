@@ -1,5 +1,6 @@
 mat-toolbar {
-  height: 6em;
+  /* important is needed because angular randomly changes the height anyway */
+  height: 6em !important;
 }
 
 img {
@@ -8,4 +9,8 @@ img {
 
 button {
   overflow: hidden;
+}
+
+.flex-stretch {
+  flex: 1 0 auto;
 }
