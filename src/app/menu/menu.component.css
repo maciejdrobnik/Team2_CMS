@@ -12,3 +12,7 @@
 .menu-tree a {
   color: #8b0002;
 }
+
+button {
+  overflow: hidden;
+}
