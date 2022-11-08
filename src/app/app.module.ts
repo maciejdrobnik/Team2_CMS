@@ -20,11 +20,13 @@ import {HomeComponent} from './pages/home/home.component';
 import {PageComponent} from './pages/page/page.component';
 import {MenuComponent} from './menu/menu.component';
 import {HttpClientModule} from '@angular/common/http';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'editor', component: TextEditorComponent},
+  {path: 'not_found', component: NotFoundComponent},
   {path: ':id', component: PageComponent},
 ];
 
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
     HomeComponent,
     PageComponent,
     TextEditorComponent,
-    MenuComponent
+    MenuComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

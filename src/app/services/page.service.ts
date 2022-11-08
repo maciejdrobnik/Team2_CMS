@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+
+const PAGE_URL = 'https://c52c176b-299c-4a4a-a352-c0fd5faa7e4f.mock.pstmn.io/page/';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,6 @@ export class PageService {
   ) { }
 
   getPage(id: string): Observable<string> {
-    return of(
-      `<h1>*Load the page with the id of ${id} from the API*</h1>\n`
-    );
+    return this.http.get(PAGE_URL + id, {responseType: 'text'});
   }
 }
