@@ -19,6 +19,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from './pages/home/home.component';
 import {PageComponent} from './pages/page/page.component';
 import {MenuComponent} from './menu/menu.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 const appRoutes: Routes = [
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     MatInputModule,
     MatDialogModule,
     RouterModule.forRoot(appRoutes),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

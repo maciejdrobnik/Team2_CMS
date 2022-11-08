@@ -7,9 +7,9 @@ import {HttpClient} from "@angular/common/http";
 })
 export class PageService {
 
-  // constructor(
-  //   private http: HttpClient
-  // ) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   getPage(id: string): Observable<string> {
     return of(
