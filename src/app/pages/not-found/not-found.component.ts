@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./not-found.component.css']
 })
 export class NotFoundComponent implements OnInit {
+  public number?: number;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.number = Math.floor(Math.random() * 3);
   }
 
 }
