@@ -17,7 +17,7 @@ export class PageService {
 
   getPage(id: string): Observable<string> {
     return this.http.get(PAGE_URL + id, {responseType: 'text'}).pipe(
-      catchError((_: any): Observable<string> => {
+      catchError((_error: any): Observable<string> => {
         this.router.navigate(['not_found']).then();
         return of('Error 404');
       })
