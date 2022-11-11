@@ -6,5 +6,8 @@
   height:15vh;
 }
 .latexOutput {
+ height:15vh;
+}
+.checkButton {
   margin-left: 7.5%;
 }

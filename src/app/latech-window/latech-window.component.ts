@@ -7,10 +7,11 @@ import { Component, OnInit} from '@angular/core';
   styleUrls: ['./latech-window.component.css']
 })
 export class LatechWindowComponent implements OnInit {
-  equation: string = "works";
+  equation: string = "";
   constructor(){}
 
   ngOnInit() {
 
   }
+
 }
