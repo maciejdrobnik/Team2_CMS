@@ -19,7 +19,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from './pages/home/home.component';
 import {PageComponent} from './pages/page/page.component';
 import {MenuComponent} from './menu/menu.component';
-
+import {KatexModule} from "ng-katex";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -50,6 +50,7 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatTreeModule,
     MatInputModule,
+    KatexModule,
     MatDialogModule,
     RouterModule.forRoot(appRoutes),
   ],
