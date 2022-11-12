@@ -41,3 +41,20 @@ $pl-light-theme: mat.define-light-theme(
 );
 
 @include mat.all-component-themes($pl-light-theme);
+
+a {
+  color: #8b0002;
+  &:hover, &:visited {
+    @extend a;
+  }
+}
+
+.darkMode {
+  @include mat.all-component-themes($pl-dark-theme);
+
+  a {
+    color: #c2402c;
+
+  }
+}
+

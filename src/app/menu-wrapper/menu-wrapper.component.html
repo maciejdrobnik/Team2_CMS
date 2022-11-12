@@ -1,0 +1,9 @@
+<mat-drawer #menu mode="over">
+  <div class="menu-bar">
+    <button mat-icon-button (click)="menu.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <app-search-bar (search)="assignSearchWord($event)" ></app-search-bar>
+  </div>
+  <app-menu [searchWord] = "searchWord"></app-menu>
+</mat-drawer>
