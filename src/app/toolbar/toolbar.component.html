@@ -1,6 +1,15 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <button mat-icon-button (click)="menuOpened.emit()">
     <mat-icon>menu</mat-icon>
   </button>
-  <img src="https://p.lodz.pl/themes/custom/politechnika/logo.svg" alt="Politechnika Łódzka">
+  <img *ngIf="!darkModeEnabled" src="assets/logo.svg" alt="Politechnika Łódzka">
+  <img *ngIf="darkModeEnabled" src="assets/logo_dark.svg" alt="Politechnika Łódzka">
+  <span class="flex-stretch"></span>
+<!--  <button mat-icon-button (click)="switchFontSize(20)">-->
+<!--    <mat-icon>format_size</mat-icon>-->
+<!--  </button>-->
+  <button mat-icon-button (click)="switchDarkMode()">
+    <mat-icon *ngIf="!darkModeEnabled">brightness_3</mat-icon>
+    <mat-icon *ngIf="darkModeEnabled">brightness_4</mat-icon>
+  </button>
 </mat-toolbar>
