@@ -1,6 +1,4 @@
 <mat-drawer-container>
-  <app-toolbar (menuOpened)="menu?.toggle()"></app-toolbar>
-  <app-menu-wrapper (init)="menu = $event"></app-menu-wrapper>
   <app-toolbar
     (menuOpened)="menu?.toggle()"
     (darkModeSwitched)="switchDarkMode()">
