@@ -11,6 +11,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTreeModule} from "@angular/material/tree";
 import {MatInputModule} from "@angular/material/input";
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import {MatDialogModule} from "@angular/material/dialog";
 import {LatechWindowComponent} from './latech-window/latech-window.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
@@ -19,7 +20,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from './pages/home/home.component';
 import {PageComponent} from './pages/page/page.component';
 import {MenuComponent} from './menu/menu.component';
-
+import {KatexModule} from "ng-katex";
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -50,10 +51,16 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatTreeModule,
     MatInputModule,
+    KatexModule,
     MatDialogModule,
     RouterModule.forRoot(appRoutes),
+    MatFormFieldModule,
+    KatexModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

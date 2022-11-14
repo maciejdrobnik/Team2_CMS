@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {EditorChangeContent, EditorChangeSelection} from "ngx-quill";
-import Quill from "quill";
-import Latech from "./latech";
+import {Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {LatechWindowComponent} from "../latech-window/latech-window.component";
+import Quill from "quill";
 
-Quill.register('modules/latech', Latech);
+
 const MODULES = {
   toolbar: [
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -19,10 +17,8 @@ const MODULES = {
 
     [{'color': []}, {'background': []}],          // dropdown with defaults from theme
     [{'align': []}],
-
     ['clean'],                //ikona jest trochę nieintuicyjna jak dla mnie // remove formatting button
-
-    ['link', 'image', 'video']                         // link and image, video
+    [ 'link', 'image', 'video']                         // link and image, video
   ],
 }
 
@@ -34,21 +30,44 @@ const MODULES = {
 export class TextEditorComponent implements OnInit {
   title: 'quil-editor';
   modules: any = MODULES;
-  constructor(private matDialog: MatDialog) {
+  quill:Quill;
+
+  constructor(private matDialog: MatDialog ) {
   }
 
   ngOnInit(): void {
+    this.quill = new Quill('#quill-editor', {
+        modules: this.modules,
+        theme: 'snow',
+      }
+    );
+  }
+  onSubmit(){
+
   }
 
   openDialog(){
-    this.matDialog.open(LatechWindowComponent, {
+    const dialogRef = this.matDialog.open(LatechWindowComponent, {
       height: '50vh',
       width: '50vw',
     });
-
+    dialogRef.afterClosed().subscribe(result => {
+      if(result !== undefined) {
+        //Tylko do sprawdzenia wyników
+        console.log(`Dialog result: ${result}`);
+        console.log(this.quill.getContents());
+        // Przeniesienie równania z dialogu do edytora
+        let range = this.quill.getSelection(true);
+        this.quill.insertEmbed(range.index, "formula", result);
+        //Nie wiem jakie powinno być length(nie wiem czy w ogóle ma to znaczenie)
+        this.quill.setSelection(range.index + 1, 0, "silent");
+      }});
   }
-  changedEditor(event: EditorChangeContent | EditorChangeSelection) {
-    console.log('editor got changed', event);
-  }
-
+  // onContentChanged(obj: any) {
+  //   this.tempString = obj.html;
+  // }
+  //
+  // changedEditor(event: EditorChangeContent | EditorChangeSelection) {
+  //   console.log(this.tempString);
+  // }
 }
