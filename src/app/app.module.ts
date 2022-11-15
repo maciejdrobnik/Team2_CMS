@@ -27,6 +27,7 @@ import {KatexModule} from "ng-katex";
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'editor', component: TextEditorComponent},
+  {path: 'not-found', component: NotFoundComponent},
   {path: ':id', component: PageComponent},
 ];
 
@@ -39,7 +40,6 @@ const appRoutes: Routes = [
     DrawerComponent,
     HomeComponent,
     PageComponent,
-    TextEditorComponent,
     MenuComponent,
     NotFoundComponent
   ],
@@ -56,6 +56,7 @@ const appRoutes: Routes = [
     MatInputModule,
     KatexModule,
     MatDialogModule,
+    MatFormFieldModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
   ],
