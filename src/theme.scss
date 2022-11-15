@@ -1,10 +1,18 @@
 @use '@angular/material' as mat;
 
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;500&display=swap');
 
-* {
-  font-family: 'Titillium Web', sans-serif;
-}
+$tul-typography: mat.define-typography-config(
+  $headline:  mat.define-typography-level(3rem, 1, 500, "Titillium Web"),
+  $title: mat.define-typography-level(2rem, 1, 500, "Titillium Web"),
+  $body-1: mat.define-typography-level(1rem, 1.25, 400, "Titillium Web"),
+  $body-2: mat.define-typography-level(1rem, 1.25, 500, "Titillium Web"),
+  $button: mat.define-typography-level(1.5rem, 1, 400, "Titillium Web"),
+  $input: mat.define-typography-level(1.5rem, 1, 400, "Titillium Web"),
+  $caption: mat.define-typography-level(1rem, 1, 400, "Titillium Web"),
+);
+
+@include mat.core($tul-typography);
 
 $pl-red: (
   100: #c2402c,
