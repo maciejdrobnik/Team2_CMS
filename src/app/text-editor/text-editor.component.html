@@ -1,11 +1,20 @@
 <div class="container">
   <div class="row">
     <div class="col-nd-12">
-      <quill-editor [styles]="{height: '200px'}" (onEditorChanged)="changedEditor($event)"
-                    [modules]="modules"></quill-editor>
+      <!--      <form [formGroup]="editorForm" (ngSubmit)="onSubmit()">-->
+      <!--            <div class="form-group">-->
+      <!--            <label for="editor"></label>-->
+      <!--            <quill-editor  [styles]="{height: '200px'}" (onEditorChanged)="changedEditor($event)"-->
+      <!--                    (onContentChanged)="onContentChanged($event)"-->
+      <!--                           formControlName="editor"-->
+      <!--            >-->
+      <!--            </quill-editor>-->
+      <div id="quill-editor"></div>
     </div>
+    <!--        </form>-->
+    <!--    </div>-->
   </div>
-  <button (click)="openDialog()"><mat-icon> functions</mat-icon></button>
+  <button id="latex" (click)="openDialog()"><mat-icon> functions</mat-icon></button>
   <div class="row">
     <div class="col-nd-8">
       <p></p>
