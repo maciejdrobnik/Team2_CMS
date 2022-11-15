@@ -1,6 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {LatechWindowComponent} from "../latech-window/latech-window.component";
+import {LatexWindowComponent} from "../latex-window/latex-window.component";
 import Quill from "quill";
 
 
@@ -47,7 +47,7 @@ export class TextEditorComponent implements OnInit {
   }
 
   openDialog(){
-    const dialogRef = this.matDialog.open(LatechWindowComponent, {
+    const dialogRef = this.matDialog.open(LatexWindowComponent, {
       height: '50vh',
       width: '50vw',
     });

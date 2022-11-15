@@ -13,7 +13,7 @@ import {MatTreeModule} from "@angular/material/tree";
 import {MatInputModule} from "@angular/material/input";
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import {MatDialogModule} from "@angular/material/dialog";
-import {LatechWindowComponent} from './latech-window/latech-window.component';
+import {LatexWindowComponent} from './latex-window/latex-window.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {DrawerComponent} from './drawer/drawer.component';
 import {RouterModule, Routes} from "@angular/router";
@@ -35,7 +35,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     TextEditorComponent,
-    LatechWindowComponent,
+    LatexWindowComponent,
     ToolbarComponent,
     DrawerComponent,
     HomeComponent,

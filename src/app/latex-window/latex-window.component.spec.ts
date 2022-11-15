@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LatechWindowComponent } from './latech-window.component';
+import { LatexWindowComponent } from './latex-window.component';
 
 describe('LatechWindowComponent', () => {
-  let component: LatechWindowComponent;
-  let fixture: ComponentFixture<LatechWindowComponent>;
+  let component: LatexWindowComponent;
+  let fixture: ComponentFixture<LatexWindowComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LatechWindowComponent ]
+      declarations: [ LatexWindowComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LatechWindowComponent);
+    fixture = TestBed.createComponent(LatexWindowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
