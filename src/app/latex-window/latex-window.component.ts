@@ -3,10 +3,10 @@ import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-latech-window',
-  templateUrl: './latech-window.component.html',
-  styleUrls: ['./latech-window.component.css']
+  templateUrl: './latex-window.component.html',
+  styleUrls: ['./latex-window.component.css']
 })
-export class LatechWindowComponent implements OnInit {
+export class LatexWindowComponent implements OnInit {
   equation: string = "";
   constructor(){}
 

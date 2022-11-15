@@ -1,12 +1,20 @@
 @use '@angular/material' as mat;
 
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;500&display=swap');
 
-* {
-  font-family: 'Titillium Web', sans-serif;
-}
+$tul-typography: mat.define-typography-config(
+  $headline:  mat.define-typography-level(3rem, 1, 500, "Titillium Web"),
+  $title: mat.define-typography-level(2rem, 1, 500, "Titillium Web"),
+  $body-1: mat.define-typography-level(1rem, 1.25, 400, "Titillium Web"),
+  $body-2: mat.define-typography-level(1rem, 1.25, 500, "Titillium Web"),
+  $button: mat.define-typography-level(1.5rem, 1, 400, "Titillium Web"),
+  $input: mat.define-typography-level(1.5rem, 1, 400, "Titillium Web"),
+  $caption: mat.define-typography-level(1rem, 1, 400, "Titillium Web"),
+);
 
-$pl-red: (
+@include mat.core($tul-typography);
+
+$tul-red: (
   100: #c2402c,
   500: #8b0002,
   700: #580000,
@@ -17,7 +25,7 @@ $pl-red: (
   )
 );
 
-$pl-gray: (
+$tul-gray: (
   100: #bdbdbd,
   500: #e3e3e3,
   700: #ffffff,
@@ -28,7 +36,7 @@ $pl-gray: (
   )
 );
 
-$pl-dark-gray: (
+$tul-dark-gray: (
   100: #333,
   500: #222,
   700: #111,
@@ -39,11 +47,11 @@ $pl-dark-gray: (
   )
 );
 
-$primary-light: mat.define-palette($pl-gray);
-$primary-dark: mat.define-dark-theme($pl-dark-gray);
-$accent: mat.define-palette($pl-red);
+$primary-light: mat.define-palette($tul-gray);
+$primary-dark: mat.define-dark-theme($tul-dark-gray);
+$accent: mat.define-palette($tul-red);
 
-$pl-light-theme: mat.define-light-theme(
+$tul-light-theme: mat.define-light-theme(
     (
       color: (
         primary: $primary-light,
@@ -52,7 +60,7 @@ $pl-light-theme: mat.define-light-theme(
     )
 );
 
-$pl-dark-theme: mat.define-dark-theme(
+$tul-dark-theme: mat.define-dark-theme(
     (
       color: (
         primary: $primary-dark,
@@ -61,8 +69,8 @@ $pl-dark-theme: mat.define-dark-theme(
     )
 );
 
-@include mat.all-component-themes($pl-light-theme);
+@include mat.all-component-themes($tul-light-theme);
 
 .darkMode {
-  @include mat.all-component-themes($pl-dark-theme);
+  @include mat.all-component-themes($tul-dark-theme);
 }
