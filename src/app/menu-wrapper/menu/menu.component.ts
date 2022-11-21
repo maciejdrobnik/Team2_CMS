@@ -56,8 +56,22 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  search(){
+  // searchOnData(pages: Page[], regex: RegExp): Page[] {
+  //   let resultRootPages = [];
+  //   if(pages) {
+  //     for(let page of pages) {
+  //       if(page.subpages && page.subpages.length > 0){
+  //         let resultSubPages = this.searchOnData(page.subpages, regex);
+  //         const r = resultSubPages.filter(page => page.name.search(regex) !== -1);
+  //       }
+  //
+  //       resultRootPages.push(page);
+  //     }
+  //   }
+  //   return resultRootPages;
+  // }
 
+  search(){
     if(this.searchWord !== '') {
       this.hideAllPages(true);
       const regex = new RegExp(this.searchWord, 'i');
@@ -72,9 +86,11 @@ export class MenuComponent implements OnInit {
     }
   }
 
+
   showPageResult(pageID: number): void {
     const pageToHide = document.getElementById(pageID.toString());
     if(pageToHide){
+      console.log(pageToHide);
       pageToHide.classList.remove('hidden');
     }
 
