@@ -18,6 +18,7 @@ mat-drawer {
   display: flex;
 }
 
-mat-form-field {
+app-search-bar {
+  display: flex;
   flex: 1 1 auto;
 }

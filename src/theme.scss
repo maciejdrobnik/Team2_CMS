@@ -71,6 +71,20 @@ $tul-dark-theme: mat.define-dark-theme(
 
 @include mat.all-component-themes($tul-light-theme);
 
+a {
+  color: #8b0002;
+  &:hover, &:visited {
+    @extend a;
+  }
+}
+
 .darkMode {
+  @include mat.all-component-themes($pl-dark-theme);
+
+  a {
+    color: #c2402c;
+
+  }
   @include mat.all-component-themes($tul-dark-theme);
 }
+

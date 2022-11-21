@@ -2,12 +2,13 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 import {MatDrawer} from "@angular/material/sidenav";
 
 @Component({
-  selector: 'app-drawer',
-  templateUrl: './drawer.component.html',
-  styleUrls: ['./drawer.component.css']
+  selector: 'app-menu-wrapper',
+  templateUrl: './menu-wrapper.component.html',
+  styleUrls: ['./menu-wrapper.component.css']
 })
-export class DrawerComponent implements OnInit {
+export class MenuWrapperComponent implements OnInit {
 
+  searchWord: string = '';
   constructor() { }
 
   @ViewChild('menu', { static: true }) menu: MatDrawer | any;
@@ -16,6 +17,10 @@ export class DrawerComponent implements OnInit {
 
   ngOnInit(): void {
     this.init.emit(this.menu);
+  }
+
+  assignSearchWord(event: string) {
+    this.searchWord = event;
   }
 
 }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DrawerComponent } from './drawer.component';
+import { MenuWrapperComponent } from './menu-wrapper.component';
 
 describe('DrawerComponent', () => {
-  let component: DrawerComponent;
-  let fixture: ComponentFixture<DrawerComponent>;
+  let component: MenuWrapperComponent;
+  let fixture: ComponentFixture<MenuWrapperComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DrawerComponent ]
+      declarations: [ MenuWrapperComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DrawerComponent);
+    fixture = TestBed.createComponent(MenuWrapperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

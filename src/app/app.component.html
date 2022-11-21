@@ -3,7 +3,7 @@
     (menuOpened)="menu?.toggle()"
     (darkModeSwitched)="switchDarkMode()">
   </app-toolbar>
-  <app-drawer (init)="menu = $event"></app-drawer>
+  <app-menu-wrapper (init)="menu = $event"></app-menu-wrapper>
   <div class="main">
     <router-outlet></router-outlet>
   </div>

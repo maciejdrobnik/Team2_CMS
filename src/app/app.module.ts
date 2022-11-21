@@ -15,14 +15,16 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/mater
 import {MatDialogModule} from "@angular/material/dialog";
 import {LatexWindowComponent} from './latex-window/latex-window.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
-import {DrawerComponent} from './drawer/drawer.component';
+import {MenuWrapperComponent} from './menu-wrapper/menu-wrapper.component';
 import {RouterModule, Routes} from "@angular/router";
-import {HomeComponent} from './pages/home/home.component';
-import {PageComponent} from './pages/page/page.component';
-import {MenuComponent} from './menu/menu.component';
+import { HomeComponent } from './pages/home/home.component';
+import { PageComponent } from './pages/page/page.component';
+import {MenuComponent} from "./menu-wrapper/menu/menu.component";
+import { SearchBarComponent } from './menu-wrapper/search-bar/search-bar.component';
 import {HttpClientModule} from '@angular/common/http';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {KatexModule} from "ng-katex";
+
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -37,10 +39,11 @@ const appRoutes: Routes = [
     TextEditorComponent,
     LatexWindowComponent,
     ToolbarComponent,
-    DrawerComponent,
+    MenuWrapperComponent,
     HomeComponent,
     PageComponent,
     MenuComponent,
+    SearchBarComponent
     NotFoundComponent
   ],
   imports: [
