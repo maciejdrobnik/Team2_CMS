@@ -79,7 +79,7 @@ a {
 }
 
 .darkMode {
-  @include mat.all-component-themes($pl-dark-theme);
+  @include mat.all-component-themes($tul-dark-theme);
 
   a {
     color: #c2402c;
