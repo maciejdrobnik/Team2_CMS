@@ -11,8 +11,9 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTreeModule} from "@angular/material/tree";
 import {MatInputModule} from "@angular/material/input";
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import {MatDialogModule} from "@angular/material/dialog";
-import { LatechWindowComponent } from './latech-window/latech-window.component';
+import {LatexWindowComponent} from './latex-window/latex-window.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {MenuWrapperComponent} from './menu-wrapper/menu-wrapper.component';
 import {RouterModule, Routes} from "@angular/router";
@@ -20,11 +21,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { PageComponent } from './pages/page/page.component';
 import {MenuComponent} from "./menu-wrapper/menu/menu.component";
 import { SearchBarComponent } from './menu-wrapper/search-bar/search-bar.component';
+import {HttpClientModule} from '@angular/common/http';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import {KatexModule} from "ng-katex";
 
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'editor', component: TextEditorComponent},
+  {path: 'not-found', component: NotFoundComponent},
   {path: ':id', component: PageComponent},
 ];
 
@@ -32,14 +37,14 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     TextEditorComponent,
-    LatechWindowComponent,
+    LatexWindowComponent,
     ToolbarComponent,
     MenuWrapperComponent,
     HomeComponent,
     PageComponent,
-    TextEditorComponent,
     MenuComponent,
     SearchBarComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -52,10 +57,15 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatTreeModule,
     MatInputModule,
+    KatexModule,
     MatDialogModule,
-    RouterModule.forRoot(appRoutes)
+    MatFormFieldModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
