@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, SimpleChange} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChange} from '@angular/core';
 import { Page } from "../../services/mock-menu-data";
 import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
-import { DOCUMENT } from "@angular/common";
+import {MatDrawer} from "@angular/material/sidenav";
 
 
 @Component({
@@ -16,7 +16,10 @@ export class MenuComponent implements OnInit {
   pagesSource = new MatTreeNestedDataSource<Page>();
   pagesArray = new Array<any>;
 
+  @Input() isClosed: boolean;
   @Input() searchWord: any;
+
+  @Output() redirect = new EventEmitter<any>();
 
   constructor(private menuService: MenuService) { }
 
@@ -31,6 +34,10 @@ export class MenuComponent implements OnInit {
     this.getMenuData();
     this.pagesArray = this.pagesToArray(this.pagesSource.data);
     console.log(this.pagesArray);
+  }
+
+  loadPage() {
+    this.redirect.emit();
   }
 
   pagesToArray(pages: Page[]): Page[] {
@@ -54,6 +61,14 @@ export class MenuComponent implements OnInit {
     if(change) {
       this.search();
     }
+    let menuclose: SimpleChange = changes['isClosed'];
+    if(menuclose) {
+      this.onClose();
+    }
+  }
+
+  onClose() {
+    this.treeControl.collapseAll();
   }
 
   // searchOnData(pages: Page[], regex: RegExp): Page[] {
@@ -108,6 +123,9 @@ export class MenuComponent implements OnInit {
       }
     }
   }
+
+
+
 
 
 

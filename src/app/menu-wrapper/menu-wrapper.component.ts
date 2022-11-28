@@ -9,6 +9,7 @@ import {MatDrawer} from "@angular/material/sidenav";
 export class MenuWrapperComponent implements OnInit {
 
   searchWord: string = '';
+  menuClosed: boolean = false;
   constructor() { }
 
   @ViewChild('menu', { static: true }) menu: MatDrawer | any;
@@ -22,5 +23,12 @@ export class MenuWrapperComponent implements OnInit {
   assignSearchWord(event: string) {
     this.searchWord = event;
   }
+
+  closeMenu(){
+    this.menu.close();
+    this.menuClosed = !this.menuClosed;
+  }
+
+
 
 }
