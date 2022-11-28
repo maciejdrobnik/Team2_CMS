@@ -84,7 +84,7 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  searchMenuTree(page: Page): Page | null{
+  searchMenuTree(page: Page): boolean{
     const name = page.name.toLowerCase();
     let isPageSearched = false;
     if(name.includes(this.searchWord)) {
@@ -93,22 +93,20 @@ export class MenuComponent implements OnInit {
       isPageSearched = true;
     }
     if (page.subpages && page.subpages.length !== 0){
-      let result = null;
+      let result = false;
       for (const subpage of page.subpages){
         result = this.searchMenuTree(subpage);
-        if(result !== null) {
+        if(result) {
           this.showPageResult(page.id);
           this.treeControl.expand(page);
+          isPageSearched = true;
         }
       }
-      return result;
-    }
-    if(isPageSearched) {
-      return page;
-    }
-    return null;
-  }
 
+    }
+    return isPageSearched;
+
+  }
 
 
   showPageResult(pageID: number): void {
