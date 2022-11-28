@@ -43,7 +43,7 @@ const appRoutes: Routes = [
     HomeComponent,
     PageComponent,
     MenuComponent,
-    SearchBarComponent
+    SearchBarComponent,
     NotFoundComponent
   ],
   imports: [
