@@ -9,15 +9,14 @@
   list-style-type: none;
 }
 
-
-.menu-tree a {
-  color: #8b0002;
-}
-
 button {
   overflow: hidden;
 }
 
 .hidden {
   display: none;
+}
+
+.menu {
+  margin: 10px;
 }
