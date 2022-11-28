@@ -1,20 +1,19 @@
 <div class="menu">
   <h3>Menu</h3>
-  <!--TODO: menu closing after accessing page-->
-  <mat-tree [dataSource]="pagesSource" [treeControl]="treeControl" class="menu-tree">
+  <mat-tree  [dataSource]="pagesSource" [treeControl]="treeControl"  class="menu-tree">
     <!-- leaf pages -->
     <mat-tree-node id="{{page.id}}" *matTreeNodeDef="let page" matTreeNodeToggle>
       <li class="mat-tree-node">
         <!-- use a disabled button to provide padding for tree leaf -->
         <button mat-icon-button disabled></button>
-        <a routerLink="/{{page.id}}">{{page.name}}</a>
+        <a (click)="loadPage()" routerLink="/{{page.id}}">{{page.name}}</a>
       </li>
     </mat-tree-node>
     <!-- expandable pages/categories -->
-    <mat-nested-tree-node id="{{page.id}}" *matTreeNodeDef="let page; when: hasSubpages">
+    <mat-nested-tree-node id="{{page.id}}" *matTreeNodeDef="let page; when: hasSubpages" >
       <li>
         <div class="mat-tree-node">
-          <button mat-icon-button matTreeNodeToggle
+          <button mat-icon-button matTreeNodeToggle id="{{page.id}}"
                   [attr.aria-label]="'toggle ' + page.name">
             <mat-icon class="mat-icon-rtl-mirror">
               {{treeControl.isExpanded(page) ? 'expand_more' : 'chevron_right'}}
