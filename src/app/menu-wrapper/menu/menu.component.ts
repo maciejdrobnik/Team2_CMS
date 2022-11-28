@@ -16,6 +16,8 @@ export class MenuComponent implements OnInit {
   pagesSource = new MatTreeNestedDataSource<Page>();
   pagesArray = new Array<any>;
 
+  classHidden = 'menu-tree-invisible';
+
   @Input() isClosed: boolean;
   @Input() searchWord: any;
 
@@ -33,11 +35,6 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.getMenuData();
     this.pagesArray = this.pagesToArray(this.pagesSource.data);
-    console.log(this.pagesArray);
-  }
-
-  loadPage() {
-    this.redirect.emit();
   }
 
   pagesToArray(pages: Page[]): Page[] {
@@ -57,12 +54,12 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnChanges(changes: { [property: string]: SimpleChange }) {
-    let change: SimpleChange = changes['searchWord'];
-    if(change) {
+    let search: SimpleChange = changes['searchWord'];
+    let menuClose: SimpleChange = changes['isClosed'];
+    if(search) {
       this.search();
     }
-    let menuclose: SimpleChange = changes['isClosed'];
-    if(menuclose) {
+    if(menuClose) {
       this.onClose();
     }
   }
@@ -71,54 +68,68 @@ export class MenuComponent implements OnInit {
     this.treeControl.collapseAll();
   }
 
-  // searchOnData(pages: Page[], regex: RegExp): Page[] {
-  //   let resultRootPages = [];
-  //   if(pages) {
-  //     for(let page of pages) {
-  //       if(page.subpages && page.subpages.length > 0){
-  //         let resultSubPages = this.searchOnData(page.subpages, regex);
-  //         const r = resultSubPages.filter(page => page.name.search(regex) !== -1);
-  //       }
-  //
-  //       resultRootPages.push(page);
-  //     }
-  //   }
-  //   return resultRootPages;
-  // }
+  loadPage() {
+    this.redirect.emit();
+  }
 
   search(){
     if(this.searchWord !== '') {
       this.hideAllPages(true);
-      const regex = new RegExp(this.searchWord, 'i');
-
-      const result = this.pagesArray.filter(page => page.name.search(regex) !== -1);
-      console.log(result);
-      for( let page of result){
-        this.showPageResult(page.id);
+      this.searchWord = this.searchWord.toLowerCase();
+      for (const page of this.pagesSource.data){
+        this.searchMenuTree(page);
       }
     }else {
       this.hideAllPages(false);
     }
   }
 
+  searchMenuTree(page: Page): Page | null{
+    const name = page.name.toLowerCase();
+    let isPageSearched = false;
+    if(name.includes(this.searchWord)) {
+      this.showPageResult(page.id);
+      this.treeControl.expand(page);
+      isPageSearched = true;
+    }
+    if (page.subpages && page.subpages.length !== 0){
+      let result = null;
+      for (const subpage of page.subpages){
+        result = this.searchMenuTree(subpage);
+        if(result !== null) {
+          this.showPageResult(page.id);
+          this.treeControl.expand(page);
+        }
+      }
+      return result;
+    }
+    if(isPageSearched) {
+      return page;
+    }
+    return null;
+  }
+
+
 
   showPageResult(pageID: number): void {
     const pageToHide = document.getElementById(pageID.toString());
     if(pageToHide){
-      console.log(pageToHide);
-      pageToHide.classList.remove('hidden');
+      pageToHide.classList.remove(this.classHidden);
     }
-
   }
 
   hideAllPages(ifHide: boolean): void {
+    if(!ifHide) {
+      this.treeControl.collapseAll();
+    }
+
     for(let page of this.pagesArray) {
       const pageToHide = document.getElementById(page.id.toString());
       if(pageToHide) {
         if(ifHide) {
-          pageToHide.classList.add('hidden');
+          pageToHide.classList.add(this.classHidden);
         }else {
-          pageToHide.classList.remove('hidden');
+          pageToHide.classList.remove(this.classHidden);
         }
       }
     }

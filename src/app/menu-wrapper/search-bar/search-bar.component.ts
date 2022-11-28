@@ -9,6 +9,7 @@ export class SearchBarComponent implements OnInit {
 
   currentSearch: string = '';
 
+
   @Output() search = new EventEmitter<string>();
   constructor() { }
 
@@ -16,12 +17,9 @@ export class SearchBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  startSearch(event: KeyboardEvent): void {
-    if (event.key !== 'Backspace') {
-      this.currentSearch += event.key;
-    } else if (this.currentSearch !== '') {
-      this.currentSearch = this.currentSearch.slice(0, this.currentSearch.length - 1);
-    }
+
+  startSearch(event: KeyboardEvent, inputElement: HTMLInputElement): void {
+    this.currentSearch = inputElement.value;
 
     this.search.emit(this.currentSearch);
     console.log(this.currentSearch);

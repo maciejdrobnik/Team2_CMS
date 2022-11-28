@@ -1,5 +1,5 @@
 <mat-form-field appearance="fill">
-  <input (keydown)="startSearch($event)" matInput>
+  <input (keyup)="startSearch($event, input)" matInput #input>
 </mat-form-field>
 <button mat-icon-button>
   <mat-icon>search</mat-icon>

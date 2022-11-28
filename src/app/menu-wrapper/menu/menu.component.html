@@ -1,6 +1,5 @@
 <div class="menu">
   <h3>Menu</h3>
-  <!--TODO: menu closing after accessing page-->
   <mat-tree  [dataSource]="pagesSource" [treeControl]="treeControl"  class="menu-tree">
     <!-- leaf pages -->
     <mat-tree-node id="{{page.id}}" *matTreeNodeDef="let page" matTreeNodeToggle>
