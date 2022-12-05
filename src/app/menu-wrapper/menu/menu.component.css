@@ -14,6 +14,20 @@ button {
 }
 
 
+
+.menu-tree-text {
+  width: 90%;
+  overflow: hidden;
+  white-space: nowrap; /* don't break the line */
+  text-overflow: ellipsis; /* give the beautiful '...' effect */
+}
+
+
+
+
 .menu {
   margin: 10px;
+  position: relative;
+  /*width: 90%;*/
+  /*overflow: hidden;*/
 }
