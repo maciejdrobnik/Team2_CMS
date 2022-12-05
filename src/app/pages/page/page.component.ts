@@ -25,8 +25,8 @@ export class PageComponent implements OnInit {
   }
 
   getPage(): void {
-    this.pageService.getPage(this.id).subscribe((content) => {
-      this.pageHTML = content;
+    this.pageService.getPage(this.id).subscribe((page) => {
+      this.pageHTML = page.content;
     });
   }
 }
