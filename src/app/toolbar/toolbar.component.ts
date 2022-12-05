@@ -27,4 +27,5 @@ export class ToolbarComponent implements OnInit {
   switchFontSize(fontSize: number) {
     this.fontSideSwitched.emit(fontSize);
   }
+
 }

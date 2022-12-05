@@ -14,3 +14,33 @@ button {
 .flex-stretch {
   flex: 1 0 auto;
 }
+
+.lang_img {
+  margin: 0 5px;
+
+}
+
+.lang {
+  margin: 0 2em;
+}
+
+.home p {
+  display: inline;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.home {
+  border-radius: 10%;
+  text-decoration: none;
+  color: black;
+
+}
+
+.home:hover {
+  color: #8b0002;
+}
+
+.icons {
+  margin-right: 1.1em;
+}

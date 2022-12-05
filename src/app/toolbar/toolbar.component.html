@@ -8,8 +8,20 @@
 <!--  <button mat-icon-button (click)="switchFontSize(20)">-->
 <!--    <mat-icon>format_size</mat-icon>-->
 <!--  </button>-->
-  <button mat-icon-button (click)="switchDarkMode()">
-    <mat-icon *ngIf="!darkModeEnabled">brightness_3</mat-icon>
-    <mat-icon *ngIf="darkModeEnabled">brightness_4</mat-icon>
-  </button>
+  <span class="icons">
+      <a class="home" mat-button routerLink="/">
+        <mat-icon>home</mat-icon>
+        <p>Home</p>
+      </a>
+    <span class="lang">
+      <img class="lang_img" src="assets/lang/en.png" alt="English flag">
+      <img class="lang_img" src="assets/lang/fr.png" alt="French flag">
+      <img class="lang_img" src="assets/lang/pl.png" alt="Polish flag">
+    </span>
+    <button mat-icon-button (click)="switchDarkMode()">
+      <mat-icon *ngIf="!darkModeEnabled">brightness_3</mat-icon>
+      <mat-icon *ngIf="darkModeEnabled">brightness_4</mat-icon>
+    </button>
+  </span>
+
 </mat-toolbar>
