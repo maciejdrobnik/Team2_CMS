@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import { PageService } from "../../services/page.service";
 
 @Component({
@@ -14,14 +14,18 @@ export class PageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private pageService: PageService,
-  ) {}
+    private pageService: PageService
+  ) {
+  }
 
 
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id')!;
-    this.getPage();
+    this.id = this.route.snapshot.params['id'];
+    this.route.params.subscribe(val => {
+      this.id = this.route.snapshot.params['id'];
+      this.getPage();
+    });
   }
 
   getPage(): void {
@@ -29,4 +33,6 @@ export class PageComponent implements OnInit {
       this.pageHTML = content;
     });
   }
+
+
 }
