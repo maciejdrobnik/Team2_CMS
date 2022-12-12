@@ -27,7 +27,7 @@ export class MenuComponent implements OnInit {
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
       this.pagesSource.data = pages;
-      console.log(this.pagesSource.data);
+      //console.log(this.pagesSource.data);
     });
     console.log(this.pagesSource.data);
     console.log('got pages');
@@ -55,7 +55,6 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMenuData();
-    this.pagesArray = this.pagesToArray(this.pagesSource.data);
   }
 
   pagesToArray(pages: Page[]): Page[] {
@@ -94,6 +93,8 @@ export class MenuComponent implements OnInit {
   }
 
   search(){
+    this.pagesArray = this.pagesToArray(this.pagesSource.data);
+   // console.log(`array: ${this.pagesArray}`)
     if(this.searchWord !== '') {
       this.hideAllPages(true);
       this.searchWord = this.searchWord.toLowerCase();
@@ -138,9 +139,11 @@ export class MenuComponent implements OnInit {
   }
 
   hideAllPages(ifHide: boolean): void {
+
     if(!ifHide) {
       this.treeControl.collapseAll();
     }
+
 
     for(let page of this.pagesArray) {
       const pageToHide = document.getElementById(page.id.toString());
