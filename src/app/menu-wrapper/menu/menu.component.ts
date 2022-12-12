@@ -135,17 +135,4 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  // addAddPage(page:Page): void{
-  //   if(page.children !== [] || ){
-  //
-  //   }
-  //
-  // }
-
-
-
-
-
-
-
 }
