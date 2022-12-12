@@ -4,7 +4,6 @@
       <mat-icon>close</mat-icon>
     </button>
     <app-search-bar (search)="assignSearchWord($event)" ></app-search-bar>
-<!--    <app-search-bar></app-search-bar>-->
   </div>
   <app-menu [searchWord] = "searchWord" [isClosed]="menuClosed" (redirect)="closeMenu()"></app-menu>
 </mat-drawer>

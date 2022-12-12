@@ -20,6 +20,10 @@ button {
 
 }
 
+.lang_img:hover {
+  cursor: pointer;
+}
+
 .lang {
   margin: 0 2em;
 }
