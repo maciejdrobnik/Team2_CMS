@@ -27,7 +27,6 @@ export class MenuComponent implements OnInit {
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
       this.pagesSource.data = pages;
-      this.addAddPages();
       console.log(this.pagesSource.data);
     });
     console.log(this.pagesSource.data);
