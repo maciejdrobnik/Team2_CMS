@@ -3,8 +3,6 @@ import { Page } from "../../services/mock-menu-data";
 import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
-import {MatDrawer} from "@angular/material/sidenav";
-
 
 @Component({
   selector: 'app-menu',
@@ -12,8 +10,9 @@ import {MatDrawer} from "@angular/material/sidenav";
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  treeControl = new NestedTreeControl<Page>(page => page.subpages);
+  treeControl = new NestedTreeControl<Page>(page => page.children);
   pagesSource = new MatTreeNestedDataSource<Page>();
+  // To jest potrzebne w ogóle?
   pagesArray = new Array<any>;
 
   classHidden = 'menu-tree-invisible';
@@ -26,11 +25,34 @@ export class MenuComponent implements OnInit {
   constructor(private menuService: MenuService) { }
 
   getMenuData(): void {
-    this.menuService.getMenuData().subscribe(pages => this.pagesSource.data = pages);
+    this.menuService.getMenuData().subscribe(pages => {
+      this.pagesSource.data = pages;
+      this.addAddPages();
+      console.log(this.pagesSource.data);
+    });
+    console.log(this.pagesSource.data);
     console.log('got pages');
   }
+  addAddPages(){
+    let addPage = {
+      id:4,
+      name:"Add_new_folder",
+      isRoot:false,
+      children:[],
+      tags:[],
+    }
+    for(let i = 0; i < this.pagesSource.data.length; i++){
+      if(this.pagesSource.data[i].children){
+          // this.pagesSource.data[i].children.push(addPage);
+        }
+        // for (let j = 0; j < this.pagesSource.data[i].children.length; j++) {
+        //   this.pagesSource.data[i].children.push(addPage);
+        // }
+      }
+    this.pagesSource.data.push(addPage);
+  }
 
-  hasSubpages = (_: number, page: Page) => !!page.subpages && page.subpages.length > 0;
+  hasSubpages = (_: number, page: Page) => !!page.children && page.children.length > 0;
 
   ngOnInit(): void {
     this.getMenuData();
@@ -40,10 +62,10 @@ export class MenuComponent implements OnInit {
   pagesToArray(pages: Page[]): Page[] {
     let arr = [];
     if(pages) {
-      for(let page of pages) {
-        if(page.subpages && page.subpages.length > 0){
-          let arrSub = this.pagesToArray(page.subpages);
-          for(let p of arrSub){
+      for (let page of pages) {
+        if (page.children && page.children.length > 0) {
+          let arrSub = this.pagesToArray(page.children);
+          for (let p of arrSub) {
             arr.push(p);
           }
         }
@@ -92,9 +114,9 @@ export class MenuComponent implements OnInit {
       this.treeControl.expand(page);
       isPageSearched = true;
     }
-    if (page.subpages && page.subpages.length !== 0){
+    if (page.children && page.children.length !== 0){
       let result = false;
-      for (const subpage of page.subpages){
+      for (const subpage of page.children){
         result = this.searchMenuTree(subpage);
         if(result) {
           this.showPageResult(page.id);
@@ -132,6 +154,13 @@ export class MenuComponent implements OnInit {
       }
     }
   }
+
+  // addAddPage(page:Page): void{
+  //   if(page.children !== [] || ){
+  //
+  //   }
+  //
+  // }
 
 
 

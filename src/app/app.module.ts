@@ -24,6 +24,7 @@ import { SearchBarComponent } from './menu-wrapper/search-bar/search-bar.compone
 import {HttpClientModule} from '@angular/common/http';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {KatexModule} from "ng-katex";
+import { AddPageComponent } from './add-page/add-page.component';
 
 
 const appRoutes: Routes = [
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     PageComponent,
     MenuComponent,
     SearchBarComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AddPageComponent
   ],
   imports: [
     BrowserModule,
