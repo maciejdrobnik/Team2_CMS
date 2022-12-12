@@ -37,13 +37,9 @@ button {
 .home {
   border-radius: 10%;
   text-decoration: none;
-  color: black;
 
 }
 
-.home:hover {
-  color: #8b0002;
-}
 
 .icons {
   margin-right: 1.1em;
