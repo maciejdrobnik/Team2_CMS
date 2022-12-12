@@ -12,7 +12,6 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
 export class MenuComponent implements OnInit {
   treeControl = new NestedTreeControl<Page>(page => page.children);
   pagesSource = new MatTreeNestedDataSource<Page>();
-  // To jest potrzebne w ogóle?
   pagesArray = new Array<any>;
 
   classHidden = 'menu-tree-invisible';
@@ -33,24 +32,7 @@ export class MenuComponent implements OnInit {
     console.log(this.pagesSource.data);
     console.log('got pages');
   }
-  addAddPages(){
-    let addPage = {
-      id:4,
-      name:"Add_new_folder",
-      isRoot:false,
-      children:[],
-      tags:[],
-    }
-    for(let i = 0; i < this.pagesSource.data.length; i++){
-      if(this.pagesSource.data[i].children){
-          // this.pagesSource.data[i].children.push(addPage);
-        }
-        // for (let j = 0; j < this.pagesSource.data[i].children.length; j++) {
-        //   this.pagesSource.data[i].children.push(addPage);
-        // }
-      }
-    this.pagesSource.data.push(addPage);
-  }
+ 
 
   hasSubpages = (_: number, page: Page) => !!page.children && page.children.length > 0;
 
