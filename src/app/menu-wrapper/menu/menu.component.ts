@@ -26,29 +26,10 @@ export class MenuComponent implements OnInit {
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
       this.pagesSource.data = pages;
-      this.addAddPages();
       console.log(this.pagesSource.data);
     });
     console.log(this.pagesSource.data);
     console.log('got pages');
-  }
-  addAddPages(){
-    let addPage = {
-      id:4,
-      name:"Add_new_folder",
-      isRoot:false,
-      children:[],
-      tags:[],
-    }
-    for(let i = 0; i < this.pagesSource.data.length; i++){
-      if(this.pagesSource.data[i].children){
-          // this.pagesSource.data[i].children.push(addPage);
-        }
-        // for (let j = 0; j < this.pagesSource.data[i].children.length; j++) {
-        //   this.pagesSource.data[i].children.push(addPage);
-        // }
-      }
-    this.pagesSource.data.push(addPage);
   }
 
   hasSubpages = (_: number, page: Page) => !!page.children && page.children.length > 0;
