@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {LanguageService} from "../services/language.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -7,7 +8,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() {
+  constructor( private languageService: LanguageService) {
   }
 
   @Output() menuOpened = new EventEmitter<void>();
@@ -28,4 +29,13 @@ export class ToolbarComponent implements OnInit {
     this.fontSideSwitched.emit(fontSize);
   }
 
+  switchLanguage(lang: string) {
+    this.languageService.setLanguage(lang);
+    console.log(this.languageService.getLanguage());
+   // window.location.reload();
+  }
+
+  getLanguage() {
+    return this.languageService.getLanguage();
+  }
 }

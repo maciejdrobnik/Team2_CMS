@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LanguageService} from "../../services/language.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  lang: string;
+
+  constructor(
+    private languageService: LanguageService,
+    private route: ActivatedRoute,) {
+  }
 
   ngOnInit(): void {
+    this.route.params.subscribe(val => {
+      this.lang = this.route.snapshot.params['lang'];
+    });
+    // if (this.route.snapshot.params['lang']) {
+    //   this.lang = this.route.snapshot.params['lang'];
+    // } else {
+    //   this.lang = this.languageService.getLanguage();
+    // }
+
+
+
+  }
+
+  ngOnChanges() {
+    this.lang = this.languageService.getLanguage();
   }
 
 }

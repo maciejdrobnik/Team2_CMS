@@ -27,10 +27,11 @@ import {KatexModule} from "ng-katex";
 
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: ':lang/home', component: HomeComponent},
   {path: 'editor', component: TextEditorComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: ':id', component: PageComponent},
+  {path: '',   redirectTo: 'english/home', pathMatch: 'full' }
 ];
 
 @NgModule({

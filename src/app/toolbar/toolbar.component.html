@@ -9,14 +9,17 @@
 <!--    <mat-icon>format_size</mat-icon>-->
 <!--  </button>-->
   <span class="icons">
-      <a class="home" mat-button routerLink="/">
+      <a class="home" mat-button routerLink="/{{getLanguage()}}/home">
         <mat-icon>home</mat-icon>
         <p>Home</p>
       </a>
     <span class="lang">
-      <img class="lang_img" src="assets/lang/en.png" alt="English flag">
-      <img class="lang_img" src="assets/lang/fr.png" alt="French flag">
-      <img class="lang_img" src="assets/lang/pl.png" alt="Polish flag">
+      <img class="lang_img" src="assets/lang/en.png" alt="English flag" id="english"
+           #en (click)="switchLanguage(en.id)" routerLink="/english/home">
+      <img class="lang_img" src="assets/lang/fr.png" alt="French flag" id="french"
+           #fr (click)="switchLanguage(fr.id)" routerLink="/french/home">
+      <img class="lang_img" src="assets/lang/pl.png" alt="Polish flag" id="polish"
+           #pl (click)="switchLanguage(pl.id)" routerLink="/polish/home">
     </span>
     <button mat-icon-button (click)="switchDarkMode()">
       <mat-icon *ngIf="!darkModeEnabled">brightness_3</mat-icon>
