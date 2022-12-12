@@ -12,7 +12,6 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
 export class MenuComponent implements OnInit {
   treeControl = new NestedTreeControl<Page>(page => page.children);
   pagesSource = new MatTreeNestedDataSource<Page>();
-  // To jest potrzebne w ogóle?
   pagesArray = new Array<any>;
 
   classHidden = 'menu-tree-invisible';
