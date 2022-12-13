@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
+import {  Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
 
-  language = "english";
+  language = new Subject<string>();
 
   constructor(){
   }
 
   setLanguage(lang: string){
-    this.language = lang;
+    this.language.next(lang);
   }
 
   getLanguage(){

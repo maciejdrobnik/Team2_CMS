@@ -4,6 +4,7 @@ import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {Router} from "@angular/router";
+import {LanguageService} from "../../services/language.service";
 
 @Component({
   selector: 'app-menu',
@@ -22,39 +23,24 @@ export class MenuComponent implements OnInit {
 
   @Output() redirect = new EventEmitter<any>();
 
-  constructor(private menuService: MenuService) { }
+  language:string;
+  constructor(private menuService: MenuService, private  languageService: LanguageService) { }
 
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
       this.pagesSource.data = pages;
-      //console.log(this.pagesSource.data);
     });
     console.log(this.pagesSource.data);
     console.log('got pages');
-  }
-  addAddPages(){
-    let addPage = {
-      id:4,
-      name:"Add_new_folder",
-      isRoot:false,
-      children:[],
-      tags:[],
-    }
-    for(let i = 0; i < this.pagesSource.data.length; i++){
-      if(this.pagesSource.data[i].children){
-          // this.pagesSource.data[i].children.push(addPage);
-        }
-        // for (let j = 0; j < this.pagesSource.data[i].children.length; j++) {
-        //   this.pagesSource.data[i].children.push(addPage);
-        // }
-      }
-    this.pagesSource.data.push(addPage);
   }
 
   hasSubpages = (_: number, page: Page) => !!page.children && page.children.length > 0;
 
   ngOnInit(): void {
-    this.getMenuData();
+    this.languageService.getLanguage().subscribe(
+      (lang) => this.getMenuData(),
+    );
+
   }
 
   pagesToArray(pages: Page[]): Page[] {

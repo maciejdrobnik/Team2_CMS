@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {LanguageService} from "../../services/language.service";
 import {ActivatedRoute} from "@angular/router";
+import {Observable, Observer} from "rxjs";
+
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private languageService: LanguageService,
     private route: ActivatedRoute,) {
+  }
+   myObserver = {
+    next: (lang: string) => this.lang = lang,
   }
 
   ngOnInit(): void {
@@ -29,9 +34,8 @@ export class HomeComponent implements OnInit {
 
 
   }
-
   ngOnChanges() {
-    this.lang = this.languageService.getLanguage();
+    this.languageService.getLanguage().subscribe(this.myObserver);
   }
 
 }

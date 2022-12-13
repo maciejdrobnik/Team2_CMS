@@ -93,9 +93,9 @@ a {
 
   }
   .home {
-    color: white;
+    color: white !important;
     &:hover {
-      color: #c2402c;
+      color: #c2402c !important;
     }
   }
 
