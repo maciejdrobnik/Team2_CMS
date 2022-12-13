@@ -3,6 +3,7 @@ import { Page } from "../../services/mock-menu-data";
 import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-menu',
@@ -12,7 +13,6 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
 export class MenuComponent implements OnInit {
   treeControl = new NestedTreeControl<Page>(page => page.children);
   pagesSource = new MatTreeNestedDataSource<Page>();
-  // To jest potrzebne w ogóle?
   pagesArray = new Array<any>;
 
   classHidden = 'menu-tree-invisible';
@@ -94,7 +94,6 @@ export class MenuComponent implements OnInit {
 
   search(){
     this.pagesArray = this.pagesToArray(this.pagesSource.data);
-   // console.log(`array: ${this.pagesArray}`)
     if(this.searchWord !== '') {
       this.hideAllPages(true);
       this.searchWord = this.searchWord.toLowerCase();
