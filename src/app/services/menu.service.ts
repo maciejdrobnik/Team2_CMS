@@ -11,13 +11,16 @@ const PAGE_URL = URL + 'menu';
   providedIn: 'root'
 })
 export class MenuService {
+  language:string;
+
   constructor(private http: HttpClient, private languageService: LanguageService) {
+    this.languageService.getLanguage().subscribe(
+      lang => {this.language = lang}
+    );
   }
 
   getMenuData(): Observable<Page[]> {
-    const lang = this.languageService.getLanguage();
-    const url = PAGE_URL + '/' + lang; //for now to test language change this part manually to eg
-   // const url = PAGE_URL + '/' + 'polish';
+    const url = PAGE_URL + '/' + this.language;
     return this.http.get<Page[]>(url, {responseType: 'json'});
   }
 }

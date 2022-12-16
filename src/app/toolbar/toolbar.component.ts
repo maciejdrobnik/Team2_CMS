@@ -18,6 +18,9 @@ export class ToolbarComponent implements OnInit {
   darkModeEnabled = false;
 
   ngOnInit(): void {
+    this.languageService.getLanguage().subscribe(
+      lang => {console.log(lang)}
+    );
   }
 
   switchDarkMode() {
@@ -31,8 +34,6 @@ export class ToolbarComponent implements OnInit {
 
   switchLanguage(lang: string) {
     this.languageService.setLanguage(lang);
-    console.log(this.languageService.getLanguage());
-   // window.location.reload();
   }
 
   getLanguage() {
