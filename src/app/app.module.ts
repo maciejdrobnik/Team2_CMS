@@ -4,7 +4,6 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {QuillModule} from 'ngx-quill'
 import {FormsModule} from "@angular/forms";
-import {TextEditorComponent} from './text-editor/text-editor.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
@@ -13,7 +12,6 @@ import {MatTreeModule} from "@angular/material/tree";
 import {MatInputModule} from "@angular/material/input";
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import {MatDialogModule} from "@angular/material/dialog";
-import {LatexWindowComponent} from './latex-window/latex-window.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {MenuWrapperComponent} from './menu-wrapper/menu-wrapper.component';
 import {RouterModule, Routes} from "@angular/router";
@@ -28,7 +26,6 @@ import {KatexModule} from "ng-katex";
 
 const appRoutes: Routes = [
   {path: ':lang/home', component: HomeComponent},
-  {path: 'editor', component: TextEditorComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: ':lang/:id', component: PageComponent},
   {path: '',   redirectTo: 'english/home', pathMatch: 'full' }
@@ -37,8 +34,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    TextEditorComponent,
-    LatexWindowComponent,
     ToolbarComponent,
     MenuWrapperComponent,
     HomeComponent,
