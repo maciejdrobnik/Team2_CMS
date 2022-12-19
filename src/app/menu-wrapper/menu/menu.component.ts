@@ -30,15 +30,16 @@ export class MenuComponent implements OnInit {
     this.menuService.getMenuData().subscribe(pages => {
       this.pagesSource.data = pages;
     });
-    console.log(this.pagesSource.data);
-    console.log('got pages');
   }
 
   hasSubpages = (_: number, page: Page) => !!page.children && page.children.length > 0;
 
   ngOnInit(): void {
     this.languageService.getLanguage().subscribe(
-      (lang) => this.getMenuData(),
+      (lang) => {
+        this.getMenuData();
+        this.language = lang;
+      },
     );
 
   }
