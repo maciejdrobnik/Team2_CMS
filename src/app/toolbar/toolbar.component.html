@@ -14,11 +14,17 @@
         <p>Home</p>
       </a>
     <span class="lang">
-      <img class="lang_img" src="assets/lang/en.png" alt="English flag" id="english"
-           #en (click)="switchLanguage(en.id)" routerLink="/english/home">
-      <img class="lang_img" src="assets/lang/fr.png" alt="French flag" id="french"
+      <img *ngIf="this.language === 'english'" class="lang_img" src="assets/lang/en.png" alt="English flag" id="englishNoChange"
+            >
+      <img *ngIf="this.language !== 'english'" class="lang_img" src="assets/lang/en.png" alt="English flag" id="english"
+           #en (click)="switchLanguage(en.id)"  routerLink="/english/home">
+      <img *ngIf="this.language === 'french'" class="lang_img" src="assets/lang/fr.png" alt="French flag" id="frenchNoChange"
+            >
+      <img *ngIf="this.language !== 'french'" class="lang_img" src="assets/lang/fr.png" alt="French flag" id="french"
            #fr (click)="switchLanguage(fr.id)" routerLink="/french/home">
-      <img class="lang_img" src="assets/lang/pl.png" alt="Polish flag" id="polish"
+      <img *ngIf="this.language === 'polish'" class="lang_img" src="assets/lang/pl.png" alt="Polish flag" id="polishNoChange"
+           >
+      <img *ngIf="this.language !== 'polish'" class="lang_img" src="assets/lang/pl.png" alt="Polish flag" id="polish"
            #pl (click)="switchLanguage(pl.id)" routerLink="/polish/home">
     </span>
     <button mat-icon-button (click)="switchDarkMode()">
