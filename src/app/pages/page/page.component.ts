@@ -33,11 +33,9 @@ export class PageComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    //will use later for path
-    //this.pagePath = '/test';
-    //this.location.replaceState(this.pagePath);
     this.route.params.subscribe(val => {
       this.id = this.route.snapshot.params['id'];
+      this.pageContent = [];
       this.getPage();
     });
   }
