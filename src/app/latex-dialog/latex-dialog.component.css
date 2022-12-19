@@ -1,0 +1,18 @@
+.full-width {
+  position: relative;
+  width: 90%;
+  margin: 2.5% 5%;
+}
+.input{
+  width: 100%;
+  font-size: 20px;
+}
+.latexInput {
+  height:15vh;
+}
+.latexOutput {
+  height:15vh;
+}
+.submitButton {
+  margin: 10px;
+}
