@@ -5,7 +5,7 @@
     <mat-tree-node id="{{page.id}}" *matTreeNodeDef="let page" matTreeNodeToggle>
       <li class="mat-tree-node menu-tree-text">
         <!-- use a disabled button to provide padding for tree leaf -->
-        <button mat-icon-button disabled></button>
+        <a class="add" (click)="addPage(page)"><mat-icon>add</mat-icon></a>
         <a class="menu-tree-text" (click)="loadPage()" routerLink="/{{page.id}}">
           {{page.name}}
         </a>
@@ -21,6 +21,7 @@
               {{treeControl.isExpanded(page) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
           </button>
+          <a class="add" (click)="addPage(page)"><mat-icon>add</mat-icon></a>
           <span class="menu-tree-text">{{page.name}}</span>
         </div>
         <ul [class.menu-tree-invisible]="!treeControl.isExpanded(page)">
@@ -29,5 +30,8 @@
       </li>
     </mat-nested-tree-node>
   </mat-tree>
+  <a class="add" id="add_Folder" (click)="addRoot()">
+    <mat-icon>add</mat-icon>Add new Folder
+  </a>
 </div>
 

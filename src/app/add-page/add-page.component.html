@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Name of root</mat-label>
+    <input matInput [(ngModel)]="data.folderName">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Return</button>
+  <button mat-button [mat-dialog-close]="data.folderName" cdkFocusInitial>Confirm</button>
+</div>

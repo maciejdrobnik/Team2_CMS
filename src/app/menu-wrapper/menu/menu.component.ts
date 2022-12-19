@@ -5,6 +5,10 @@ import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {Router} from "@angular/router";
 import {LanguageService} from "../../services/language.service";
+import {MatDialog} from "@angular/material/dialog";
+import {AddPageComponent} from "../../add-page/add-page.component";
+import {FolderDTO} from "../../services/menu.service";
+import {DialogData} from "../../add-page/add-page.component";
 
 @Component({
   selector: 'app-menu',
@@ -24,7 +28,7 @@ export class MenuComponent implements OnInit {
   @Output() redirect = new EventEmitter<any>();
 
   language:string;
-  constructor(private menuService: MenuService, private  languageService: LanguageService) { }
+  constructor(private menuService: MenuService, private  languageService: LanguageService, public dialog: MatDialog) { }
 
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
@@ -38,7 +42,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.languageService.getLanguage().subscribe(
-      (lang) => this.getMenuData(),
+      () => this.getMenuData(),
     );
 
   }
@@ -141,18 +145,27 @@ export class MenuComponent implements OnInit {
       }
     }
   }
+  addPage(page:Page): void{
 
-  // addAddPage(page:Page): void{
-  //   if(page.children !== [] || ){
-  //
-  //   }
-  //
-  // }
+  }
 
-
-
-
-
-
+  addRoot():void{
+    let dialogData:DialogData = {
+      folderName: "",
+    }
+    let dialogRef = this.dialog.open(AddPageComponent, {
+      height: '400px',
+      width: '600px',
+      data: {folderName: dialogData.folderName}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      let newFolder:FolderDTO = {
+        folderName:result,
+      }
+      this.menuService.addRoot(newFolder).subscribe(
+        () => this.getMenuData(),
+      );
+    });
+  }
 
 }
