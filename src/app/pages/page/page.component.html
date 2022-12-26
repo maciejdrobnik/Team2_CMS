@@ -7,5 +7,23 @@
   <ng-template class="latexOutput" #latex>
     <ng-katex class="latexFunction" [equation]=page.content></ng-katex>
   </ng-template>
+  <div id="editBox">
+    <ul>
+      <li>
+        <a routerLink="/{{language}}/{{id}}">
+          <button (click)="editPage()">
+          Edit Page
+        </button>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/{{language}}/home">
+          <button (click)="deletePage()">
+            Delete Page
+          </button>
+        </a>
+      </li>
+    </ul>
 
+  </div>
 </div>

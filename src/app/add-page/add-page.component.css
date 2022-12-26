@@ -1,0 +1,26 @@
+#fullAddPageDialog{
+  position: relative;
+}
+
+#addPageDialog {
+  font-size: 20px;
+  text-align: center;
+  margin: 0 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#addPageInputField{
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+#addPageButtons{
+  position: absolute;
+  /*Right jest równy paddingowi elementów dialogu(input i title)*/
+  right: 24px;
+  gap: 5px;
+
+}
+

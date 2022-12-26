@@ -16,10 +16,12 @@ button {
 
 
 .menu-tree-text {
-  width: 90%;
+  max-width: 90%;
   overflow: hidden;
   white-space: nowrap; /* don't break the line */
   text-overflow: ellipsis; /* give the beautiful '...' effect */
+  display: flex;
+  margin-right: 5px;
 }
 a:hover {
   cursor: pointer;
@@ -47,6 +49,8 @@ a:hover {
 
 #add_Folder{
   padding-top: 10px;
+  margin-left: 40px;
+  padding-left: 0;
 }
 
 mat-nested-tree-node a{

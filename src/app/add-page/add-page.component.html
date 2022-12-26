@@ -1,11 +1,13 @@
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field appearance="fill">
+<div id="fullAddPageDialog">
+<div id="addPageDialog" mat-dialog-content>
+  <p>How do you want to name new root folder?</p>
+  <mat-form-field id="addPageInputField" appearance="fill">
     <mat-label>Name of root</mat-label>
     <input matInput [(ngModel)]="data.folderName">
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Return</button>
-  <button mat-button [mat-dialog-close]="data.folderName" cdkFocusInitial>Confirm</button>
+<div id="addPageButtons" mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" mat-raised-button color="accent">Return</button>
+  <button mat-button [mat-dialog-close]="data.folderName" mat-raised-button color="accent" cdkFocusInitial>Confirm</button>
+</div>
 </div>

@@ -1,7 +1,7 @@
 .full-width {
   position: relative;
   width: 90%;
-  margin: 2.5% 5%;
+  margin: 2.5% 5% 0 0 ;
 }
 .input{
   width: 100%;
@@ -11,8 +11,9 @@
   height:15vh;
 }
 .latexOutput {
+  margin: 0 10px;
   height:15vh;
 }
 .submitButton {
-  margin: 10px;
+  margin-bottom: 10px;
 }

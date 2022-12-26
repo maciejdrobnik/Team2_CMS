@@ -3,7 +3,6 @@ import { Page } from "../../services/mock-menu-data";
 import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
-import {Router} from "@angular/router";
 import {LanguageService} from "../../services/language.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AddPageComponent} from "../../add-page/add-page.component";
@@ -155,8 +154,8 @@ export class MenuComponent implements OnInit {
       folderName: "",
     }
     let dialogRef = this.dialog.open(AddPageComponent, {
-      height: '400px',
-      width: '600px',
+      height: '24vh',
+      width: '25vw',
       data: {folderName: dialogData.folderName}
     });
     dialogRef.afterClosed().subscribe(result => {

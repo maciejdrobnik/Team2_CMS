@@ -94,6 +94,8 @@ export class TextEditorComponent implements OnInit {
   openDialog():void{
     let range = this.quill.getSelection(true);
     const dialogRef = this.matDialog.open(LatexDialogComponent, {
+      width: "50vw",
+      height:"50vh",
       data: { equation: ''},
     });
     dialogRef.afterClosed().subscribe(result => {

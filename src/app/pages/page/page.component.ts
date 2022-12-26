@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {PageDTO, PageService} from "../../services/page.service";
 import {Location} from "@angular/common";
+import {MenuService} from "../../services/menu.service";
 
 
 interface PageContent {
@@ -18,6 +19,7 @@ interface PageContent {
 export class PageComponent implements OnInit {
 
   id: string;
+  language: string;
   pageHTML: string = "";
   pageContent: Array<PageContent> = [];
   pagePath: string;
@@ -25,14 +27,18 @@ export class PageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private pageService: PageService,
-    private location: Location
+    private location: Location,
+    private menuService: MenuService
   ) {
   }
 
 //todo add 'check for latex' func on html
 
   ngOnInit(): void {
+    console.log(this.route.snapshot)
+    console.log(this.route.snapshot.params['lang'])
     this.id = this.route.snapshot.params['id'];
+    this.language = this.route.snapshot.params['lang'];
     this.route.params.subscribe(val => {
       this.id = this.route.snapshot.params['id'];
       this.pageContent = [];
@@ -84,6 +90,15 @@ export class PageComponent implements OnInit {
     } else {
       this.pageContent.push({latex: false, content: this.pageHTML});
     }
+  }
+
+  deletePage(){
+    this.pageService.deletePage(this.id).subscribe(
+      () => this.menuService.getMenuData(),
+    );
+  }
+  editPage(){
+    console.log("Edytuj stronę" + this.id);
   }
 
 
