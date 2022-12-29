@@ -3,8 +3,9 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {MatDialogRef} from '@angular/material/dialog';
 
 
-export class DialogData {
-  folderName: string
+export class PageDialogData {
+  pageName: string;
+  mode:string;
 }
 
 @Component({
@@ -13,13 +14,10 @@ export class DialogData {
   styleUrls: ['./add-page.component.css']
 })
 export class AddPageComponent implements OnInit {
-  // title: string;
-  // input: string;
-  // parentId?:number;
 
   constructor(
     public dialogRef: MatDialogRef<AddPageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: PageDialogData,
   ) {}
 
   ngOnInit(): void {

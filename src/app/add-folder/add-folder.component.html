@@ -1,0 +1,13 @@
+<div id="fullAddFolderDialog">
+  <div id="addFolderDialog" mat-dialog-content>
+    <p>How do you want to name new {{data.mode}} folder?</p>
+    <mat-form-field id="addFolderInputField" appearance="fill">
+      <mat-label>Name of root</mat-label>
+      <input matInput [(ngModel)]="data.folderName">
+    </mat-form-field>
+  </div>
+  <div id="addFolderButtons" mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" mat-raised-button color="accent">Return</button>
+    <button mat-button [mat-dialog-close]="data.folderName" mat-raised-button color="accent">Confirm</button>
+  </div>
+</div>

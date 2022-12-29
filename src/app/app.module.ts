@@ -25,6 +25,8 @@ import {KatexModule} from "ng-katex";
 import { AddPageComponent } from './add-page/add-page.component';
 import { LatexDialogComponent } from './latex-dialog/latex-dialog.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
+import {MatMenuModule} from "@angular/material/menu";
+import { AddFolderComponent } from './add-folder/add-folder.component';
 
 
 const appRoutes: Routes = [
@@ -47,7 +49,8 @@ const appRoutes: Routes = [
     NotFoundComponent,
     AddPageComponent,
     LatexDialogComponent,
-    TextEditorComponent
+    TextEditorComponent,
+    AddFolderComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    MatMenuModule,
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}

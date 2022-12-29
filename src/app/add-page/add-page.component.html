@@ -1,13 +1,13 @@
 <div id="fullAddPageDialog">
 <div id="addPageDialog" mat-dialog-content>
-  <p>How do you want to name new root folder?</p>
+  <p>How do you want to name new page?</p>
   <mat-form-field id="addPageInputField" appearance="fill">
     <mat-label>Name of root</mat-label>
-    <input matInput [(ngModel)]="data.folderName">
+    <input matInput [(ngModel)]="data.pageName">
   </mat-form-field>
 </div>
 <div id="addPageButtons" mat-dialog-actions>
   <button mat-button (click)="onNoClick()" mat-raised-button color="accent">Return</button>
-  <button mat-button [mat-dialog-close]="data.folderName" mat-raised-button color="accent" cdkFocusInitial>Confirm</button>
+  <button mat-button [mat-dialog-close]="data.pageName" mat-raised-button color="accent">Confirm</button>
 </div>
 </div>

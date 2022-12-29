@@ -5,9 +5,9 @@ import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {LanguageService} from "../../services/language.service";
 import {MatDialog} from "@angular/material/dialog";
-import {AddPageComponent} from "../../add-page/add-page.component";
+import {AddFolderComponent} from "../../add-folder/add-folder.component";
 import {FolderDTO} from "../../services/menu.service";
-import {DialogData} from "../../add-page/add-page.component";
+import {FolderDialogData} from "../../add-folder/add-folder.component";
 
 @Component({
   selector: 'app-menu',
@@ -145,27 +145,51 @@ export class MenuComponent implements OnInit {
       }
     }
   }
-  addPage(page:Page): void{
 
-  }
-
-  addRoot():void{
-    let dialogData:DialogData = {
+  addChildFolder(parentId: number): void{
+    let dialogData:FolderDialogData = {
       folderName: "",
+      mode:"child"
     }
-    let dialogRef = this.dialog.open(AddPageComponent, {
+    let dialogRef = this.dialog.open(AddFolderComponent, {
       height: '24vh',
       width: '25vw',
-      data: {folderName: dialogData.folderName}
+      data: {folderName: dialogData.folderName,
+              mode: dialogData.mode}
     });
     dialogRef.afterClosed().subscribe(result => {
-      let newFolder:FolderDTO = {
-        folderName:result,
+      if(result) {
+        let newFolder: FolderDTO = {
+          folderName: result,
+        }
+        this.menuService.addChildFolder(newFolder, parentId).subscribe(
+          () => this.getMenuData(),
+        );
       }
-      this.menuService.addRoot(newFolder).subscribe(
-        () => this.getMenuData(),
-      );
     });
+  }
+
+  addRootFolder():void{
+    let dialogData:FolderDialogData = {
+      folderName: "",
+      mode: "root"
+    }
+    let dialogRef = this.dialog.open(AddFolderComponent, {
+      height: '24vh',
+      width: '25vw',
+      data: {folderName: dialogData.folderName,
+        mode: dialogData.mode}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        let newFolder: FolderDTO = {
+          folderName: result,
+        }
+        this.menuService.addRoot(newFolder).subscribe(
+          () => this.getMenuData(),
+        );
+      }
+      });
   }
 
 }

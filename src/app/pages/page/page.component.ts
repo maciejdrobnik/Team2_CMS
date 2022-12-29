@@ -35,8 +35,6 @@ export class PageComponent implements OnInit {
 //todo add 'check for latex' func on html
 
   ngOnInit(): void {
-    console.log(this.route.snapshot)
-    console.log(this.route.snapshot.params['lang'])
     this.id = this.route.snapshot.params['id'];
     this.language = this.route.snapshot.params['lang'];
     this.route.params.subscribe(val => {
@@ -67,7 +65,6 @@ export class PageComponent implements OnInit {
       const tag = '<latex>';
       const endTag = '</latex>';
       const content = this.pageHTML.split(tag);
-      console.log(content)
       content.forEach(str => {
         if(str.includes(endTag)) {
           const separated = str.split(endTag);
@@ -85,7 +82,6 @@ export class PageComponent implements OnInit {
 
         }
       });
-      console.log(this.pageContent);
 
     } else {
       this.pageContent.push({latex: false, content: this.pageHTML});
@@ -100,6 +96,4 @@ export class PageComponent implements OnInit {
   editPage(){
     console.log("Edytuj stronę" + this.id);
   }
-
-
 }

@@ -30,6 +30,16 @@ export class MenuService {
 
   addRoot(folder: FolderDTO): Observable<FolderDTO> {
     const url = FOLDER_URL + '/' + this.language;
+    return this.http.post<FolderDTO>(url, folder, {responseType:'json'});
+  }
+  addChildFolder(folder: FolderDTO, parentId:number): Observable<FolderDTO> {
+    const url = FOLDER_URL + '/' + 'parent' + '/' + parentId;
+    console.log(url);
+    return this.http.post<FolderDTO>(url, folder, {responseType:'json'});
+  }
+
+  addChildPage(folder: FolderDTO, parentId:string): Observable<FolderDTO> {
+    const url = FOLDER_URL + '/' + 'parent' + '/' + parentId;
     console.log(url);
     return this.http.post<FolderDTO>(url, folder, {responseType:'json'});
   }

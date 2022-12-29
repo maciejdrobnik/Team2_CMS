@@ -44,7 +44,7 @@ a:hover {
 }
 
 .add mat-icon{
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 #add_Folder{
@@ -53,10 +53,10 @@ a:hover {
   padding-left: 0;
 }
 
-mat-nested-tree-node a{
-  margin-top:3px;
+.mat-nested-tree-node{
+  margin-top:0px;
 }
 
-mat-nested-tree-node span{
-  padding-top: 5px;
+.mat-menu-trigger{
+  margin-top: 5px;
 }
