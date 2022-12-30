@@ -2,7 +2,7 @@
   <div id="addFolderDialog" mat-dialog-content>
     <p>How do you want to name new {{data.mode}} folder?</p>
     <mat-form-field id="addFolderInputField" appearance="fill">
-      <mat-label>Name of root</mat-label>
+      <mat-label>Name of {{data.mode}}</mat-label>
       <input matInput [(ngModel)]="data.folderName">
     </mat-form-field>
   </div>

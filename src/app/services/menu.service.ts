@@ -8,8 +8,16 @@ export interface FolderDTO{
   folderName: string
 }
 
+export interface PageDTO{
+  pageName: string,
+  content:string,
+  tags:string[],
+  id?:number,
+}
+
 const URL = 'http://localhost:8080/';
-const PAGE_URL = URL + 'menu';
+const MENU_URL = URL + 'menu';
+const PAGE_URL = URL + 'page';
 const FOLDER_URL = URL + 'folder'
 @Injectable({
   providedIn: 'root'
@@ -24,7 +32,7 @@ export class MenuService {
   }
 
   getMenuData(): Observable<Page[]> {
-    const url = PAGE_URL + '/' + this.language;
+    const url = MENU_URL + '/' + this.language;
     return this.http.get<Page[]>(url, {responseType: 'json'});
   }
 
@@ -38,9 +46,8 @@ export class MenuService {
     return this.http.post<FolderDTO>(url, folder, {responseType:'json'});
   }
 
-  addChildPage(folder: FolderDTO, parentId:string): Observable<FolderDTO> {
-    const url = FOLDER_URL + '/' + 'parent' + '/' + parentId;
-    console.log(url);
-    return this.http.post<FolderDTO>(url, folder, {responseType:'json'});
+  addPage(page: PageDTO, parentId:number): Observable<number> {
+    const url = PAGE_URL + '/' + 'parent' + '/' + parentId;
+    return this.http.post<number>(url, page, {responseType:'json'});
   }
 }
