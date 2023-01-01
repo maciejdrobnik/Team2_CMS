@@ -50,4 +50,9 @@ export class MenuService {
     const url = PAGE_URL + '/' + 'parent' + '/' + parentId;
     return this.http.post<number>(url, page, {responseType:'json'});
   }
+
+  getPageContent(id:number): Observable<PageDTO> {
+  const url = PAGE_URL + '/' + id;
+  return this.http.get<PageDTO>(url, {responseType: 'json'});
+}
 }

@@ -33,7 +33,7 @@ const appRoutes: Routes = [
   {path: ':lang/home', component: HomeComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: ':lang/:id', component: PageComponent},
-  {path: 'editor', component:TextEditorComponent},
+  {path: ':lang/:id/editor', component:TextEditorComponent},
   {path: '',   redirectTo: 'english/home', pathMatch: 'full' }
 ];
 
