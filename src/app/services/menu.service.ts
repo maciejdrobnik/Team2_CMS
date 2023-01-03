@@ -46,9 +46,9 @@ export class MenuService {
     return this.http.post<FolderDTO>(url, folder, {responseType:'json'});
   }
 
-  addPage(page: PageDTO, parentId:number): Observable<number> {
+  addPage(page: PageDTO, parentId:number): Observable<PageDTO> {
     const url = PAGE_URL + '/' + 'parent' + '/' + parentId;
-    return this.http.post<number>(url, page, {responseType:'json'});
+    return this.http.post<PageDTO>(url, page, {responseType:'json'});
   }
 
   getPageContent(id:number): Observable<PageDTO> {

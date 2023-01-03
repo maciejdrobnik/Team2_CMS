@@ -54,7 +54,6 @@ export class TextEditorComponent implements OnInit {
             }
           }
         },
-
         theme: 'snow',
       }
     );

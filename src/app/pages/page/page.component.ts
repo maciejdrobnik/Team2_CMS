@@ -90,10 +90,12 @@ export class PageComponent implements OnInit {
 
   deletePage(){
     this.pageService.deletePage(this.id).subscribe(
-      () => this.menuService.getMenuData(),
-    );
+      () => {this.menuService.getMenuData();
+        window.location.reload();
+      },
+      )
   }
-  editPage(){
-    console.log("Edytuj stronę" + this.id);
-  }
+  // editPage(){
+  //   console.log("Edytuj stronę" + this.id);
+  // }
 }

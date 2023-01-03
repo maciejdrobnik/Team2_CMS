@@ -215,7 +215,7 @@ export class MenuComponent implements OnInit {
         this.menuService.addPage(newPage, parentId).subscribe(
           (result) => {
             this.getMenuData();
-            this.location.replaceState(`/${this.language}/${result}`);
+            this.location.replaceState(`/${this.language}/${result.id}`);
             window.location.reload();
           },
         );
