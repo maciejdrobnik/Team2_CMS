@@ -14,6 +14,7 @@ export class ToolbarComponent implements OnInit {
   @Output() menuOpened = new EventEmitter<void>();
   @Output() darkModeSwitched = new EventEmitter<void>();
   @Output() fontSideSwitched = new EventEmitter<number>();
+  @Output() logOut = new EventEmitter<void>();
 
   darkModeEnabled = false;
   language:string;

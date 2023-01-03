@@ -24,6 +24,7 @@ import { SearchBarComponent } from './menu-wrapper/search-bar/search-bar.compone
 import {HttpClientModule} from '@angular/common/http';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {KatexModule} from "ng-katex";
+import { LoginComponent } from './pages/login/login.component';
 
 
 const appRoutes: Routes = [
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
   {path: 'editor', component: TextEditorComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: ':lang/:id', component: PageComponent},
+  {path: 'login', component: LoginComponent},
   {path: '',   redirectTo: 'english/home', pathMatch: 'full' }
 ];
 
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
     PageComponent,
     MenuComponent,
     SearchBarComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
