@@ -1,12 +1,14 @@
-<div *ngFor="let page of pageContent">
+<div id="pageContent">
+</div>
+<!--<div *ngFor="let page of pageContent">-->
 
-  <div *ngIf="!page.latex; else latex"
-       [innerHTML]="page.content">
+<!--  <div *ngIf="!page.latex; else latex"-->
+<!--       [innerHTML]="page.content">-->
 
-  </div>
-  <ng-template class="latexOutput" #latex>
-    <ng-katex class="latexFunction" [equation]=page.content></ng-katex>
-  </ng-template>
+<!--  </div>-->
+<!--  <ng-template class="latexOutput" #latex>-->
+<!--    <ng-katex class="latexFunction" [equation]=page.content></ng-katex>-->
+<!--  </ng-template>-->
   <div id="editBox">
     <ul>
       <li>
@@ -23,7 +25,22 @@
           </button>
         </a>
       </li>
+      <li>
+        <a>
+          <button (click)="editTags()">
+            Edit Tags
+          </button>
+          </a>
+      </li>
     </ul>
-
+    <div id="tags">
+        <h3>Tags:  </h3>
+      <ul>
+        <div *ngFor="let tag of tags">
+          <li>
+            {{tag}}
+          </li>
+        </div>
+      </ul>
+    </div>
   </div>
-</div>

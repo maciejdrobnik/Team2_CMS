@@ -27,6 +27,8 @@ import { LatexDialogComponent } from './latex-dialog/latex-dialog.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { AddFolderComponent } from './add-folder/add-folder.component';
+import { TagsComponent } from './tags/tags.component';
+import {MatListModule} from "@angular/material/list";
 
 
 const appRoutes: Routes = [
@@ -50,26 +52,28 @@ const appRoutes: Routes = [
     AddPageComponent,
     LatexDialogComponent,
     TextEditorComponent,
-    AddFolderComponent
+    AddFolderComponent,
+    TagsComponent
   ],
-  imports: [
-    BrowserModule,
-    QuillModule.forRoot(),
-    FormsModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatTreeModule,
-    MatInputModule,
-    KatexModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    RouterModule.forRoot(appRoutes),
-    HttpClientModule,
-    MatMenuModule,
-  ],
+    imports: [
+        BrowserModule,
+        QuillModule.forRoot(),
+        FormsModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatTreeModule,
+        MatInputModule,
+        KatexModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        RouterModule.forRoot(appRoutes),
+        HttpClientModule,
+        MatMenuModule,
+        MatListModule,
+    ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
   ],

@@ -1,17 +1,17 @@
-.latexOutput {
-  height:15vh;
-}
+/*.latexOutput {*/
+/*  height:15vh;*/
+/*}*/
 
 #editBox{
   position: fixed;
   left: 80vw;
   top: 14vh;
-  height: 15vh;
+  height: 25vh;
   margin: 0 2.5vw;
   padding: 0 2.5vw;
   list-style-type: none;
-  border: solid 1px grey;
-  border-radius: 15px;
+  /*border: solid 1px grey;*/
+  /*border-radius: 15px;*/
   width: 15vw;
   }
 #editBox li{
@@ -19,6 +19,7 @@
   list-style-type: none;
   display: flex;
   justify-content: center;
+  gap: 1vh;
 }
 #editBox ul {
   margin-block-start: 0em;
@@ -26,4 +27,13 @@
   padding-inline-start: 0px;
 }
 
+#tags{
+  margin-top: 2vh;
+}
+
+#tags li{
+  margin: 0.25vh 0;
+  padding: 0.25vh 0;
+  justify-content: left;
+}
 
