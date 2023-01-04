@@ -53,16 +53,15 @@ export class PageComponent implements OnInit {
   getPage(): void {
     this.pageService.getPage(this.id).subscribe( {
       next: (page: PageDTO) => {
-          this.pageHTML = page.content;
+          this.pageHTML = page.content || "";
           this.tags = page.tags;
           console.log(this.tags);
           },
       error: () => {},
       complete: () => {
-        if (document.getElementById("pageContent")){
-          // @ts-ignore
-          document.getElementById("pageContent").innerHTML = this.pageHTML;
-          console.log(this.pageHTML)
+        const newPageContent = document.getElementById("pageContent");
+        if (newPageContent){
+          newPageContent.innerHTML = this.pageHTML;
         }
         // this.separateContent();
       }
@@ -117,7 +116,10 @@ export class PageComponent implements OnInit {
     const dialogRef = this.matDialog.open(TagsComponent, {
       width: "30vw",
       height:"60vh",
-      data: { tags: this.tags},
+      data: { tags: this.tags, id:this.id},
     });
+    dialogRef.afterClosed().subscribe(result =>
+      window.location.reload()
+    )
   }
 }

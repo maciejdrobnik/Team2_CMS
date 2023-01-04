@@ -18,7 +18,7 @@ const Parchment = Quill.import('parchment');
 export class TextEditorComponent implements OnInit {
   title: 'quil-editor';
   quill:Quill;
-  content:string;
+  content?:string;
   pageId?:number;
 
 
@@ -70,7 +70,7 @@ export class TextEditorComponent implements OnInit {
       page => {
         this.pageId = page.id;
         this.content = page.content;
-        this.quill.root.innerHTML = this.content;
+        this.quill.root.innerHTML = this.content || "";
       }
     );
   }
@@ -83,9 +83,7 @@ export class TextEditorComponent implements OnInit {
       content: content,
       id:this.pageId,
     }
-    this.pageService.patchPage(newPage).subscribe(
-      () => console.log("Patchuję")
-    )
+    this.pageService.patchPage(newPage).subscribe();
   }
 
   modifyDialog(formulaBlot:typeof FormulaBlot):void{

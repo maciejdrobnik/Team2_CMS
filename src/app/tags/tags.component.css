@@ -1,7 +1,22 @@
 #list{
   font-size: 3rem;
+  padding: 10px;
 }
 .mat-list-item{
   font-size: 3rem;
   margin-top: 5px;
+  margin-right: 5px;
+}
+.mat-dialog-container{
+  padding: 10px;
+}
+
+.mat-list-base{
+  padding-top: 0;
+}
+span{
+  justify-content: center;
+}
+a{
+  line-height: 0;
 }

@@ -10,7 +10,7 @@ export interface FolderDTO{
 
 export interface PageDTO{
   pageName?: string,
-  content:string,
+  content?:string,
   tags?:string[],
   id?:number,
 }
