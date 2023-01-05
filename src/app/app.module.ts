@@ -27,13 +27,14 @@ import { LatexDialogComponent } from './latex-dialog/latex-dialog.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { AddFolderComponent } from './add-folder/add-folder.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 const appRoutes: Routes = [
   {path: ':lang/home', component: HomeComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: ':lang/:id', component: PageComponent},
-  {path: 'editor', component:TextEditorComponent},
+  {path: 'login', component: LoginComponent},
   {path: '',   redirectTo: 'english/home', pathMatch: 'full' }
 ];
 
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     LatexDialogComponent,
     TextEditorComponent,
     AddFolderComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
