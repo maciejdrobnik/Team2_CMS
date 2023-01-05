@@ -46,7 +46,6 @@ export class PageService {
   }
 
   patchPage(newPage:PageDTO): Observable<any> {
-    console.log(PAGE_URL + newPage.id)
     return this.http.patch(PAGE_URL + newPage.id, newPage, {responseType:'json'})
   }
 }

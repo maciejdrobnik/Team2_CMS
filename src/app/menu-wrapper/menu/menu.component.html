@@ -6,10 +6,13 @@
       <li class="mat-tree-node menu-tree-text">
         <!-- use a disabled button to provide padding for tree leaf -->
         <button mat-icon-button disabled></button>
-        <a class="menu-tree-text" (click)="loadPage()" routerLink="{{language}}/{{page.id}}">
+        <a *ngIf="page.fileName !== null" class="menu-tree-text" (click)="loadPage()" routerLink="{{language}}/{{page.id}}">
           {{page.name}}
         </a>
-        <a  [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon></a>
+          <span *ngIf="page.fileName === null" class="menu-tree-text">
+            {{page.name}}
+          </span>
+        <a  *ngIf="page.fileName === null" [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon></a>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="addPage(page.id)">Add Page</button>
           <button mat-menu-item (click)="addChildFolder(page.id)">Add Folder</button>
@@ -27,12 +30,14 @@
             </mat-icon>
           </button>
           <span class="menu-tree-text">{{page.name}}</span>
+          <div *ngIf="!page.page">
           <a  [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon></a>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="addPage(page.id)">Add Page</button>
             <button mat-menu-item (click)="addChildFolder(page.id)">Add Folder</button>
           </mat-menu>
-        </div>
+          </div>
+          </div>
         <ul [class.menu-tree-invisible]="!treeControl.isExpanded(page)">
           <ng-container matTreeNodeOutlet></ng-container>
         </ul>

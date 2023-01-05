@@ -55,7 +55,6 @@ export class PageComponent implements OnInit {
       next: (page: PageDTO) => {
           this.pageHTML = page.content || "";
           this.tags = page.tags;
-          console.log(this.tags);
           },
       error: () => {},
       complete: () => {
@@ -84,8 +83,6 @@ export class PageComponent implements OnInit {
           const separated = str.split(endTag);
           const ltx = separated[0];
           const normal = separated[1];
-          console.log(ltx);
-          console.log(normal);
           this.pageContent.push({latex: true, content: ltx});
           if(normal.length !== 0) {
             this.pageContent.push({latex: false, content: normal});
