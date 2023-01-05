@@ -35,7 +35,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   switchLanguage(lang: string) {
-    console.log("Odpala się")
     this.languageService.setLanguage(lang);
   }
 }

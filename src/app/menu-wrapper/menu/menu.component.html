@@ -6,9 +6,14 @@
       <li class="mat-tree-node menu-tree-text">
         <!-- use a disabled button to provide padding for tree leaf -->
         <button mat-icon-button disabled></button>
-        <a class="menu-tree-text" (click)="loadPage()" routerLink="/{{this.language}}/{{page.id}}">
+        <a class="menu-tree-text" (click)="loadPage()" routerLink="{{language}}/{{page.id}}">
           {{page.name}}
         </a>
+        <a  [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon></a>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="addPage(page.id)">Add Page</button>
+          <button mat-menu-item (click)="addChildFolder(page.id)">Add Folder</button>
+        </mat-menu>
       </li>
     </mat-tree-node>
     <!-- expandable pages/categories -->
@@ -22,6 +27,11 @@
             </mat-icon>
           </button>
           <span class="menu-tree-text">{{page.name}}</span>
+          <a  [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon></a>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="addPage(page.id)">Add Page</button>
+            <button mat-menu-item (click)="addChildFolder(page.id)">Add Folder</button>
+          </mat-menu>
         </div>
         <ul [class.menu-tree-invisible]="!treeControl.isExpanded(page)">
           <ng-container matTreeNodeOutlet></ng-container>
@@ -29,5 +39,8 @@
       </li>
     </mat-nested-tree-node>
   </mat-tree>
+    <a class="add" id="add_Folder" (click)="addRootFolder()">
+      Add new Folder<mat-icon>add</mat-icon>
+    </a>
 </div>
 

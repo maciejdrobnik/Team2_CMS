@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LatexWindowComponent } from './latex-window.component';
+import { LatexDialogComponent } from './latex-dialog.component';
 
-describe('LatechWindowComponent', () => {
-  let component: LatexWindowComponent;
-  let fixture: ComponentFixture<LatexWindowComponent>;
+describe('LatexDialogComponent', () => {
+  let component: LatexDialogComponent;
+  let fixture: ComponentFixture<LatexDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LatexWindowComponent ]
+      declarations: [ LatexDialogComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LatexWindowComponent);
+    fixture = TestBed.createComponent(LatexDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

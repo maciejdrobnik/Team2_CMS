@@ -3,8 +3,13 @@ import { Page } from "../../services/mock-menu-data";
 import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
-import {Router} from "@angular/router";
 import {LanguageService} from "../../services/language.service";
+import {MatDialog} from "@angular/material/dialog";
+import {AddFolderComponent} from "../../add-folder/add-folder.component";
+import {FolderDTO, PageDTO} from "../../services/menu.service";
+import {FolderDialogData} from "../../add-folder/add-folder.component";
+import {AddPageComponent, PageDialogData} from "../../add-page/add-page.component";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-menu',
@@ -24,7 +29,7 @@ export class MenuComponent implements OnInit {
   @Output() redirect = new EventEmitter<any>();
 
   language:string;
-  constructor(private menuService: MenuService, private  languageService: LanguageService) { }
+  constructor(private menuService: MenuService, private  languageService: LanguageService, public dialog: MatDialog, private location:Location) { }
 
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
@@ -143,17 +148,78 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  // addAddPage(page:Page): void{
-  //   if(page.children !== [] || ){
-  //
-  //   }
-  //
-  // }
+  addChildFolder(parentId: number): void{
+    let dialogData:FolderDialogData = {
+      folderName: "",
+      mode:"child"
+    }
+    let dialogRef = this.dialog.open(AddFolderComponent, {
+      height: '24vh',
+      width: '25vw',
+      data: {folderName: dialogData.folderName,
+              mode: dialogData.mode}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        let newFolder: FolderDTO = {
+          folderName: result,
+        }
+        this.menuService.addChildFolder(newFolder, parentId).subscribe(
+          () => this.getMenuData(),
+        );
+      }
+    });
+  }
 
+  addRootFolder():void{
+    let dialogData:FolderDialogData = {
+      folderName: "",
+      mode: "root"
+    }
+    let dialogRef = this.dialog.open(AddFolderComponent, {
+      height: '24vh',
+      width: '25vw',
+      data: {folderName: dialogData.folderName,
+        mode: dialogData.mode}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        let newFolder: FolderDTO = {
+          folderName: result,
+        }
+        this.menuService.addRoot(newFolder).subscribe(
+          () => this.getMenuData(),
+        );
+      }
+      });
+  }
 
-
-
-
-
-
+  addPage(parentId: number): void{
+    let dialogData:PageDialogData = {
+      pageName: "",
+      tags:[],
+    }
+    let dialogRef = this.dialog.open(AddPageComponent, {
+      height: '24vh',
+      width: '25vw',
+      data: {folderName: dialogData.pageName,
+        tags: dialogData.tags}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        let newPage: PageDTO = {
+          pageName: result.pageName,
+          tags:[],
+          content: "",
+        }
+        this.menuService.addPage(newPage, parentId).subscribe(
+          (result) => {
+            this.getMenuData();
+            this.location.replaceState(`/${this.language}/${result}`);
+            window.location.reload();
+          },
+        );
+      }
+    });
+  }
 }

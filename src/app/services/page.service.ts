@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {catchError, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {MenuService} from "./menu.service";
 
 const URL = 'http://localhost:8080/';
 const PAGE_URL = URL + 'page/';
@@ -33,6 +34,9 @@ export class PageService {
         return of(pageDTONotFound);
       })
     );
+  }
 
+  deletePage(id:string): Observable<any> {
+    return this.http.delete(URL + id, {responseType:'json'});
   }
 }
