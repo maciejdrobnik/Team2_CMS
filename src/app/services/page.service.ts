@@ -7,12 +7,6 @@ import {PageDTO} from "./menu.service";
 const URL = 'http://localhost:8080/';
 const PAGE_URL = URL + 'page/';
 
-// export class Page {
-//   constructor(
-//     public pageName: string,
-//     public content: string,
-//   ) { }
-// }
 
 let pageDTONotFound: PageDTO = {
   tags: [],
@@ -31,7 +25,7 @@ export class PageService {
     private router: Router,
   ) { }
 
-  getPage(id: string): Observable<PageDTO> {
+  getPage(id: number): Observable<PageDTO> {
     console.log(id);
     return this.http.get<any>(PAGE_URL + id, {responseType: 'json'}).pipe(
       catchError((_error: any): Observable<PageDTO> => {
@@ -41,7 +35,7 @@ export class PageService {
     );
   }
 
-  deletePage(id:string): Observable<any> {
+  deletePage(id:number): Observable<any> {
     return this.http.delete(URL + id, {responseType:'json'});
   }
 

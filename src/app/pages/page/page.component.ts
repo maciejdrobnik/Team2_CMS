@@ -22,7 +22,7 @@ interface PageContent {
 })
 export class PageComponent implements OnInit {
 
-  id: string;
+  id: number;
   language: string;
   pageHTML: string = "";
   tags?:string[] = [];

@@ -10,6 +10,7 @@ import {FolderDTO, PageDTO} from "../../services/menu.service";
 import {FolderDialogData} from "../../add-folder/add-folder.component";
 import {AddPageComponent, PageDialogData} from "../../add-page/add-page.component";
 import {Location} from '@angular/common';
+import {PageService} from "../../services/page.service";
 
 @Component({
   selector: 'app-menu',
@@ -29,7 +30,7 @@ export class MenuComponent implements OnInit {
   @Output() redirect = new EventEmitter<any>();
 
   language:string;
-  constructor(private menuService: MenuService, private  languageService: LanguageService, public dialog: MatDialog, private location:Location) { }
+  constructor(private menuService: MenuService, private  languageService: LanguageService, public dialog: MatDialog, private location:Location, private pageService: PageService) { }
 
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
@@ -185,8 +186,11 @@ export class MenuComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
+        let newTags: string[] = [this.language];
+        newTags.push(result);
         let newFolder: FolderDTO = {
           folderName: result,
+          tags:newTags,
         }
         this.menuService.addRoot(newFolder).subscribe(
           () => this.getMenuData(),
@@ -208,18 +212,30 @@ export class MenuComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        let newPage: PageDTO = {
-          pageName: result.pageName,
-          tags:[],
-          content: "",
-        }
-        this.menuService.addPage(newPage, parentId).subscribe(
+        let previousTags:string[] = [];
+        this.pageService.getPage(parentId).subscribe(
           (result) => {
-            this.getMenuData();
-            this.location.replaceState(`/${this.language}/${result.id}`);
-            window.location.reload();
+            console.log(result.tags)
+            previousTags = result.tags || [];
           },
-        );
+          ()=>{},
+          ()=>{
+            console.log(previousTags)
+            let newPage: PageDTO = {
+              pageName: result.pageName,
+              tags: previousTags,
+              content: "",
+            }
+            this.menuService.addPage(newPage, parentId).subscribe(
+              (result) => {
+                this.getMenuData();
+                this.location.replaceState(`/${this.language}/${result.id}`);
+                window.location.reload();
+              },
+            );
+          }
+
+        )
       }
     });
   }

@@ -66,7 +66,7 @@ export class TextEditorComponent implements OnInit {
         this.modifyDialog(formula);
       }
     });
-    this.pageService.getPage(this.route.snapshot.paramMap.get('id') || "0").subscribe(
+    this.pageService.getPage(Number(this.route.snapshot.paramMap.get('id')) || 0).subscribe(
       page => {
         this.pageId = page.id;
         this.content = page.content;

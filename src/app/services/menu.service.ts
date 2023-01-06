@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import {LanguageService} from "./language.service";
 
 export interface FolderDTO{
-  folderName: string
+  folderName: string,
+  tags?:string[]
 }
 
 export interface PageDTO{
