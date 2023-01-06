@@ -92,10 +92,28 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  searchMenuTree(page: Page): boolean{
+  isSearchedValue(page: Page): boolean {
     const name = page.name.toLowerCase();
+    const tags: string[] = [];
+    page.tags?.forEach(tag => {
+      const tagLow = tag.toLowerCase();
+      tags.push(tagLow);
+    });
+    let isInTags = false;
+
+    if(tags.length !== 0) {
+      tags.forEach(tag => {
+        if (tag.includes(this.searchWord)) {
+          isInTags = true;
+        }
+      })
+    }
+    return isInTags || name.includes(this.searchWord);
+  }
+
+  searchMenuTree(page: Page): boolean{
     let isPageSearched = false;
-    if(name.includes(this.searchWord)) {
+    if(this.isSearchedValue(page)) {
       this.showPageResult(page.id);
       this.treeControl.expand(page);
       isPageSearched = true;
