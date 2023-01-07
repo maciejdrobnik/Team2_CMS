@@ -162,13 +162,24 @@ export class MenuComponent implements OnInit {
               mode: dialogData.mode}
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log("coś nie tak")
       if(result) {
-        let newFolder: FolderDTO = {
-          folderName: result,
-        }
-        this.menuService.addChildFolder(newFolder, parentId).subscribe(
-          () => this.getMenuData(),
-        );
+        let previousTags:string[] = [];
+        this.pageService.getPage(parentId).subscribe(
+          (result2) => {
+            previousTags = result2.tags || [];
+          },
+          ()=>{},
+          ()=>{
+            let newFolder: FolderDTO = {
+              folderName: result,
+              tags: previousTags,
+            }
+            this.menuService.addChildFolder(newFolder, parentId).subscribe(
+              () => this.getMenuData(),
+            );
+          }
+        )
       }
     });
   }
@@ -186,11 +197,8 @@ export class MenuComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        let newTags: string[] = [this.language];
-        newTags.push(result);
         let newFolder: FolderDTO = {
           folderName: result,
-          tags:newTags,
         }
         this.menuService.addRoot(newFolder).subscribe(
           () => this.getMenuData(),
@@ -202,20 +210,17 @@ export class MenuComponent implements OnInit {
   addPage(parentId: number): void{
     let dialogData:PageDialogData = {
       pageName: "",
-      tags:[],
     }
     let dialogRef = this.dialog.open(AddPageComponent, {
       height: '24vh',
       width: '25vw',
-      data: {folderName: dialogData.pageName,
-        tags: dialogData.tags}
+      data: {folderName: dialogData.pageName}
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
         let previousTags:string[] = [];
         this.pageService.getPage(parentId).subscribe(
           (result) => {
-            console.log(result.tags)
             previousTags = result.tags || [];
           },
           ()=>{},

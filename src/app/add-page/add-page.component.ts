@@ -5,7 +5,6 @@ import {MatDialogRef} from '@angular/material/dialog';
 
 export class PageDialogData {
   pageName: string;
-  tags:string[];
 }
 
 @Component({
