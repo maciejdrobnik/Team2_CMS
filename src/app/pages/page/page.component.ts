@@ -27,7 +27,9 @@ export class PageComponent implements OnInit {
   pageHTML: string = "";
   tags?:string[] = [];
   pageContent: Array<PageContent> = [];
-  pagePath: string;
+  editPageField:string;
+  deletePageField:string;
+  editTagsField:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +50,27 @@ export class PageComponent implements OnInit {
       this.pageContent = [];
       this.getPage();
     });
+    this.setLanguageFields()
+  }
+
+  setLanguageFields() {
+    switch (this.language) {
+      case "polish":
+        this.editPageField = "Edytuj stronę";
+        this.deletePageField = "Usuń stronę";
+        this.editTagsField = "Edytuj Tagi";
+        break;
+      case "english":
+        this.editPageField = "Edit Page";
+        this.deletePageField = "Delete Page";
+        this.editTagsField = "Edit Tags";
+        break;
+      case "french":
+        this.editPageField = "Modifier La Page";
+        this.deletePageField = "Supprimer La Page";
+        this.editTagsField = "Étiquettes d'édition";
+        break;
+    }
   }
 
   getPage(): void {

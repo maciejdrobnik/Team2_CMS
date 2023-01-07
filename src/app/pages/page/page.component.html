@@ -14,21 +14,21 @@
       <li>
         <a routerLink="/{{language}}/{{id}}/editor">
           <button>
-          Edit Page
+            {{editPageField}}
         </button>
         </a>
       </li>
       <li>
         <a routerLink="/{{language}}/home">
           <button (click)="deletePage()">
-            Delete Page
+            {{deletePageField}}
           </button>
         </a>
       </li>
       <li>
         <a>
           <button (click)="editTags()">
-            Edit Tags
+            {{editTagsField}}
           </button>
           </a>
       </li>

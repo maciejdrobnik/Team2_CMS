@@ -30,6 +30,9 @@ export class MenuComponent implements OnInit {
   @Output() redirect = new EventEmitter<any>();
 
   language:string;
+  addPageField:string;
+  addFolderField:string;
+  addNewRootFolder:string;
   constructor(private menuService: MenuService, private  languageService: LanguageService, public dialog: MatDialog, private location:Location, private pageService: PageService) { }
 
   getMenuData(): void {
@@ -46,9 +49,29 @@ export class MenuComponent implements OnInit {
       (lang) => {
         this.getMenuData();
         this.language = lang;
+        this.setLanguageFields(lang);
       },
     );
+  }
 
+  setLanguageFields(lang:string){
+    switch (lang){
+      case "polish":
+        this.addPageField = "Dodaj stronę";
+        this.addFolderField = "Dodaj folder";
+        this.addNewRootFolder = "Dodaj Nowy Folder";
+        break;
+      case "english":
+        this.addPageField = "Add Page";
+        this.addFolderField = "Add Folder";
+        this.addNewRootFolder = "Add New Folder";
+        break;
+      case "french":
+        this.addPageField = "Ajouter Une Page";
+        this.addFolderField = "Ajouter Le Dossier";
+        this.addNewRootFolder = "Ajouter Un Nouveau Dossier";
+        break;
+    }
   }
 
   pagesToArray(pages: Page[]): Page[] {
@@ -153,13 +176,13 @@ export class MenuComponent implements OnInit {
   addChildFolder(parentId: number): void{
     let dialogData:FolderDialogData = {
       folderName: "",
-      mode:"child"
+      mode:"child",
+      language:this.language
     }
     let dialogRef = this.dialog.open(AddFolderComponent, {
       height: '24vh',
       width: '25vw',
-      data: {folderName: dialogData.folderName,
-              mode: dialogData.mode}
+      data: dialogData
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log("coś nie tak")
@@ -187,13 +210,13 @@ export class MenuComponent implements OnInit {
   addRootFolder():void{
     let dialogData:FolderDialogData = {
       folderName: "",
-      mode: "root"
+      mode: "root",
+      language:this.language
     }
     let dialogRef = this.dialog.open(AddFolderComponent, {
       height: '24vh',
       width: '25vw',
-      data: {folderName: dialogData.folderName,
-        mode: dialogData.mode}
+      data: dialogData
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
@@ -210,11 +233,12 @@ export class MenuComponent implements OnInit {
   addPage(parentId: number): void{
     let dialogData:PageDialogData = {
       pageName: "",
+      language:this.language,
     }
     let dialogRef = this.dialog.open(AddPageComponent, {
       height: '24vh',
       width: '25vw',
-      data: {folderName: dialogData.pageName}
+      data: dialogData,
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
