@@ -29,6 +29,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import { AddFolderComponent } from './add-folder/add-folder.component';
 import { TagsComponent } from './tags/tags.component';
 import {MatListModule} from "@angular/material/list";
+import { LoginComponent } from './pages/login/login.component';
 
 
 const appRoutes: Routes = [
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
   {path: 'not-found', component: NotFoundComponent},
   {path: ':lang/:id', component: PageComponent},
   {path: ':lang/:id/editor', component:TextEditorComponent},
+  {path: 'login', component: LoginComponent},
   {path: '',   redirectTo: 'english/home', pathMatch: 'full' }
 ];
 
@@ -53,7 +55,9 @@ const appRoutes: Routes = [
     LatexDialogComponent,
     TextEditorComponent,
     AddFolderComponent,
-    TagsComponent
+    TagsComponent,
+    AddFolderComponent,
+    LoginComponent,
   ],
     imports: [
         BrowserModule,

@@ -1,0 +1,49 @@
+.main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #8b0002;
+}
+
+.content {
+  margin-top: -70px;
+  width: 50%;
+  text-align: center;
+}
+
+p {
+  color: white;
+  margin: 20px 0;
+}
+
+.welcome {
+  font-size: 4.2em;
+}
+
+.login {
+  margin: 30px 0 15px 0;
+  font-size: 2em;
+}
+
+
+
+a {
+  overflow: hidden;
+  font-size: 3em;
+  font-weight: 900;
+  height: 1.8em;
+  width: 5.2em;
+  padding: 0.45em 0;
+  background-color: white;
+  margin: 1em 0 1.4em 0;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+  background-color: #580000;
+
+}
+

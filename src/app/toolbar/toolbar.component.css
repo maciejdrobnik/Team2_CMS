@@ -37,7 +37,15 @@ button {
 .home {
   border-radius: 10%;
   text-decoration: none;
+}
 
+.logout {
+  margin: 0 2em;
+}
+
+
+.logout a:hover {
+  color: #580000;
 }
 
 
