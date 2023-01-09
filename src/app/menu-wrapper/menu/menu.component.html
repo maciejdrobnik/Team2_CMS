@@ -16,6 +16,7 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="addPage(page.id)">{{addPageField}}</button>
           <button mat-menu-item (click)="addChildFolder(page.id)">{{addFolderField}}</button>
+          <button *ngIf="!page.isRoot" mat-menu-item (click)="editFolderTags(page.id)">{{addFolderField}}</button>
         </mat-menu>
       </li>
     </mat-tree-node>
@@ -35,6 +36,7 @@
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="addPage(page.id)">{{addPageField}}</button>
             <button mat-menu-item (click)="addChildFolder(page.id)">{{addFolderField}}</button>
+            <button *ngIf="!page.isRoot" mat-menu-item (click)="addChildFolder(page.id)">{{addFolderField}}</button>
           </mat-menu>
           </div>
           </div>
