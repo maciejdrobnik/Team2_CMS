@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {LatexDialogComponent} from "../latex-dialog/latex-dialog.component";
 import Quill from "quill";
@@ -88,14 +88,11 @@ export class TextEditorComponent implements OnInit {
 
   modifyDialog(formulaBlot:typeof FormulaBlot):void{
     let range = formulaBlot.offset(this.quill.scroll);
-    let text = formulaBlot.contentNode.innerText;
-    // let first = text.indexOf("\n");
-    let last = text.slice(2).indexOf("\n");
-    let filteredText = text.slice(0, last+2);
+    let text = formulaBlot.contentNode.parentNode.getAttribute("data-value");
     const dialogRef = this.matDialog.open(LatexDialogComponent, {
       width: "40vw",
       height:"50vh",
-      data: { equation: filteredText, },
+      data: { equation: text, },
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined && result !== "") {
