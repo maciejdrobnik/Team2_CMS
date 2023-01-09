@@ -3,7 +3,6 @@ import { Page } from "../../services/mock-menu-data";
 import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
-import {Router} from "@angular/router";
 import {LanguageService} from "../../services/language.service";
 
 @Component({
@@ -35,6 +34,7 @@ export class MenuComponent implements OnInit {
   hasSubpages = (_: number, page: Page) => !!page.children && page.children.length > 0;
 
   ngOnInit(): void {
+    this.searchWord = "";
     this.languageService.getLanguage().subscribe(
       (lang) => {
         this.getMenuData();
@@ -73,6 +73,7 @@ export class MenuComponent implements OnInit {
 
   onClose() {
     this.treeControl.collapseAll();
+    this.searchWord = "";
   }
 
   loadPage() {
