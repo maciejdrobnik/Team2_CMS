@@ -1,29 +1,46 @@
-<div *ngFor="let page of pageContent">
+<div id="pageContent">
+</div>
+<!--<div *ngFor="let page of pageContent">-->
 
-  <div *ngIf="!page.latex; else latex"
-       [innerHTML]="page.content">
+<!--  <div *ngIf="!page.latex; else latex"-->
+<!--       [innerHTML]="page.content">-->
 
-  </div>
-  <ng-template class="latexOutput" #latex>
-    <ng-katex class="latexFunction" [equation]=page.content></ng-katex>
-  </ng-template>
+<!--  </div>-->
+<!--  <ng-template class="latexOutput" #latex>-->
+<!--    <ng-katex class="latexFunction" [equation]=page.content></ng-katex>-->
+<!--  </ng-template>-->
   <div id="editBox">
     <ul>
       <li>
-        <a routerLink="/{{language}}/{{id}}">
-          <button (click)="editPage()">
-          Edit Page
+        <a routerLink="/{{language}}/{{id}}/editor">
+          <button>
+            {{editPageField}}
         </button>
         </a>
       </li>
       <li>
         <a routerLink="/{{language}}/home">
           <button (click)="deletePage()">
-            Delete Page
+            {{deletePageField}}
           </button>
         </a>
       </li>
+      <li>
+        <a>
+          <button (click)="editTags()">
+            {{editTagsField}}
+          </button>
+          </a>
+      </li>
     </ul>
-
+    <div id="tags">
+        <h3>Tags:  </h3>
+      <ul>
+        <div *ngFor="let tag of tags">
+          <li>
+            {{tag}}
+          </li>
+        </div>
+      </ul>
+    </div>
   </div>
-</div>

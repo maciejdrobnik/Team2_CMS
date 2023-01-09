@@ -27,6 +27,8 @@ import { LatexDialogComponent } from './latex-dialog/latex-dialog.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { AddFolderComponent } from './add-folder/add-folder.component';
+import { TagsComponent } from './tags/tags.component';
+import {MatListModule} from "@angular/material/list";
 import { LoginComponent } from './pages/login/login.component';
 
 
@@ -34,6 +36,7 @@ const appRoutes: Routes = [
   {path: ':lang/home', component: HomeComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: ':lang/:id', component: PageComponent},
+  {path: ':lang/:id/editor', component:TextEditorComponent},
   {path: 'login', component: LoginComponent},
   {path: '',   redirectTo: 'english/home', pathMatch: 'full' }
 ];
@@ -51,27 +54,30 @@ const appRoutes: Routes = [
     AddPageComponent,
     LatexDialogComponent,
     TextEditorComponent,
-    AddFolderComponent
-    LoginComponent
+    AddFolderComponent,
+    TagsComponent,
+    AddFolderComponent,
+    LoginComponent,
   ],
-  imports: [
-    BrowserModule,
-    QuillModule.forRoot(),
-    FormsModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatTreeModule,
-    MatInputModule,
-    KatexModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    RouterModule.forRoot(appRoutes),
-    HttpClientModule,
-    MatMenuModule,
-  ],
+    imports: [
+        BrowserModule,
+        QuillModule.forRoot(),
+        FormsModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatTreeModule,
+        MatInputModule,
+        KatexModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        RouterModule.forRoot(appRoutes),
+        HttpClientModule,
+        MatMenuModule,
+        MatListModule,
+    ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
   ],

@@ -6,6 +6,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 export class FolderDialogData {
   folderName: string;
   mode:string;
+  language: string;
 }
 
 @Component({
@@ -14,9 +15,11 @@ export class FolderDialogData {
   styleUrls: ['./add-folder.component.css']
 })
 export class AddFolderComponent implements OnInit {
-  // title: string;
-  // input: string;
-  // parentId?:number;
+
+    addRoot:string;
+    nameOfRoot:string;
+    returnField:string;
+    confirmField:string;
 
   constructor(
     public dialogRef: MatDialogRef<AddFolderComponent>,
@@ -24,10 +27,33 @@ export class AddFolderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setLanguageFields(this.data.language);
   }
   onNoClick(): void {
     this.dialogRef.close();
+  }
 
+  setLanguageFields(lang:string) {
+    switch (lang) {
+      case "polish":
+        this.addRoot = this.data.mode === "root" ? "Jak chcesz nazwać nowy folder główny?" : "Jak chcesz nazwać nowy folder podrzędny?";
+        this.nameOfRoot = "Nazwa folderu";
+        this.returnField = "Wróć";
+        this.confirmField = "Potwierdź";
+        break;
+      case "english":
+        this.addRoot = this.data.mode === "root" ? "How do you want to name new root folder?" : "How do you want to name new child folder?";
+        this.nameOfRoot = "Name of Folder";
+        this.returnField = "Return";
+        this.confirmField = "Confirm";
+        break;
+      case "french":
+        this.addRoot = this.data.mode === "root" ? "Comment voulez-vous nommer le nouveau dossier racine ?" : "Comment voulez-vous nommer le nouveau dossier enfant ?";
+        this.nameOfRoot = "Nom du dossier";
+        this.returnField = "Revenir";
+        this.confirmField = "Confirmer";
+        break;
+    }
   }
 }
 

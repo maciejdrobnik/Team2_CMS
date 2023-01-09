@@ -2,19 +2,18 @@ import { Injectable } from '@angular/core';
 import {catchError, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {MenuService} from "./menu.service";
+import {PageDTO} from "./menu.service";
 
 const URL = 'http://localhost:8080/';
 const PAGE_URL = URL + 'page/';
 
-export class PageDTO {
-  constructor(
-    public pageName: string,
-    public content: string,
-  ) { }
-}
 
-const pageDTONotFound = new PageDTO("not found", "Page not found!");
+let pageDTONotFound: PageDTO = {
+  tags: [],
+  id: 0,
+  content: "Page not found",
+  pageName:"not found"
+};
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +25,7 @@ export class PageService {
     private router: Router,
   ) { }
 
-  getPage(id: string): Observable<PageDTO> {
+  getPage(id: number): Observable<PageDTO> {
     console.log(id);
     return this.http.get<any>(PAGE_URL + id, {responseType: 'json'}).pipe(
       catchError((_error: any): Observable<PageDTO> => {
@@ -36,7 +35,11 @@ export class PageService {
     );
   }
 
-  deletePage(id:string): Observable<any> {
+  deletePage(id:number): Observable<any> {
     return this.http.delete(URL + id, {responseType:'json'});
+  }
+
+  patchPage(newPage:PageDTO): Observable<any> {
+    return this.http.patch(PAGE_URL + newPage.id, newPage, {responseType:'json'})
   }
 }

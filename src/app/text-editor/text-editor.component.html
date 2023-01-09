@@ -1,7 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-nd-12">
-      <div id="quill-editor"></div>
+      <div id="quill-editor">
+        {{this.content}}
+      </div>
     </div>
+    <button (click)="onSubmit()" mat-raised-button color="accent">Save changes</button>
   </div>
 </div>

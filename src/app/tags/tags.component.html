@@ -1,0 +1,9 @@
+<mat-list role="list">
+  <div id="list" *ngFor="let tag of tags">
+    <mat-list-item role="listitem">{{tag}}  <a (click)="deleteTag(tag)"><mat-icon>remove</mat-icon></a></mat-list-item>
+  </div>
+</mat-list>
+<input id="newTag" #newTag  type="text">
+<a>
+  <button mat-raised-button color="accent" (click)="addTag(newTag.value)">Add Tag</button>
+</a>

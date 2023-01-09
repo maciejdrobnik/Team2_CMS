@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {PageDTO, PageService} from "../../services/page.service";
+import {PageService} from "../../services/page.service";
 import {Location} from "@angular/common";
 import {MenuService} from "../../services/menu.service";
+import {PageDTO} from "../../services/menu.service";
+import {LatexDialogComponent} from "../../latex-dialog/latex-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {TagsComponent} from "../../tags/tags.component";
 
 
 interface PageContent {
@@ -18,17 +22,21 @@ interface PageContent {
 })
 export class PageComponent implements OnInit {
 
-  id: string;
+  id: number;
   language: string;
   pageHTML: string = "";
+  tags?:string[] = [];
   pageContent: Array<PageContent> = [];
-  pagePath: string;
+  editPageField:string;
+  deletePageField:string;
+  editTagsField:string;
 
   constructor(
     private route: ActivatedRoute,
     private pageService: PageService,
     private location: Location,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private matDialog: MatDialog
   ) {
   }
 
@@ -42,28 +50,56 @@ export class PageComponent implements OnInit {
       this.pageContent = [];
       this.getPage();
     });
+    this.setLanguageFields()
+  }
+
+  setLanguageFields() {
+    switch (this.language) {
+      case "polish":
+        this.editPageField = "Edytuj stronę";
+        this.deletePageField = "Usuń stronę";
+        this.editTagsField = "Edytuj Tagi";
+        break;
+      case "english":
+        this.editPageField = "Edit Page";
+        this.deletePageField = "Delete Page";
+        this.editTagsField = "Edit Tags";
+        break;
+      case "french":
+        this.editPageField = "Modifier La Page";
+        this.deletePageField = "Supprimer La Page";
+        this.editTagsField = "Étiquettes d'édition";
+        break;
+    }
   }
 
   getPage(): void {
     this.pageService.getPage(this.id).subscribe( {
-      next: (page: PageDTO) => {this.pageHTML = page.content;},
+      next: (page: PageDTO) => {
+          this.pageHTML = page.content || "";
+          this.tags = page.tags;
+          },
       error: () => {},
       complete: () => {
-        this.separateContent();
+        const newPageContent = document.getElementById("pageContent");
+        if (newPageContent){
+          newPageContent.innerHTML = this.pageHTML;
+        }
+        // this.separateContent();
       }
     });
   }
 
 
   checkForLatex(): number {
-    const match = this.pageHTML.match('<latex>');
+    const match = this.pageHTML.match('<span class="ql-formula">');
     return match?.length || 0;
   }
 
   separateContent() {
     if (this.checkForLatex() !== 0) {
-      const tag = '<latex>';
-      const endTag = '</latex>';
+      const tag = '<span class="ql-formula">';
+      const endTag = '</p>';
       const content = this.pageHTML.split(tag);
       content.forEach(str => {
         if(str.includes(endTag)) {
@@ -90,10 +126,20 @@ export class PageComponent implements OnInit {
 
   deletePage(){
     this.pageService.deletePage(this.id).subscribe(
-      () => this.menuService.getMenuData(),
-    );
+      () => {this.menuService.getMenuData();
+        window.location.reload();
+      },
+      )
   }
-  editPage(){
-    console.log("Edytuj stronę" + this.id);
+
+  editTags(){
+    const dialogRef = this.matDialog.open(TagsComponent, {
+      width: "30vw",
+      height:"60vh",
+      data: { tags: this.tags, id:this.id},
+    });
+    dialogRef.afterClosed().subscribe(result =>
+      window.location.reload()
+    )
   }
 }

@@ -10,6 +10,7 @@ import {FolderDTO, PageDTO} from "../../services/menu.service";
 import {FolderDialogData} from "../../add-folder/add-folder.component";
 import {AddPageComponent, PageDialogData} from "../../add-page/add-page.component";
 import {Location} from '@angular/common';
+import {PageService} from "../../services/page.service";
 
 @Component({
   selector: 'app-menu',
@@ -29,11 +30,15 @@ export class MenuComponent implements OnInit {
   @Output() redirect = new EventEmitter<any>();
 
   language:string;
-  constructor(private menuService: MenuService, private  languageService: LanguageService, public dialog: MatDialog, private location:Location) { }
+  addPageField:string;
+  addFolderField:string;
+  addNewRootFolder:string;
+  constructor(private menuService: MenuService, private  languageService: LanguageService, public dialog: MatDialog, private location:Location, private pageService: PageService) { }
 
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
       this.pagesSource.data = pages;
+      console.log(pages);
     });
   }
 
@@ -44,9 +49,29 @@ export class MenuComponent implements OnInit {
       (lang) => {
         this.getMenuData();
         this.language = lang;
+        this.setLanguageFields(lang);
       },
     );
+  }
 
+  setLanguageFields(lang:string){
+    switch (lang){
+      case "polish":
+        this.addPageField = "Dodaj stronę";
+        this.addFolderField = "Dodaj folder";
+        this.addNewRootFolder = "Dodaj Nowy Folder";
+        break;
+      case "english":
+        this.addPageField = "Add Page";
+        this.addFolderField = "Add Folder";
+        this.addNewRootFolder = "Add New Folder";
+        break;
+      case "french":
+        this.addPageField = "Ajouter Une Page";
+        this.addFolderField = "Ajouter Le Dossier";
+        this.addNewRootFolder = "Ajouter Un Nouveau Dossier";
+        break;
+    }
   }
 
   pagesToArray(pages: Page[]): Page[] {
@@ -151,22 +176,33 @@ export class MenuComponent implements OnInit {
   addChildFolder(parentId: number): void{
     let dialogData:FolderDialogData = {
       folderName: "",
-      mode:"child"
+      mode:"child",
+      language:this.language
     }
     let dialogRef = this.dialog.open(AddFolderComponent, {
       height: '24vh',
       width: '25vw',
-      data: {folderName: dialogData.folderName,
-              mode: dialogData.mode}
+      data: dialogData
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log("coś nie tak")
       if(result) {
-        let newFolder: FolderDTO = {
-          folderName: result,
-        }
-        this.menuService.addChildFolder(newFolder, parentId).subscribe(
-          () => this.getMenuData(),
-        );
+        let previousTags:string[] = [];
+        this.pageService.getPage(parentId).subscribe(
+          (result2) => {
+            previousTags = result2.tags || [];
+          },
+          ()=>{},
+          ()=>{
+            let newFolder: FolderDTO = {
+              folderName: result,
+              tags: previousTags,
+            }
+            this.menuService.addChildFolder(newFolder, parentId).subscribe(
+              () => this.getMenuData(),
+            );
+          }
+        )
       }
     });
   }
@@ -174,13 +210,13 @@ export class MenuComponent implements OnInit {
   addRootFolder():void{
     let dialogData:FolderDialogData = {
       folderName: "",
-      mode: "root"
+      mode: "root",
+      language:this.language
     }
     let dialogRef = this.dialog.open(AddFolderComponent, {
       height: '24vh',
       width: '25vw',
-      data: {folderName: dialogData.folderName,
-        mode: dialogData.mode}
+      data: dialogData
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
@@ -197,28 +233,38 @@ export class MenuComponent implements OnInit {
   addPage(parentId: number): void{
     let dialogData:PageDialogData = {
       pageName: "",
-      tags:[],
+      language:this.language,
     }
     let dialogRef = this.dialog.open(AddPageComponent, {
       height: '24vh',
       width: '25vw',
-      data: {folderName: dialogData.pageName,
-        tags: dialogData.tags}
+      data: dialogData,
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        let newPage: PageDTO = {
-          pageName: result.pageName,
-          tags:[],
-          content: "",
-        }
-        this.menuService.addPage(newPage, parentId).subscribe(
+        let previousTags:string[] = [];
+        this.pageService.getPage(parentId).subscribe(
           (result) => {
-            this.getMenuData();
-            this.location.replaceState(`/${this.language}/${result}`);
-            window.location.reload();
+            previousTags = result.tags || [];
           },
-        );
+          ()=>{},
+          ()=>{
+            console.log(previousTags)
+            let newPage: PageDTO = {
+              pageName: result.pageName,
+              tags: previousTags,
+              content: "",
+            }
+            this.menuService.addPage(newPage, parentId).subscribe(
+              (result) => {
+                this.getMenuData();
+                this.location.replaceState(`/${this.language}/${result.id}`);
+                window.location.reload();
+              },
+            );
+          }
+
+        )
       }
     });
   }
