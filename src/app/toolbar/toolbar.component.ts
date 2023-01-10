@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LanguageService} from "../services/language.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-toolbar',
@@ -8,10 +9,10 @@ import {LanguageService} from "../services/language.service";
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor( private languageService: LanguageService) {
+  constructor( private languageService: LanguageService, private location: Location) {
   }
 
-  @Output() menuOpened = new EventEmitter<void>();
+  @Output() menuOpened = new EventEmitter<number>();
   @Output() darkModeSwitched = new EventEmitter<void>();
   @Output() fontSideSwitched = new EventEmitter<number>();
 
@@ -34,7 +35,19 @@ export class ToolbarComponent implements OnInit {
   }
 
   switchLanguage(lang: string) {
-    console.log("Odpala się")
     this.languageService.setLanguage(lang);
+  }
+
+  checkIfPageOpened(): number {
+    const pathElements = this.location.path().split('/');
+    const len = pathElements.length;
+    if(!isNaN(parseInt(pathElements[len - 1], 10))) {
+      return parseInt(pathElements[len - 1], 10)
+    }
+    return -1;
+  }
+
+  menuOpenedEmit() {
+    this.menuOpened.emit(this.checkIfPageOpened());
   }
 }

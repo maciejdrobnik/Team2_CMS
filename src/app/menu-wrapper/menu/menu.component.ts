@@ -4,6 +4,8 @@ import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {LanguageService} from "../../services/language.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-menu',
@@ -15,15 +17,21 @@ export class MenuComponent implements OnInit {
   pagesSource = new MatTreeNestedDataSource<Page>();
   pagesArray = new Array<any>;
 
+
+
   classHidden = 'menu-tree-invisible';
 
   @Input() isClosed: boolean;
   @Input() searchWord: any;
+  @Input() currentPageId: any = -1;
 
   @Output() redirect = new EventEmitter<any>();
 
   language:string;
-  constructor(private menuService: MenuService, private  languageService: LanguageService) { }
+  constructor(
+    private menuService: MenuService,
+    private languageService: LanguageService)
+  { }
 
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
@@ -41,8 +49,9 @@ export class MenuComponent implements OnInit {
         this.language = lang;
       },
     );
-
   }
+
+
 
   pagesToArray(pages: Page[]): Page[] {
     let arr = [];
@@ -67,7 +76,11 @@ export class MenuComponent implements OnInit {
       this.search();
     }
     if(menuClose) {
-      this.onClose();
+      if(menuClose.currentValue === true) {
+        this.onClose();
+      } else {
+        this.expandCurrentPage();
+      }
     }
   }
 
@@ -78,6 +91,16 @@ export class MenuComponent implements OnInit {
 
   loadPage() {
     this.redirect.emit();
+
+  }
+
+  expandCurrentPage(): void {
+    if(this.currentPageId === -1) {
+      return;
+    }
+    for (const page of this.pagesSource.data) {
+      this.searchMenuTree(page, true);
+    }
   }
 
   search(){
@@ -112,9 +135,12 @@ export class MenuComponent implements OnInit {
     return isInTags || name.includes(this.searchWord);
   }
 
-  searchMenuTree(page: Page): boolean{
+  searchMenuTree(page: Page, searchById?: boolean): boolean{
     let isPageSearched = false;
-    if(this.isSearchedValue(page)) {
+    const compareSearch = searchById ?
+      (this.currentPageId === page.id) :
+      this.isSearchedValue(page);
+    if(compareSearch) {
       this.showPageResult(page.id);
       this.treeControl.expand(page);
       isPageSearched = true;
@@ -122,7 +148,7 @@ export class MenuComponent implements OnInit {
     if (page.children && page.children.length !== 0){
       let result = false;
       for (const subpage of page.children){
-        result = this.searchMenuTree(subpage);
+        result = this.searchMenuTree(subpage, searchById);
         if(result) {
           this.showPageResult(page.id);
           this.treeControl.expand(page);
@@ -144,12 +170,9 @@ export class MenuComponent implements OnInit {
   }
 
   hideAllPages(ifHide: boolean): void {
-
     if(!ifHide) {
       this.treeControl.collapseAll();
     }
-
-
     for(let page of this.pagesArray) {
       const pageToHide = document.getElementById(page.id.toString());
       if(pageToHide) {

@@ -5,5 +5,5 @@
     </button>
     <app-search-bar (search)="assignSearchWord($event)" [menuClosed]="menuClosed" ></app-search-bar>
   </div>
-  <app-menu [searchWord] = "searchWord" [isClosed]="menuClosed" (redirect)="closeMenu()"></app-menu>
+  <app-menu [searchWord] = "searchWord" [isClosed]="menuClosed" [currentPageId]="currentlyOpenPage"  (redirect)="closeMenu()"></app-menu>
 </mat-drawer>

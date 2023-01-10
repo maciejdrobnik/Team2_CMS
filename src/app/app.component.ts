@@ -10,7 +10,7 @@ import {FormControl} from "@angular/forms";
 export class AppComponent {
   title = 'TeamProject';
   menu?: MatDrawer;
-  clickTarget: any;
+  currentlyOpenPage: number = -1;
 
   @HostBinding('class') className = '';
   darkModeControl = new FormControl(false);
@@ -35,5 +35,10 @@ export class AppComponent {
         this.menu?.close();
       }
     }
+  }
+
+  checkMenuOpen(event: any) {
+    this.currentlyOpenPage = event;
+    this.menu?.toggle();
   }
 }

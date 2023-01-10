@@ -7,8 +7,8 @@ import {MatDrawer} from "@angular/material/sidenav";
   styleUrls: ['./menu-wrapper.component.css']
 })
 export class MenuWrapperComponent implements OnInit {
-
   searchWord: string = '';
+
 
   constructor() { }
 
@@ -17,6 +17,7 @@ export class MenuWrapperComponent implements OnInit {
   @Output() init = new EventEmitter<MatDrawer>();
 
   @Input() menuClosed: boolean = true;
+  @Input() currentlyOpenPage: number = -1;
 
   ngOnInit(): void {
     this.init.emit(this.menu);

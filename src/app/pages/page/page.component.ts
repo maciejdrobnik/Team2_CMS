@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {PageDTO, PageService} from "../../services/page.service";
-import {Location} from "@angular/common";
 
 
 interface PageContent {
@@ -24,12 +23,10 @@ export class PageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private pageService: PageService,
-    private location: Location
+    private pageService: PageService
   ) {
   }
 
-//todo add 'check for latex' func on html
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
