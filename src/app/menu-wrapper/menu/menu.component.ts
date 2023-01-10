@@ -4,13 +4,15 @@ import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {LanguageService} from "../../services/language.service";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AddFolderComponent} from "../../add-folder/add-folder.component";
 import {FolderDTO, PageDTO} from "../../services/menu.service";
 import {FolderDialogData} from "../../add-folder/add-folder.component";
 import {AddPageComponent, PageDialogData} from "../../add-page/add-page.component";
 import {Location} from '@angular/common';
 import {PageService} from "../../services/page.service";
+import { ActivatedRoute, Router  } from '@angular/router';
+import {DeleteDialogComponent, DeleteDialogData} from "../../delete-dialog/delete-dialog.component";
 
 @Component({
   selector: 'app-menu',
@@ -33,7 +35,9 @@ export class MenuComponent implements OnInit {
   addPageField:string;
   addFolderField:string;
   addNewRootFolder:string;
-  constructor(private menuService: MenuService, private  languageService: LanguageService, public dialog: MatDialog, private location:Location, private pageService: PageService) { }
+  constructor(private menuService: MenuService, private  languageService: LanguageService,
+              public dialog: MatDialog, private location:Location, private pageService: PageService,
+              private route: ActivatedRoute, private router: Router) { }
 
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
@@ -266,5 +270,30 @@ export class MenuComponent implements OnInit {
         )
       }
     });
+  }
+  deletePage(page:Page){
+    let dialogData:DeleteDialogData = {
+      isPage: true,
+      name: page.name,
+      confirmDeleted:false
+    }
+    let deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
+      height: '170px',
+      width: '500px',
+      panelClass: 'custom-dialog-container',
+      data: dialogData,
+    });
+    deleteDialogRef.afterClosed().subscribe(result =>{
+        if(result){
+          this.pageService.deletePage(page.id).subscribe(
+            () =>{
+              this.getMenuData();
+              if( this.router.url === `/${this.language}/${page.id}`) {
+                const URL = `/${this.language}/home`;
+                this.router.navigateByUrl(URL);
+              }
+            });
+        }
+    })
   }
 }

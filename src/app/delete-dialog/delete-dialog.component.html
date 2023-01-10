@@ -1,0 +1,7 @@
+<div id="deleteDialog" >
+    <p>Are you sure you want to delete {{data.isPage ? "Page" : "Folder"}} "{{data.name}}"?</p>
+    <div id="deleteButtons" mat-dialog-actions>
+      <button [mat-dialog-close]="false" mat-button mat-raised-button color="accent">Cancel</button>
+      <button [mat-dialog-close]="true" mat-button mat-raised-button color="accent">Confirm</button>
+    </div>
+</div>

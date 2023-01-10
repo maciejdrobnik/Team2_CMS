@@ -13,6 +13,9 @@
             {{page.name}}
           </span>
         <a  *ngIf="page.fileName === null" [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon></a>
+        <a *ngIf="page.fileName !== null" (click)="deletePage(page)" >
+          <mat-icon>remove</mat-icon>
+        </a>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="addPage(page.id)">{{addPageField}}</button>
           <button mat-menu-item (click)="addChildFolder(page.id)">{{addFolderField}}</button>
