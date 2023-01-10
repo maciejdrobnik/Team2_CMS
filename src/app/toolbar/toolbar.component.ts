@@ -18,11 +18,13 @@ export class ToolbarComponent implements OnInit {
 
   darkModeEnabled = false;
   language:string;
+  username: string  = ''
 
   ngOnInit(): void {
     this.languageService.getLanguage().subscribe(
       lang => {this.language = lang}
     );
+    this.username = sessionStorage.getItem('username') || '';
   }
 
   switchDarkMode() {

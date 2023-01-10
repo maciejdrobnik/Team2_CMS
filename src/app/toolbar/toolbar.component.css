@@ -52,3 +52,12 @@ button {
 .icons {
   margin-right: 1.1em;
 }
+
+.usernameInfo {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
