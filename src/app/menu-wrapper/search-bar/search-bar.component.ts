@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChange} from '@angular/core';
 
 @Component({
   selector: 'app-search-bar',
@@ -11,10 +11,23 @@ export class SearchBarComponent implements OnInit {
 
 
   @Output() search = new EventEmitter<string>();
+  @Input() menuClosed: boolean;
   constructor() { }
 
 
   ngOnInit(): void {
+    this.currentSearch = '';
+  }
+
+  ngOnChanges(changes: { [property: string]: SimpleChange }) {
+    let menuClose: SimpleChange = changes['menuClosed'];
+    if(menuClose) {
+      this.currentSearch = '';
+      const input = document.getElementById('searchBar') as HTMLInputElement;
+      if(input) {
+        input.value = '';
+      }
+    }
   }
 
 

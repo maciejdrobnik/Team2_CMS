@@ -1,9 +1,9 @@
-<mat-drawer #menu mode="over">
+<mat-drawer id="menu" #menu mode="over">
   <div class="menu-bar">
     <button mat-icon-button [autofocus]="false" (click)="closeMenu()">
       <mat-icon>close</mat-icon>
     </button>
-    <app-search-bar (search)="assignSearchWord($event)" ></app-search-bar>
+    <app-search-bar (search)="assignSearchWord($event)" [menuClosed]="menuClosed" ></app-search-bar>
   </div>
-  <app-menu [searchWord] = "searchWord" [isClosed]="menuClosed" (redirect)="closeMenu()"></app-menu>
+  <app-menu [searchWord] = "searchWord" [isClosed]="menuClosed" [currentPageId]="currentlyOpenPage"  (redirect)="closeMenu()"></app-menu>
 </mat-drawer>

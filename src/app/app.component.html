@@ -1,9 +1,9 @@
-<mat-drawer-container>
+<mat-drawer-container (click)="checkClickOutsideMenu($event)">
   <app-toolbar
-    (menuOpened)="menu?.toggle()"
+    (menuOpened)="checkMenuOpen($event)"
     (darkModeSwitched)="switchDarkMode()">
   </app-toolbar>
-  <app-menu-wrapper (init)="menu = $event"></app-menu-wrapper>
+  <app-menu-wrapper (init)="menu = $event" [menuClosed]="!menu?.opened" [currentlyOpenPage]="currentlyOpenPage"></app-menu-wrapper>
   <div class="main">
     <router-outlet></router-outlet>
   </div>
