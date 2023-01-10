@@ -25,21 +25,16 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.loggedIn = this.getLogin();
+    console.log(this.loggedIn)
     this.darkModeControl.valueChanges.subscribe((darkMode) => {
       const darkClassName = 'darkMode';
       this.className = darkMode ? darkClassName : '';
     });
-    this.location.subscribe(loc => {
-      if(loc.url === '/login') {
-        this.loggedIn = false;
-        sessionStorage.setItem('loggedIn', 'false');
-        this.router.navigateByUrl('login');
-      }
-    });
 
-    if(location.pathname !== 'login' && !this.getLogin()) {
-      this.router.navigateByUrl('login');
-    }
+  }
+
+  isInLogin() {
+    return this.location.path() === '/login';
   }
 
   getLogin(): boolean {
@@ -53,12 +48,15 @@ export class AppComponent {
     this.darkModeControl.setValue(!this.darkModeControl.value);
   }
 
-  toggleLogin() {
-    sessionStorage.setItem('loggedIn', String(!this.getLogin()));
-    this.loggedIn = ! this.loggedIn;
+
+  setLogin(event: any, value: boolean) {
+    sessionStorage.setItem('username', value ? event : '');
+    this.loggedIn = value;
+    sessionStorage.setItem('loggedIn', String(value));
     if(!this.loggedIn){
       this.router.navigateByUrl('login');
     }
-
   }
+
+
 }

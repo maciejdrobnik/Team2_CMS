@@ -1,9 +1,9 @@
 <mat-drawer-container>
-  <div *ngIf="loggedIn else notLoggedIn">
+  <div *ngIf="loggedIn && !isInLogin() else notLoggedIn">
     <app-toolbar
       (menuOpened)="menu?.toggle()"
       (darkModeSwitched)="switchDarkMode()"
-      (logOut)="toggleLogin()">
+      (logOut)="setLogin($event, false)">
     </app-toolbar>
     <app-menu-wrapper (init)="menu = $event"></app-menu-wrapper>
     <div class="main">
@@ -11,7 +11,7 @@
     </div>
   </div>
   <ng-template #notLoggedIn>
-    <app-login (logIn)="toggleLogin()"></app-login>
+    <app-login (logIn)="setLogin($event, true)"></app-login>
   </ng-template>
 
 </mat-drawer-container>
