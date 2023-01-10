@@ -4,3 +4,8 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+.snackbarStyles{
+  min-width: 400px !important;
+  background-color: #8b0002 !important;
+  font-size: 12px !important;
+}

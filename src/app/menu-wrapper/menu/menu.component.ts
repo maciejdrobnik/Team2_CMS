@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChange} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChange, ElementRef} from '@angular/core';
 import { Page } from "../../services/mock-menu-data";
 import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
@@ -13,6 +13,11 @@ import {Location} from '@angular/common';
 import {PageService} from "../../services/page.service";
 import { ActivatedRoute, Router  } from '@angular/router';
 import {DeleteDialogComponent, DeleteDialogData} from "../../delete-dialog/delete-dialog.component";
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-menu',
@@ -35,9 +40,12 @@ export class MenuComponent implements OnInit {
   addPageField:string;
   addFolderField:string;
   addNewRootFolder:string;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
   constructor(private menuService: MenuService, private  languageService: LanguageService,
               public dialog: MatDialog, private location:Location, private pageService: PageService,
-              private route: ActivatedRoute, private router: Router) { }
+              private route: ActivatedRoute, private router: Router, private _snackbar:MatSnackBar) { }
 
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
@@ -271,15 +279,17 @@ export class MenuComponent implements OnInit {
       }
     });
   }
-  deletePage(page:Page){
+  deletePage(page:Page, evt: MouseEvent){
+    const elementTargeted = new ElementRef(evt.currentTarget);
     let dialogData:DeleteDialogData = {
       isPage: true,
       name: page.name,
-      confirmDeleted:false
+      confirmDeleted:false,
+      target: elementTargeted
     }
     let deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
-      height: '170px',
-      width: '500px',
+      minHeight: '110px',
+      minWidth: '200px',
       panelClass: 'custom-dialog-container',
       data: dialogData,
     });
@@ -294,6 +304,42 @@ export class MenuComponent implements OnInit {
               }
             });
         }
+    })
+  }
+
+  deleteFolder(page:Page, evt: MouseEvent){
+    const elementTargeted = new ElementRef(evt.currentTarget);
+    let dialogData:DeleteDialogData = {
+      isPage: false,
+      name: page.name,
+      confirmDeleted:false,
+      target: elementTargeted
+    }
+    let deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
+      minHeight: '110px',
+      minWidth: '200px',
+      panelClass: 'custom-dialog-container',
+      data: dialogData,
+    });
+    deleteDialogRef.afterClosed().subscribe(result =>{
+      if(result){
+        this.menuService.deleteFolder(page.id).subscribe(
+          () =>{
+            this.getMenuData();
+            this.openSnackbar(`You deleted folder ${page.name}`)
+            //check all children. If you were on page inside you need to reload. Hard to do for now.
+              const URL = `/${this.language}/home`;
+              this.router.navigateByUrl(URL);
+          });
+      }
+    })
+  }
+  openSnackbar(message:string){
+    this._snackbar.open(message,'', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3000,
+      panelClass:['snackbarStyles'],
     })
   }
 }

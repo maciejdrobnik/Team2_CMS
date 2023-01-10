@@ -4,10 +4,15 @@ import {PageService} from "../../services/page.service";
 import {Location} from "@angular/common";
 import {MenuService} from "../../services/menu.service";
 import {PageDTO} from "../../services/menu.service";
-import {LatexDialogComponent} from "../../latex-dialog/latex-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {TagsComponent} from "../../tags/tags.component";
-
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {delay} from "rxjs";
 
 interface PageContent {
   latex: boolean,
@@ -30,13 +35,15 @@ export class PageComponent implements OnInit {
   editPageField:string;
   deletePageField:string;
   editTagsField:string;
-
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(
     private route: ActivatedRoute,
     private pageService: PageService,
     private location: Location,
     private menuService: MenuService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private _snackbar:MatSnackBar
   ) {
   }
 
@@ -126,10 +133,18 @@ export class PageComponent implements OnInit {
 
   deletePage(){
     this.pageService.deletePage(this.id).subscribe(
-      () => {this.menuService.getMenuData();
-        window.location.reload();
-      },
+      () => {
+            window.location.reload()
+        },
       )
+  }
+  openSnackbar(message:string){
+    this._snackbar.open(message,'', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3000,
+      panelClass:['snackbarStyles'],
+    })
   }
 
   editTags(){
@@ -138,8 +153,10 @@ export class PageComponent implements OnInit {
       height:"60vh",
       data: { tags: this.tags, id:this.id},
     });
-    dialogRef.afterClosed().subscribe(result =>
-      window.location.reload()
+    dialogRef.afterClosed().subscribe(
+      () => {
+        this.openSnackbar("You edited Tags")
+      }
     )
   }
 }

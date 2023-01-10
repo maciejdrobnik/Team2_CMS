@@ -1,7 +1,5 @@
 #deleteDialog {
-  font-size: 20px;
   text-align: center;
-  margin: 0 5px;
   display: flex;
   position: relative;
   justify-content: start;
@@ -12,9 +10,9 @@
 
 #deleteButtons{
   position: absolute;
+  margin-top: 15px;
   /*Right jest równy paddingowi elementów dialogu(input i title)*/
-  right: 24px;
-  bottom: 10px;
+  right: 7px;
   gap: 5px;
 }
 

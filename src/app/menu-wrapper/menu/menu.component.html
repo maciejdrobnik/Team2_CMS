@@ -13,7 +13,10 @@
             {{page.name}}
           </span>
         <a  *ngIf="page.fileName === null" [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon></a>
-        <a *ngIf="page.fileName !== null" (click)="deletePage(page)" >
+        <a *ngIf="page.fileName !== null" (click)="deletePage(page, $event)" >
+          <mat-icon>remove</mat-icon>
+        </a>
+        <a *ngIf="(page.fileName === null) && !page.isRoot" (click)="deleteFolder(page, $event)" >
           <mat-icon>remove</mat-icon>
         </a>
         <mat-menu #menu="matMenu">
@@ -39,8 +42,10 @@
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="addPage(page.id)">{{addPageField}}</button>
             <button mat-menu-item (click)="addChildFolder(page.id)">{{addFolderField}}</button>
-            <button *ngIf="!page.isRoot" mat-menu-item (click)="addChildFolder(page.id)">{{addFolderField}}</button>
           </mat-menu>
+            <a *ngIf="(page.fileName === null) && !page.isRoot" (click)="deleteFolder(page, $event)" >
+              <mat-icon>remove</mat-icon>
+            </a>
           </div>
           </div>
         <ul [class.menu-tree-invisible]="!treeControl.isExpanded(page)">

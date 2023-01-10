@@ -30,6 +30,8 @@ import { AddFolderComponent } from './add-folder/add-folder.component';
 import { TagsComponent } from './tags/tags.component';
 import {MatListModule} from "@angular/material/list";
 import {DeleteDialogComponent} from "./delete-dialog/delete-dialog.component";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { EditFolderDialogComponent } from './edit-folder-dialog/edit-folder-dialog.component';
 
 const appRoutes: Routes = [
   {path: ':lang/home', component: HomeComponent},
@@ -54,7 +56,8 @@ const appRoutes: Routes = [
     TextEditorComponent,
     AddFolderComponent,
     TagsComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    EditFolderDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatMenuModule,
     MatListModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}

@@ -1,10 +1,11 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {Component, Inject, OnInit, ElementRef} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig} from "@angular/material/dialog";
 
 export class DeleteDialogData {
   confirmDeleted: boolean;
   isPage:boolean;
   name:string;
+  target: ElementRef;
 }
 @Component({
   selector: 'app-delete-dialog',
@@ -12,10 +13,20 @@ export class DeleteDialogData {
   styleUrls: ['./delete-dialog.component.css']
 })
 export class DeleteDialogComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<DeleteDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DeleteDialogData) { }
+
+  private readonly _matDialogRef: MatDialogRef<DeleteDialogComponent>;
+  private readonly triggerElementRef:ElementRef;
+
+  constructor(_matDialogRef: MatDialogRef<DeleteDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DeleteDialogData) {
+    this.triggerElementRef = data.target;
+    this._matDialogRef = _matDialogRef;
+  }
 
   ngOnInit(): void {
-
+    const matDialogConfig: MatDialogConfig = new MatDialogConfig();
+    const rect = this.triggerElementRef.nativeElement.getBoundingClientRect();
+    matDialogConfig.position = { left: `${rect.left}px`, top: `${rect.bottom - 50}px` };
+    this._matDialogRef.updatePosition(matDialogConfig.position);
   }
 
 }
