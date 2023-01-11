@@ -6,8 +6,11 @@
     <input matInput [(ngModel)]="data.pageName">
   </mat-form-field>
 </div>
+  <div class="errorMessage">
+    <small *ngIf="isWrong">Too short page name</small>
+  </div>
 <div id="addPageButtons" mat-dialog-actions>
   <button mat-button (click)="onNoClick()" mat-raised-button color="accent">{{returnField}}</button>
-  <button mat-button [mat-dialog-close]="data" mat-raised-button color="accent">{{confirmField}}</button>
+  <button mat-button (click)="returnPageName()" mat-raised-button color="accent">{{confirmField}}</button>
 </div>
 </div>

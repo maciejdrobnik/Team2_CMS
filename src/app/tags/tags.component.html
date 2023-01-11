@@ -1,9 +1,17 @@
+<button class="closeButton" mat-icon-button aria-label="close dialog" mat-dialog-close>
+  <mat-icon>close</mat-icon>
+</button>
 <mat-list role="list">
   <div id="list" *ngFor="let tag of tags">
     <mat-list-item role="listitem">{{tag}}  <a (click)="deleteTag(tag)"><mat-icon>remove</mat-icon></a></mat-list-item>
   </div>
 </mat-list>
-<input id="newTag" #newTag  type="text">
-<a>
+<div class="newTagDiv">
+  <input  [ngClass]="isWrong ? 'wrongInput' : ''" id="newTag" #newTag  type="text">
   <button mat-raised-button color="accent" (click)="addTag(newTag.value)">Add Tag</button>
-</a>
+</div>
+<div class="errorMessage">
+  <small *ngIf="isWrong">Invalid Tag name</small>
+</div>
+<button mat-raised-button color="accent" class="confirmChanges" (click)="returnTags(true)">Confirm Changes</button>
+

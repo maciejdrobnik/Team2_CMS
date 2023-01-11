@@ -1,7 +1,14 @@
 import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PageService} from "../services/page.service";
 import {PageDTO} from "../services/menu.service";
+import {FormControl, Validators} from "@angular/forms";
+
+
+interface dataToSend {
+  tags:string[];
+  confirmation:boolean;
+}
 
 @Component({
   selector: 'app-tags',
@@ -12,34 +19,47 @@ export class TagsComponent implements OnInit {
 
   tagElement?:HTMLInputElement;
   tags:string[];
+  isWrong: boolean;
+  confirmation:boolean;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {tags: string[], id:number}, private pageService: PageService) {
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {tags: string[], id:number}, private pageService: PageService, public dialogReference: MatDialogRef<TagsComponent>) {
     this.tags = data.tags;
+    this.isWrong = false;
+    this.confirmation = false;
   }
 
   ngOnInit(): void {
   }
 
   addTag(newTag: string){
-    if(newTag !== "" && newTag.length < 25) {
+    let validator = true;
+    this.tags.forEach((tag) =>{
+      if(tag === newTag) validator = false;
+
+    })
+    if(newTag !== "" && newTag.length < 25 && validator) {
+      this.isWrong = false;
       this.tags.push(newTag);
+      // @ts-ignore
+      document.getElementById("newTag").value = "";
     }
-    const newPage:PageDTO = {
-      tags: this.tags,
-      id:this.data.id,
+    else{
+      this.isWrong = true;
+      console.log("invalid")
     }
-    this.pageService.patchPage(newPage).subscribe();
-    // @ts-ignore
-    document.getElementById("newTag").value = "";
   }
   deleteTag(tag:string){
-    this.tags = this.tags.filter((tempTag) =>
+    const tempTags = this.tags.filter((tempTag) =>
       tempTag != tag
     )
-    const newPage:PageDTO = {
-      tags: this.tags,
-      id:this.data.id,
+    this.tags = tempTags;
+  }
+  returnTags(confirm:boolean){
+    const data:dataToSend = {
+      tags:this.tags,
+      confirmation:confirm,
     }
-    this.pageService.patchPage(newPage).subscribe();
+    this.dialogReference.close(data);
   }
 }

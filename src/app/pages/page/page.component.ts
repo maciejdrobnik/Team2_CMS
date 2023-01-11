@@ -35,7 +35,7 @@ export class PageComponent implements OnInit {
   editPageField:string;
   deletePageField:string;
   editTagsField:string;
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(
     private route: ActivatedRoute,
@@ -149,13 +149,25 @@ export class PageComponent implements OnInit {
 
   editTags(){
     const dialogRef = this.matDialog.open(TagsComponent, {
-      width: "30vw",
-      height:"60vh",
+      width: "400px",
+      minHeight:"300px",
+      maxHeight:"700px",
       data: { tags: this.tags, id:this.id},
     });
     dialogRef.afterClosed().subscribe(
-      () => {
-        this.openSnackbar("You edited Tags")
+      data => {
+        if(data.confirmation){
+        const newPage:PageDTO = {
+          tags:data.tags,
+          id:this.id,
+        }
+        this.pageService.patchPage(newPage).subscribe(
+          () => {
+            this.getPage();
+            this.openSnackbar("You edited Tags");
+          }
+        )
+      }
       }
     )
   }
