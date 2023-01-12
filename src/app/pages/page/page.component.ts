@@ -39,6 +39,7 @@ export class PageComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   pageName:string;
+  editMode: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,6 +55,7 @@ export class PageComponent implements OnInit {
 //todo add 'check for latex' func on html
 
   ngOnInit(): void {
+    this.editMode = false;
     this.id = this.route.snapshot.params['id'];
     this.language = this.route.snapshot.params['lang'];
     this.route.params.subscribe(val => {
@@ -61,7 +63,7 @@ export class PageComponent implements OnInit {
       this.pageContent = [];
       this.getPage();
     });
-    this.setLanguageFields()
+    this.setLanguageFields();
   }
 
   setLanguageFields() {
@@ -83,7 +85,17 @@ export class PageComponent implements OnInit {
         break;
     }
   }
-
+  changeEditMode(newPageName: string){
+    this.editMode = !this.editMode;
+    if(newPageName !== this.pageName){
+      this.pageName = newPageName;
+      const newPage:PageDTO = {
+        pageName: this.pageName,
+        id:this.id
+      }
+      this.pageService.patchPage(newPage).subscribe();
+    }
+  }
   getPage(): void {
     this.pageService.getPage(this.id).subscribe( {
       next: (page: PageDTO) => {
@@ -161,6 +173,7 @@ export class PageComponent implements OnInit {
       }
     )
   }
+
   openSnackbar(message:string){
     this._snackbar.open(message,'', {
       horizontalPosition: this.horizontalPosition,

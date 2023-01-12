@@ -11,6 +11,14 @@
 <!--  </ng-template>-->
   <div id="editBox">
     <ul>
+      <li class="editName">
+        <div *ngIf="!editMode" class="noEditMode">
+          <p>Page name: {{pageName}}</p><a (click)="changeEditMode(pageName)"><mat-icon>edit</mat-icon></a>
+        </div>
+        <div *ngIf="editMode" class="editMode">
+          <p>Page name: </p><input value="{{pageName}}" #newPageName><a (click)="changeEditMode(newPageName.value)"><mat-icon>save</mat-icon></a>
+        </div>
+      </li>
       <li>
         <a routerLink="/{{language}}/{{id}}/editor">
           <button>

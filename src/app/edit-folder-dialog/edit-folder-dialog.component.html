@@ -3,11 +3,11 @@
 </button>
 <div *ngIf="editMode" class="editMode">
   <p>Foldername:</p> <input value="{{data.folderName}}" placeholder="{{data.folderName}}" #changedName>
-  <a (click)="changeEditMode(changedName.value)"><mat-icon>save</mat-icon></a>
+  <a class="editorIcon" (click)="changeEditMode(changedName.value)"><mat-icon>save</mat-icon></a>
 </div>
 <div *ngIf="!editMode" class="noEditMode">
   <p>Foldername: {{data.folderName}}</p>
-  <a (click)="changeEditMode(data.folderName)"><mat-icon>edit</mat-icon></a>
+  <a class="editorIcon" (click)="changeEditMode(data.folderName)"><mat-icon>edit</mat-icon></a>
 </div>
 <h3 *ngIf="!data.tags.length">No tags right now</h3>
 <mat-list class="listOfTags" role="list">
@@ -22,4 +22,4 @@
 <div class="errorMessage">
   <small *ngIf="isWrong">Invalid Tag name</small>
 </div>
-<button mat-raised-button color="accent" class="confirmChanges" (click)="returnFolder(true)">Confirm Changes</button>
+<button  mat-raised-button color="accent" class="confirmChanges" (click)="returnFolder(true)">Confirm Changes</button>

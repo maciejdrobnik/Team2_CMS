@@ -11,9 +11,15 @@
 .mat-list-base{
   padding-top: 0;
 }
-a{
+.editorIcon .mat-icon {
+  position: absolute;
+  top: -3px;
+  transform: scale(0.75);
+}
+a {
+  position: relative;
   line-height: 0;
-  margin-left: 50px;
+  margin-left: 5px;
 }
 
 .closeButton{
@@ -23,15 +29,17 @@ a{
 }
 
 .confirmChanges{
-  float: right;
-  bottom:0;
+  position: relative;
+  left:200px;
+  top: 10px;
 }
 
 .newTagDiv{
   display: flex;
   gap: 5px;
   position: relative;
-  top: 10px;
+  top: 20px;
+  margin-bottom: 20px;
 }
 
 small {
@@ -50,6 +58,7 @@ small {
   position: relative;
   top: 10px;
   gap: 5px;
+  margin-bottom: 10px;
 }
 .tagItem{
   font-size: 17px;
@@ -61,10 +70,22 @@ small {
 
 .editMode {
     display: flex;
-    gap: 10px;
+    gap: 5px;
+    height:30px;
+    align-items: start;
+}
+
+.editMode p, input {
+  height: 20px;
 }
 
 .noEditMode{
   display: flex;
-  gap: 10px;
+  gap: 5px;
+  height:30px;
+  align-items: start;
+}
+
+.noEditMode p, input {
+  height: 20px;
 }

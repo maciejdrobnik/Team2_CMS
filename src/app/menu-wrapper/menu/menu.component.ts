@@ -358,8 +358,9 @@ export class MenuComponent implements OnInit {
               tags: dialogData.tags
 
             }
-            this.menuService.patchFolder(newFolder, dialogData.id).subscribe();
-            this.getMenuData();
+            this.menuService.patchFolder(newFolder, dialogData.id).subscribe(
+              () => this.getMenuData(),
+            );
           }
         )
       }
