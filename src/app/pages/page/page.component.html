@@ -1,1 +1,14 @@
 <div id="pageContent"></div>
+<div id="tagsBox" *ngIf="tags?.length !== 0">
+  <div id="tags" >
+    <h3>Tags:  </h3>
+    <ul>
+      <div *ngFor="let tag of tags">
+        <li>
+          <span class="tagBadge">{{tag}}</span>
+
+        </li>
+      </div>
+    </ul>
+  </div>
+</div>

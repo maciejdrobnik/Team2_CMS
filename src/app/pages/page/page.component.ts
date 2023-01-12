@@ -18,6 +18,7 @@ export class PageComponent implements OnInit {
 
   id: number;
   pageHTML: string = "";
+  tags?:string[] = [];
   pageContent: Array<PageContent> = [];
 
 
@@ -41,7 +42,7 @@ export class PageComponent implements OnInit {
     this.pageService.getPage(this.id).subscribe( {
       next: (page: PageDTO) => {
         this.pageHTML = page.content || "";
-        //this.tags = page.tags;
+        this.tags = page.tags;
       },
       error: () => {},
       complete: () => {
@@ -53,41 +54,6 @@ export class PageComponent implements OnInit {
     });
   }
 
-
-  checkForLatex(): number {
-    const match = this.pageHTML.match('<latex>');
-    return match?.length || 0;
-  }
-
-  separateContent() {
-    if (this.checkForLatex() !== 0) {
-      const tag = '<latex>';
-      const endTag = '</latex>';
-      const content = this.pageHTML.split(tag);
-      console.log(content)
-      content.forEach(str => {
-        if(str.includes(endTag)) {
-          const separated = str.split(endTag);
-          const ltx = separated[0];
-          const normal = separated[1];
-          this.pageContent.push({latex: true, content: ltx});
-          if(normal.length !== 0) {
-            this.pageContent.push({latex: false, content: normal});
-          }
-
-        } else {
-          if(str.length !== 0) {
-            this.pageContent.push({latex: false, content: str});
-          }
-
-        }
-      });
-      console.log(this.pageContent);
-
-    } else {
-      this.pageContent.push({latex: false, content: this.pageHTML});
-    }
-  }
 
 
 }
