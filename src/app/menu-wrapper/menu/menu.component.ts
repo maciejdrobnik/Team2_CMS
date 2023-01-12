@@ -197,7 +197,6 @@ export class MenuComponent implements OnInit {
       data: dialogData
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log("coś nie tak")
       if(result) {
         let previousTags:string[] = [];
         this.pageService.getPage(parentId).subscribe(
@@ -261,7 +260,6 @@ export class MenuComponent implements OnInit {
           },
           ()=>{},
           ()=>{
-            console.log(previousTags)
             let newPage: PageDTO = {
               pageName: result.pageName,
               tags: previousTags,

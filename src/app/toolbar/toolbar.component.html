@@ -9,10 +9,14 @@
 <!--    <mat-icon>format_size</mat-icon>-->
 <!--  </button>-->
   <span class="icons">
-      <a class="home" mat-button routerLink="/{{language}}/home">
-        <mat-icon>home</mat-icon>
-        <p>Home</p>
+    <a class="home logout" mat-button routerLink="" (click)="logOut.emit()">
+        <mat-icon>exit_to_app</mat-icon>
+        <p>LOG OUT</p>
       </a>
+    <a class="home" mat-button routerLink="/{{language}}/home">
+      <mat-icon>home</mat-icon>
+      <p>Home</p>
+    </a>
     <span class="lang">
       <img *ngIf="this.language === 'english'" class="lang_img" src="assets/lang/en.png" alt="English flag" id="englishNoChange"
             >
@@ -31,6 +35,10 @@
       <mat-icon *ngIf="!darkModeEnabled">brightness_3</mat-icon>
       <mat-icon *ngIf="darkModeEnabled">brightness_4</mat-icon>
     </button>
+  </span>
+
+  <span class="usernameInfo">
+    you are logged in as: {{username}}
   </span>
 
 </mat-toolbar>

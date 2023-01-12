@@ -32,12 +32,15 @@ import {MatListModule} from "@angular/material/list";
 import {DeleteDialogComponent} from "./delete-dialog/delete-dialog.component";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { EditFolderDialogComponent } from './edit-folder-dialog/edit-folder-dialog.component';
+import { LoginComponent } from './pages/login/login.component';
+
 
 const appRoutes: Routes = [
   {path: ':lang/home', component: HomeComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: ':lang/:id', component: PageComponent},
   {path: ':lang/:id/editor', component:TextEditorComponent},
+  {path: 'login', component: LoginComponent},
   {path: '',   redirectTo: 'english/home', pathMatch: 'full' }
 ];
 
@@ -78,6 +81,8 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatListModule,
     MatSnackBarModule
+    AddFolderComponent,
+    LoginComponent,
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}

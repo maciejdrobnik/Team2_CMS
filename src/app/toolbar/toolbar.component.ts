@@ -14,14 +14,17 @@ export class ToolbarComponent implements OnInit {
   @Output() menuOpened = new EventEmitter<void>();
   @Output() darkModeSwitched = new EventEmitter<void>();
   @Output() fontSideSwitched = new EventEmitter<number>();
+  @Output() logOut = new EventEmitter<void>();
 
   darkModeEnabled = false;
   language:string;
+  username: string  = ''
 
   ngOnInit(): void {
     this.languageService.getLanguage().subscribe(
       lang => {this.language = lang}
     );
+    this.username = sessionStorage.getItem('username') || '';
   }
 
   switchDarkMode() {

@@ -52,8 +52,6 @@ export class PageComponent implements OnInit {
   ) {
   }
 
-//todo add 'check for latex' func on html
-
   ngOnInit(): void {
     this.editMode = false;
     this.id = this.route.snapshot.params['id'];
@@ -109,43 +107,8 @@ export class PageComponent implements OnInit {
         if (newPageContent){
           newPageContent.innerHTML = this.pageHTML;
         }
-        // this.separateContent();
       }
     });
-  }
-
-
-  checkForLatex(): number {
-    const match = this.pageHTML.match('<span class="ql-formula">');
-    return match?.length || 0;
-  }
-
-  separateContent() {
-    if (this.checkForLatex() !== 0) {
-      const tag = '<span class="ql-formula">';
-      const endTag = '</p>';
-      const content = this.pageHTML.split(tag);
-      content.forEach(str => {
-        if(str.includes(endTag)) {
-          const separated = str.split(endTag);
-          const ltx = separated[0];
-          const normal = separated[1];
-          this.pageContent.push({latex: true, content: ltx});
-          if(normal.length !== 0) {
-            this.pageContent.push({latex: false, content: normal});
-          }
-
-        } else {
-          if(str.length !== 0) {
-            this.pageContent.push({latex: false, content: str});
-          }
-
-        }
-      });
-
-    } else {
-      this.pageContent.push({latex: false, content: this.pageHTML});
-    }
   }
 
   deletePage(evt: MouseEvent){
