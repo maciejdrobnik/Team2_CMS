@@ -6,15 +6,19 @@ import {Router} from "@angular/router";
 const URL = 'http://localhost:8080/';
 const PAGE_URL = URL + 'page/';
 
-export class PageDTO {
-  constructor(
-    public pageName: string,
-    public content: string,
-  ) { }
+export interface PageDTO{
+  pageName?: string,
+  content?:string,
+  tags?:string[],
+  id?:number,
 }
 
-const pageDTONotFound = new PageDTO("not found", "Page not found!");
-
+let pageDTONotFound: PageDTO = {
+  tags: [],
+  id: 0,
+  content: "Page not found",
+  pageName:"not found"
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -25,13 +29,12 @@ export class PageService {
     private router: Router,
   ) { }
 
-  getPage(id: string): Observable<PageDTO> {
+  getPage(id: number): Observable<PageDTO> {
     return this.http.get<any>(PAGE_URL + id, {responseType: 'json'}).pipe(
       catchError((_error: any): Observable<PageDTO> => {
         this.router.navigate(['not_found']).then();
         return of(pageDTONotFound);
       })
     );
-
   }
 }

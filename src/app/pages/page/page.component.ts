@@ -16,10 +16,11 @@ interface PageContent {
 })
 export class PageComponent implements OnInit {
 
-  id: string;
+  id: number;
   pageHTML: string = "";
+  tags?:string[] = [];
   pageContent: Array<PageContent> = [];
-  pagePath: string;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -39,49 +40,20 @@ export class PageComponent implements OnInit {
 
   getPage(): void {
     this.pageService.getPage(this.id).subscribe( {
-      next: (page: PageDTO) => {this.pageHTML = page.content;},
+      next: (page: PageDTO) => {
+        this.pageHTML = page.content || "";
+        this.tags = page.tags;
+      },
       error: () => {},
       complete: () => {
-        this.separateContent();
+        const newPageContent = document.getElementById("pageContent");
+        if (newPageContent){
+          newPageContent.innerHTML = this.pageHTML;
+        }
       }
     });
   }
 
-
-  checkForLatex(): number {
-    const match = this.pageHTML.match('<latex>');
-    return match?.length || 0;
-  }
-
-  separateContent() {
-    if (this.checkForLatex() !== 0) {
-      const tag = '<latex>';
-      const endTag = '</latex>';
-      const content = this.pageHTML.split(tag);
-      console.log(content)
-      content.forEach(str => {
-        if(str.includes(endTag)) {
-          const separated = str.split(endTag);
-          const ltx = separated[0];
-          const normal = separated[1];
-          this.pageContent.push({latex: true, content: ltx});
-          if(normal.length !== 0) {
-            this.pageContent.push({latex: false, content: normal});
-          }
-
-        } else {
-          if(str.length !== 0) {
-            this.pageContent.push({latex: false, content: str});
-          }
-
-        }
-      });
-      console.log(this.pageContent);
-
-    } else {
-      this.pageContent.push({latex: false, content: this.pageHTML});
-    }
-  }
 
 
 }
