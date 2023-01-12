@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {MatDialogRef} from '@angular/material/dialog';
 
@@ -15,21 +15,42 @@ export class PageDialogData {
 })
 export class AddPageComponent implements OnInit {
 
+  private readonly _dialogRef: MatDialogRef<AddPageComponent>;
   addPageField:string;
   nameOfPageField:string;
   confirmField:string;
   returnField:string;
+  isWrong:boolean;
 
   constructor(
     public dialogRef: MatDialogRef<AddPageComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PageDialogData,
-  ) {}
+  ) {
+    this._dialogRef = dialogRef;
+  }
 
   ngOnInit(): void {
     this.setLanguageFields(this.data.language);
+    this.isWrong = false;
   }
+
+  @HostListener('window:keyup.Enter', ['$event'])
+  onDialogClick(event: KeyboardEvent): void {
+    this.returnPageName();
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  returnPageName(){
+    if(this.data.pageName.length < 3){
+      this.isWrong = true;
+    }
+    else{
+      this.dialogRef.close(this.data);
+    }
+
   }
   setLanguageFields(lang:string) {
     switch (lang) {

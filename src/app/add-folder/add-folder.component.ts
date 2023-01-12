@@ -1,6 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {MatDialogRef} from '@angular/material/dialog';
+import {FormControl} from "@angular/forms";
 
 
 export class FolderDialogData {
@@ -20,6 +21,8 @@ export class AddFolderComponent implements OnInit {
     nameOfRoot:string;
     returnField:string;
     confirmField:string;
+    isWrong:boolean;
+    folderNameControl = new FormControl('');
 
   constructor(
     public dialogRef: MatDialogRef<AddFolderComponent>,
@@ -28,9 +31,25 @@ export class AddFolderComponent implements OnInit {
 
   ngOnInit(): void {
     this.setLanguageFields(this.data.language);
+    this.isWrong = false;
   }
-  onNoClick(): void {
+
+  @HostListener('window:keyup.Enter', ['$event'])
+  onDialogClick(event: KeyboardEvent): void {
+    this.returnFolderName();
+  }
+
+  onNoClick() {
     this.dialogRef.close();
+  }
+  returnFolderName(){
+    if(this.data.folderName.length > 3){
+      this.dialogRef.close(this.data.folderName);
+    }
+    else {
+      this.folderNameControl.setErrors({'incorrect': true});
+      this.isWrong = true;
+    }
   }
 
   setLanguageFields(lang:string) {

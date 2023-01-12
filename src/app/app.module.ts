@@ -29,6 +29,9 @@ import {MatMenuModule} from "@angular/material/menu";
 import { AddFolderComponent } from './add-folder/add-folder.component';
 import { TagsComponent } from './tags/tags.component';
 import {MatListModule} from "@angular/material/list";
+import {DeleteDialogComponent} from "./delete-dialog/delete-dialog.component";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { EditFolderDialogComponent } from './edit-folder-dialog/edit-folder-dialog.component';
 import { LoginComponent } from './pages/login/login.component';
 
 
@@ -56,28 +59,30 @@ const appRoutes: Routes = [
     TextEditorComponent,
     AddFolderComponent,
     TagsComponent,
-    AddFolderComponent,
-    LoginComponent,
+    DeleteDialogComponent,
+    EditFolderDialogComponent,
+    LoginComponent
   ],
-    imports: [
-        BrowserModule,
-        QuillModule.forRoot(),
-        FormsModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatTreeModule,
-        MatInputModule,
-        KatexModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        RouterModule.forRoot(appRoutes),
-        HttpClientModule,
-        MatMenuModule,
-        MatListModule,
-    ],
+  imports: [
+    BrowserModule,
+    QuillModule.forRoot(),
+    FormsModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatTreeModule,
+    MatInputModule,
+    KatexModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+    MatMenuModule,
+    MatListModule,
+    MatSnackBarModule
+  ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
   ],

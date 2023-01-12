@@ -6,6 +6,7 @@ export interface Page {
   children?: Page[];
   fileName?: string;
   page?:boolean;
+  isOpen?:boolean;
 }
 
 // export const MENU_DATA: Page[] = [

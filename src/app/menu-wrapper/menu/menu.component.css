@@ -60,3 +60,14 @@ a:hover {
 .mat-menu-trigger{
   margin-top: 5px;
 }
+
+.addRootFolder {
+  display: flex;
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+.addIcon {
+  margin-left: 5px;
+  margin-top: -3px;
+}

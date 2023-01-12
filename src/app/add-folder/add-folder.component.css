@@ -1,5 +1,7 @@
 #fullAddFolderDialog{
   position: relative;
+  min-height:190px;
+  min-width: 350px;
 }
 
 #addFolderDialog {
@@ -20,7 +22,15 @@
   position: absolute;
   /*Right jest równy paddingowi elementów dialogu(input i title)*/
   right: 24px;
+  bottom: 10px;
   gap: 5px;
+}
 
+.errorMessage{
+  position: relative;
+  color: #8b0002;
+  left: 28px;
+  top: -15px;
+  width: 50%;
 }
 

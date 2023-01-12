@@ -6,3 +6,18 @@ button {
   overflow: hidden;
   outline: none;
 }
+.editPanel {
+  position: fixed;
+  top: 150px;
+  right: 2.5vw;
+  width: 10vw;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+button {
+  margin: 5px;
+}
+.container{
+  width: 60vw;
+}
