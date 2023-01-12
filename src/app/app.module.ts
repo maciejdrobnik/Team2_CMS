@@ -60,7 +60,8 @@ const appRoutes: Routes = [
     AddFolderComponent,
     TagsComponent,
     DeleteDialogComponent,
-    EditFolderDialogComponent
+    EditFolderDialogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -81,8 +82,6 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatListModule,
     MatSnackBarModule
-    AddFolderComponent,
-    LoginComponent,
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
