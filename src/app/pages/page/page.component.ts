@@ -16,10 +16,10 @@ interface PageContent {
 })
 export class PageComponent implements OnInit {
 
-  id: string;
+  id: number;
   pageHTML: string = "";
   pageContent: Array<PageContent> = [];
-  pagePath: string;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -39,10 +39,16 @@ export class PageComponent implements OnInit {
 
   getPage(): void {
     this.pageService.getPage(this.id).subscribe( {
-      next: (page: PageDTO) => {this.pageHTML = page.content;},
+      next: (page: PageDTO) => {
+        this.pageHTML = page.content || "";
+        //this.tags = page.tags;
+      },
       error: () => {},
       complete: () => {
-        this.separateContent();
+        const newPageContent = document.getElementById("pageContent");
+        if (newPageContent){
+          newPageContent.innerHTML = this.pageHTML;
+        }
       }
     });
   }

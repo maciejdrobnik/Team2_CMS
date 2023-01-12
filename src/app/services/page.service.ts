@@ -25,7 +25,7 @@ export class PageService {
     private router: Router,
   ) { }
 
-  getPage(id: string): Observable<PageDTO> {
+  getPage(id: number): Observable<PageDTO> {
     return this.http.get<any>(PAGE_URL + id, {responseType: 'json'}).pipe(
       catchError((_error: any): Observable<PageDTO> => {
         this.router.navigate(['not_found']).then();
