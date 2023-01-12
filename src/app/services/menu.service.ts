@@ -55,4 +55,11 @@ export class MenuService {
     const url = PAGE_URL + '/' + 'parent' + '/' + parentId;
     return this.http.post<PageDTO>(url, page, {responseType:'json'});
   }
+  getFolder(id:number): Observable<FolderDTO>{
+    return this.http.get<FolderDTO>(FOLDER_URL + '/' + id, {responseType:'json'});
+  }
+
+  patchFolder(newFolder: FolderDTO, id:number): Observable<FolderDTO>{
+    return this.http.patch<FolderDTO>(FOLDER_URL + '/' + id,newFolder, {responseType:'json'});
+  }
 }

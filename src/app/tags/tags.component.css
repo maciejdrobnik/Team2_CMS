@@ -1,21 +1,15 @@
 #list{
   font-size: 3rem;
-  padding: 10px;
-}
-.mat-list-item{
-  font-size: 3rem;
-  margin-top: 5px;
-  margin-right: 5px;
+  padding: 5px;
 }
 .mat-dialog-container{
   padding: 10px;
 }
-
+.mat-list-base .mat-list-item{
+  width: 200px;
+}
 .mat-list-base{
   padding-top: 0;
-}
-span{
-  justify-content: center;
 }
 a{
   line-height: 0;
@@ -35,6 +29,8 @@ a{
 .newTagDiv{
   display: flex;
   gap: 5px;
+  position: relative;
+  top: 10px;
 }
 
 small {
@@ -47,4 +43,17 @@ small {
 
 .wrongInput{
   border: 1px solid #8b0002;
+}
+
+.listOfTags{
+  position: relative;
+  top: 10px;
+  gap: 5px;
+}
+.tagItem{
+  font-size: 17px;
+  border-radius: 5px;
+  border: 1px solid #8b0002;
+  margin-top: 5px;
+  width:100px
 }

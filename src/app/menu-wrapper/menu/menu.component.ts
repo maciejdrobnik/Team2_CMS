@@ -18,6 +18,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import {EditFolderDialogComponent, EditFolderDialogData} from "../../edit-folder-dialog/edit-folder-dialog.component";
 
 @Component({
   selector: 'app-menu',
@@ -285,7 +286,8 @@ export class MenuComponent implements OnInit {
       isPage: true,
       name: page.name,
       confirmDeleted:false,
-      target: elementTargeted
+      target: elementTargeted,
+      isLeft:true,
     }
     let deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
       minHeight: '110px',
@@ -313,7 +315,8 @@ export class MenuComponent implements OnInit {
       isPage: false,
       name: page.name,
       confirmDeleted:false,
-      target: elementTargeted
+      target: elementTargeted,
+      isLeft:true
     }
     let deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
       minHeight: '110px',
@@ -333,6 +336,34 @@ export class MenuComponent implements OnInit {
           });
       }
     })
+  }
+  editFolderTags(folderId:number){
+    this.menuService.getFolder(folderId).subscribe(
+      folder => {
+        let dialogData:EditFolderDialogData = {
+          confirmation: false,
+          id: folderId,
+          tags: folder.tags || [],
+          folderName: folder.folderName
+        }
+        let deleteDialogRef = this.dialog.open(EditFolderDialogComponent, {
+          height: '330px',
+          width: '400px',
+          data: dialogData,
+        });
+        deleteDialogRef.afterClosed().subscribe(
+          result => {
+            const newFolder:FolderDTO = {
+              folderName: dialogData.folderName,
+              tags: dialogData.tags
+
+            }
+            this.menuService.patchFolder(newFolder, dialogData.id).subscribe();
+            this.getMenuData();
+          }
+        )
+      }
+    )
   }
   openSnackbar(message:string){
     this._snackbar.open(message,'', {

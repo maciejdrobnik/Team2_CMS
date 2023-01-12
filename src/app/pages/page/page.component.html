@@ -19,8 +19,8 @@
         </a>
       </li>
       <li>
-        <a routerLink="/{{language}}/home">
-          <button (click)="deletePage()">
+        <a>
+          <button (click)="deletePage($event)">
             {{deletePageField}}
           </button>
         </a>

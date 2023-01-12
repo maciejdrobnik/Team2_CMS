@@ -1,0 +1,70 @@
+#list{
+  font-size: 3rem;
+  padding: 5px;
+}
+.mat-dialog-container{
+  padding: 10px;
+}
+.mat-list-base .mat-list-item{
+  width: 200px;
+}
+.mat-list-base{
+  padding-top: 0;
+}
+a{
+  line-height: 0;
+  margin-left: 50px;
+}
+
+.closeButton{
+  float: right;
+  top:-20px;
+  right:-20px;
+}
+
+.confirmChanges{
+  float: right;
+  bottom:0;
+}
+
+.newTagDiv{
+  display: flex;
+  gap: 5px;
+  position: relative;
+  top: 10px;
+}
+
+small {
+  color: #8b0002;
+}
+
+.errorMessage{
+  margin-bottom: 20px;
+}
+
+.wrongInput{
+  border: 1px solid #8b0002;
+}
+
+.listOfTags{
+  position: relative;
+  top: 10px;
+  gap: 5px;
+}
+.tagItem{
+  font-size: 17px;
+  border-radius: 5px;
+  border: 1px solid #8b0002;
+  margin-top: 5px;
+  width:100px
+}
+
+.editMode {
+    display: flex;
+    gap: 10px;
+}
+
+.noEditMode{
+  display: flex;
+  gap: 10px;
+}

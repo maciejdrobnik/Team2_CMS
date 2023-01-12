@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, ElementRef, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PageService} from "../../services/page.service";
 import {Location} from "@angular/common";
 import {MenuService} from "../../services/menu.service";
@@ -13,6 +13,7 @@ import {
 } from '@angular/material/snack-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {delay} from "rxjs";
+import {DeleteDialogComponent, DeleteDialogData} from "../../delete-dialog/delete-dialog.component";
 
 interface PageContent {
   latex: boolean,
@@ -37,13 +38,16 @@ export class PageComponent implements OnInit {
   editTagsField:string;
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  pageName:string;
+
   constructor(
     private route: ActivatedRoute,
     private pageService: PageService,
     private location: Location,
     private menuService: MenuService,
     private matDialog: MatDialog,
-    private _snackbar:MatSnackBar
+    private _snackbar:MatSnackBar,
+    private router: Router
   ) {
   }
 
@@ -85,6 +89,7 @@ export class PageComponent implements OnInit {
       next: (page: PageDTO) => {
           this.pageHTML = page.content || "";
           this.tags = page.tags;
+          this.pageName = page.pageName || "";
           },
       error: () => {},
       complete: () => {
@@ -131,12 +136,30 @@ export class PageComponent implements OnInit {
     }
   }
 
-  deletePage(){
-    this.pageService.deletePage(this.id).subscribe(
-      () => {
-            window.location.reload()
-        },
-      )
+  deletePage(evt: MouseEvent){
+    const elementTargeted = new ElementRef(evt.currentTarget);
+    let dialogData:DeleteDialogData = {
+      isPage: true,
+      name: this.pageName,
+      confirmDeleted:false,
+      target: elementTargeted,
+      isLeft:false
+    }
+    let deleteDialogRef = this.matDialog.open(DeleteDialogComponent, {
+      minHeight: '110px',
+      minWidth: '200px',
+      panelClass: 'custom-dialog-container',
+      data: dialogData,
+    });
+    deleteDialogRef.afterClosed().subscribe(
+      result => {
+        if(result){
+          this.pageService.deletePage(this.id).subscribe(
+            () => this.router.navigateByUrl(`/${this.language}/home`)
+          )
+        }
+      }
+    )
   }
   openSnackbar(message:string){
     this._snackbar.open(message,'', {

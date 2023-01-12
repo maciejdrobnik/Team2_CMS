@@ -1,9 +1,10 @@
 <button class="closeButton" mat-icon-button aria-label="close dialog" mat-dialog-close>
   <mat-icon>close</mat-icon>
 </button>
-<mat-list role="list">
+<h3 *ngIf="!tags.length">No tags right now</h3>
+<mat-list class="listOfTags" role="list">
   <div id="list" *ngFor="let tag of tags">
-    <mat-list-item role="listitem">{{tag}}  <a (click)="deleteTag(tag)"><mat-icon>remove</mat-icon></a></mat-list-item>
+    <mat-list-item class="tagItem" role="listitem">{{tag}}  <a (click)="deleteTag(tag)"><mat-icon>remove</mat-icon></a></mat-list-item>
   </div>
 </mat-list>
 <div class="newTagDiv">

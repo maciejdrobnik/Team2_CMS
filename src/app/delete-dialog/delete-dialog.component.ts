@@ -6,6 +6,7 @@ export class DeleteDialogData {
   isPage:boolean;
   name:string;
   target: ElementRef;
+  isLeft:boolean;
 }
 @Component({
   selector: 'app-delete-dialog',
@@ -30,7 +31,12 @@ export class DeleteDialogComponent implements OnInit {
   ngOnInit(): void {
     const matDialogConfig: MatDialogConfig = new MatDialogConfig();
     const rect = this.triggerElementRef.nativeElement.getBoundingClientRect();
-    matDialogConfig.position = { left: `${rect.left}px`, top: `${rect.bottom - 50}px` };
+    if(this.data.isLeft){
+      matDialogConfig.position = { left: `${rect.left}px`, top: `${rect.bottom - 50}px` };
+    }
+    else{
+      matDialogConfig.position = { left: `${rect.left - 330}px`, top: `${rect.bottom - 50}px` };
+    }
     this._matDialogRef.updatePosition(matDialogConfig.position);
   }
 
