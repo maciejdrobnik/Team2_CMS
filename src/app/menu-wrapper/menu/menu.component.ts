@@ -41,7 +41,7 @@ export class MenuComponent implements OnInit {
   addPageField:string;
   addFolderField:string;
   addNewRootFolder:string;
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(private menuService: MenuService, private  languageService: LanguageService,
@@ -297,6 +297,7 @@ export class MenuComponent implements OnInit {
         if(result){
           this.pageService.deletePage(page.id).subscribe(
             () =>{
+              this.openSnackbar(`You deleted the page ${page.name}`)
               this.getMenuData();
               if( this.router.url === `/${this.language}/${page.id}`) {
                 const URL = `/${this.language}/home`;
@@ -369,7 +370,7 @@ export class MenuComponent implements OnInit {
     this._snackbar.open(message,'', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
-      duration: 3000,
+      duration: 2000,
       panelClass:['snackbarStyles'],
     })
   }
