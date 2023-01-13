@@ -4,6 +4,9 @@ export interface Page {
   isRoot:boolean,
   tags?: string[],
   children?: Page[];
+  fileName?: string;
+  page?:boolean;
+  isOpen?:boolean;
 }
 
 // export const MENU_DATA: Page[] = [

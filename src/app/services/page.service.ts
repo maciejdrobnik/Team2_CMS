@@ -2,16 +2,10 @@ import { Injectable } from '@angular/core';
 import {catchError, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {PageDTO} from "./menu.service";
 
 const URL = 'http://localhost:8080/';
 const PAGE_URL = URL + 'page/';
-
-export interface PageDTO{
-  pageName?: string,
-  content?:string,
-  tags?:string[],
-  id?:number,
-}
 
 let pageDTONotFound: PageDTO = {
   tags: [],
@@ -19,6 +13,7 @@ let pageDTONotFound: PageDTO = {
   content: "Page not found",
   pageName:"not found"
 };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,5 +31,13 @@ export class PageService {
         return of(pageDTONotFound);
       })
     );
+  }
+
+  deletePage(id:number): Observable<any> {
+    return this.http.delete(URL + id, {responseType:'json'});
+  }
+
+  patchPage(newPage:PageDTO): Observable<PageDTO> {
+    return this.http.patch(PAGE_URL + newPage.id, newPage, {responseType:'json'})
   }
 }

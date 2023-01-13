@@ -1,0 +1,16 @@
+<div id="fullAddFolderDialog">
+  <div id="addFolderDialog" mat-dialog-content>
+    <p id="addFolderPopupHeader">{{addRoot}}</p>
+    <mat-form-field id="addFolderInputField" appearance="fill">
+      <mat-label id="folderNameInputLabel">{{nameOfRoot}}</mat-label>
+      <input matInput id="folderNameInput" [(ngModel)]="data.folderName" name="folder">
+    </mat-form-field>
+  </div>
+  <div class="errorMessage">
+    <small *ngIf="isWrong">Invalid Tag name</small>
+  </div>
+  <div id="addFolderButtons" mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" mat-raised-button color="accent">{{returnField}}</button>
+    <button mat-button (click)="returnFolderName()" mat-raised-button color="accent">{{confirmField}}</button>
+  </div>
+</div>

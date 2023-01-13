@@ -6,9 +6,24 @@
       <li class="mat-tree-node menu-tree-text">
         <!-- use a disabled button to provide padding for tree leaf -->
         <button mat-icon-button disabled></button>
-        <a class="menu-tree-text" (click)="loadPage()" routerLink="/{{this.language}}/{{page.id}}">
+        <a *ngIf="page.fileName !== null" class="menu-tree-text" (click)="loadPage()" routerLink="{{language}}/{{page.id}}">
           {{page.name}}
         </a>
+          <span *ngIf="page.fileName === null" class="menu-tree-text">
+            {{page.name}}
+          </span>
+        <a  *ngIf="page.fileName === null" [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon></a>
+        <a *ngIf="page.fileName !== null" (click)="deletePage(page, $event)" >
+          <mat-icon>remove</mat-icon>
+        </a>
+        <a *ngIf="(page.fileName === null) && !page.isRoot" (click)="deleteFolder(page, $event)" >
+          <mat-icon>remove</mat-icon>
+        </a>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="addPage(page.id)">{{addPageField}}</button>
+          <button mat-menu-item (click)="addChildFolder(page.id)">{{addFolderField}}</button>
+          <button *ngIf="!page.isRoot" mat-menu-item (click)="editFolderTags(page.id)">Edit Folder</button>
+        </mat-menu>
       </li>
     </mat-tree-node>
     <!-- expandable pages/categories -->
@@ -22,12 +37,29 @@
             </mat-icon>
           </button>
           <span class="menu-tree-text">{{page.name}}</span>
-        </div>
+          <div *ngIf="!page.page">
+          <a  [matMenuTriggerFor]="menu"><mat-icon>add</mat-icon></a>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="addPage(page.id)">{{addPageField}}</button>
+            <button mat-menu-item (click)="addChildFolder(page.id)">{{addFolderField}}</button>
+            <button *ngIf="!page.isRoot" mat-menu-item (click)="editFolderTags(page.id)">Edit Folder</button>
+          </mat-menu>
+            <a *ngIf="(page.fileName === null) && !page.isRoot" (click)="deleteFolder(page, $event)" >
+              <mat-icon>remove</mat-icon>
+            </a>
+          </div>
+          </div>
         <ul [class.menu-tree-invisible]="!treeControl.isExpanded(page)">
           <ng-container matTreeNodeOutlet></ng-container>
         </ul>
       </li>
     </mat-nested-tree-node>
   </mat-tree>
+  <div class="addRootFolder">
+    <span>{{addNewRootFolder}}</span>
+    <a class="addIcon" (click)="addRootFolder()">
+      <mat-icon>add</mat-icon>
+    </a>
+    </div>
 </div>
 

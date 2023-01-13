@@ -35,7 +35,6 @@ export class SearchBarComponent implements OnInit {
     this.currentSearch = inputElement.value;
 
     this.search.emit(this.currentSearch);
-    console.log(this.currentSearch);
   }
 
 }

@@ -1,10 +1,47 @@
-<h1>{{pageName}}</h1>
-<div id="tagsBox" >
-  <p>Tags: </p>
-  <span class="tagList" *ngFor="let tag of tags">
-    <span class="tagBadge">{{tag}}</span>
-  </span>
-</div>
-<div id="pageContent"></div>
+<div class="main">
+  <div class="pageContainer">
+    <h1>{{pageName}}</h1>
+    <div id="pageContent"></div>
+  </div>
+  <div class="box">
+    <div id="editBox">
+      <div class="editName">
+        <p>Page name:</p>
+        <div *ngIf="!editMode" class="pageName">
+          <p class="name">{{pageName}}</p>
+          <a  mat-icon-button (click)="changeEditMode(pageName)"><mat-icon>edit</mat-icon></a>
+        </div>
+        <div *ngIf="editMode" class="pageName">
+          <input class="name" value="{{pageName}}" #newPageName>
+          <a mat-icon-button (click)="changeEditMode(newPageName.value)"><mat-icon>save</mat-icon></a>
+        </div>
+      </div>
 
+      <ul class="editButtons">
+        <li>
+          <a class="editButton" mat-raised-button color="accent" routerLink="/{{language}}/{{id}}/editor">
+            {{editPageField}}
+          </a>
+        </li>
+        <li>
+          <a class="editButton" mat-raised-button color="accent" (click)="deletePage($event)">
+            {{deletePageField}}
+          </a>
+        </li>
+        <li>
+          <a class="editButton" mat-raised-button color="accent" (click)="editTags()">
+            {{editTagsField}}
+          </a>
+        </li>
+      </ul>
 
+        <div id="tags" >
+          <p>Tags: </p>
+          <p *ngIf="!tags?.length">No tags right now</p>
+          <div class="tagList" *ngFor="let tag of showTags">
+              <span class="tagBadge">{{tag}}</span>
+          </div>
+        </div>
+
+    </div>
+  </div>

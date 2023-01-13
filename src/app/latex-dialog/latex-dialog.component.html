@@ -1,0 +1,15 @@
+<button class="closeButton" mat-icon-button aria-label="close dialog" mat-dialog-close>
+  <mat-icon>close</mat-icon>
+</button>
+<mat-dialog-content class="full-width">
+  <mat-form-field class="input">
+    <textarea matInput class="latexInput" placeholder="Write LaTeX text here" [(ngModel)]="equation"></textarea>
+  </mat-form-field>
+  <div class="latexOutput">
+    <button mat-button [mat-dialog-close]=equation class="submitButton" mat-raised-button color="accent">
+      Submit
+    </button>
+    <h3>This is how it looks like:</h3>
+    <ng-katex class="latexFunction" [equation]=equation></ng-katex>
+  </div>
+</mat-dialog-content>

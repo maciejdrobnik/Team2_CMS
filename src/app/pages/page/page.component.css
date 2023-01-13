@@ -1,21 +1,102 @@
-#tagsBox{
-  border-radius: 20px;
-  max-width: 100%;
-  margin-bottom: 2vh;
-  padding: 0.5vh 1vw;
-  border: 1px solid #dadada;
-  height: 5vh;
+.main {
+  display: flex;
+  margin-left: 20vw;
 }
 
-h1 {
-  font-weight: bold;
-  margin-bottom: 1vh;
-  margin-top: 0;
+.pageContainer {
+  width: 60vw;
+}
 
+.box {
+  width: 20vw;
+  text-align: center;
+}
+
+#editBox{
+  position: sticky;
+  top: 5px;
+  min-height: 25vh;
+  max-height: 80vh;
+  padding: 2.5vh 1.5vw;
+  border-radius: 10px;
+  width: 18vw;
+  margin: 0 1vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+.editName {
+  display: block;
+  font-size: 2.3vh;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 2vh;
+}
+
+p{
+  margin: 0;
+  font-size: 2.3vh;
+  font-weight: bold;
+}
+
+.pageName {
+  height: 5vh;
+  margin: 1vh 0;
+  display: inline-flex;
+  justify-items: center;
+  align-items: center;
+  flex-flow: row-reverse;
+}
+
+.name {
+  max-width: 14vw;
+  overflow: hidden;
+  white-space: nowrap; /* don't break the line */
+}
+
+.pageName p {
+  text-overflow: ellipsis; /* give the beautiful '...' effect */
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+input {
+  margin: 0;
+}
+
+
+.editButtons {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.editButtons li {
+  margin: 2vh 0;
+}
+
+.editButton {
+  font-size: 3vh;
+  overflow: hidden;
+}
+
+a:hover {
+  text-decoration: none;
+
+}
+
+
+#tags{
+  margin: 2vh;
+  font-size: 18px;
+  text-align: left;
 }
 
 .tagList{
-  margin: 0 0.5vh;
+  padding-left: 20px;
+  margin: 2vh 0;
 }
 
 .tagBadge {
@@ -24,10 +105,9 @@ h1 {
   border-radius: 20px;
   padding: 2px 18px;
   max-height: 20px;
-  font-size: 2vh;
+  font-size: 2.3vh;
 }
 
-p {
-  font-size: 2vh;
-  display: inline;
+h1 {
+  font-weight: bold;
 }

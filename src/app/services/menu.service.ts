@@ -1,12 +1,25 @@
 import {Injectable} from '@angular/core';
 import { Page} from "./mock-menu-data";
-import {Observable, of} from "rxjs";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Observable} from "rxjs";
+import { HttpClient } from '@angular/common/http';
 import {LanguageService} from "./language.service";
 
-const URL = 'http://localhost:8080/';
+export interface FolderDTO{
+  folderName: string,
+  tags?:string[]
+}
 
-const PAGE_URL = URL + 'menu';
+export interface PageDTO{
+  pageName?: string,
+  content?:string,
+  tags?:string[],
+  id?:number,
+}
+
+const URL = 'http://localhost:8080/';
+const MENU_URL = URL + 'menu';
+const PAGE_URL = URL + 'page';
+const FOLDER_URL = URL + 'folder'
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +33,33 @@ export class MenuService {
   }
 
   getMenuData(): Observable<Page[]> {
-    const url = PAGE_URL + '/' + this.language;
+    const url = MENU_URL + '/' + this.language;
     return this.http.get<Page[]>(url, {responseType: 'json'});
+  }
+
+  addRoot(folder: FolderDTO): Observable<FolderDTO> {
+    const url = FOLDER_URL + '/' + this.language;
+    return this.http.post<FolderDTO>(url, folder, {responseType:'json'});
+  }
+  addChildFolder(folder: FolderDTO, parentId:number): Observable<FolderDTO> {
+    const url = FOLDER_URL + '/' + 'parent' + '/' + parentId;
+    return this.http.post<FolderDTO>(url, folder, {responseType:'json'});
+  }
+
+  deleteFolder(id:number): Observable<FolderDTO> {
+    const url = URL + id;
+    return this.http.delete<FolderDTO>(url, {responseType:'json'});
+  }
+
+  addPage(page: PageDTO, parentId:number): Observable<PageDTO> {
+    const url = PAGE_URL + '/' + 'parent' + '/' + parentId;
+    return this.http.post<PageDTO>(url, page, {responseType:'json'});
+  }
+  getFolder(id:number): Observable<FolderDTO>{
+    return this.http.get<FolderDTO>(FOLDER_URL + '/' + id, {responseType:'json'});
+  }
+
+  patchFolder(newFolder: FolderDTO, id:number): Observable<FolderDTO>{
+    return this.http.patch<FolderDTO>(FOLDER_URL + '/' + id,newFolder, {responseType:'json'});
   }
 }

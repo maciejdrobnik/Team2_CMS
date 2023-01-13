@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChange} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChange} from '@angular/core';
 import { Page } from "../../services/mock-menu-data";
 import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
@@ -6,6 +6,21 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {LanguageService} from "../../services/language.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {MatDialog} from "@angular/material/dialog";
+import {AddFolderComponent} from "../../add-folder/add-folder.component";
+import {FolderDTO, PageDTO} from "../../services/menu.service";
+import {FolderDialogData} from "../../add-folder/add-folder.component";
+import {AddPageComponent, PageDialogData} from "../../add-page/add-page.component";
+import {Location} from '@angular/common';
+import {PageService} from "../../services/page.service";
+import { ActivatedRoute, Router  } from '@angular/router';
+import {DeleteDialogComponent, DeleteDialogData} from "../../delete-dialog/delete-dialog.component";
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import {EditFolderDialogComponent, EditFolderDialogData} from "../../edit-folder-dialog/edit-folder-dialog.component";
 
 @Component({
   selector: 'app-menu',
@@ -28,10 +43,15 @@ export class MenuComponent implements OnInit {
   @Output() redirect = new EventEmitter<any>();
 
   language:string;
-  constructor(
-    private menuService: MenuService,
-    private languageService: LanguageService)
-  { }
+  addPageField:string;
+  addFolderField:string;
+  addNewRootFolder:string;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+  constructor(private menuService: MenuService, private  languageService: LanguageService,
+              public dialog: MatDialog, private location:Location, private pageService: PageService,
+              private route: ActivatedRoute, private router: Router, private _snackbar:MatSnackBar) { }
 
   getMenuData(): void {
     this.menuService.getMenuData().subscribe(pages => {
@@ -47,8 +67,29 @@ export class MenuComponent implements OnInit {
       (lang) => {
         this.getMenuData();
         this.language = lang;
+        this.setLanguageFields(lang);
       },
     );
+  }
+
+  setLanguageFields(lang:string){
+    switch (lang){
+      case "polish":
+        this.addPageField = "Dodaj stronę";
+        this.addFolderField = "Dodaj folder";
+        this.addNewRootFolder = "Dodaj Nowy Folder";
+        break;
+      case "english":
+        this.addPageField = "Add Page";
+        this.addFolderField = "Add Folder";
+        this.addNewRootFolder = "Add New Folder";
+        break;
+      case "french":
+        this.addPageField = "Ajouter Une Page";
+        this.addFolderField = "Ajouter Le Dossier";
+        this.addNewRootFolder = "Ajouter Un Nouveau Dossier";
+        break;
+    }
   }
 
 
@@ -185,6 +226,193 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  addChildFolder(parentId: number): void{
+    let dialogData:FolderDialogData = {
+      folderName: "",
+      mode:"child",
+      language:this.language
+    }
+    let dialogRef = this.dialog.open(AddFolderComponent, {
+      minHeight:"250px",
+      width: '400px',
+      data: dialogData
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        let previousTags:string[] = [];
+        this.pageService.getPage(parentId).subscribe(
+          (result2) => {
+            previousTags = result2.tags || [];
+          },
+          ()=>{},
+          ()=>{
+            let newFolder: FolderDTO = {
+              folderName: result,
+              tags: previousTags,
+            }
+            this.menuService.addChildFolder(newFolder, parentId).subscribe(
+              () => this.getMenuData(),
+            );
+          }
+        )
+      }
+    });
+  }
 
+  addRootFolder():void{
+    let dialogData:FolderDialogData = {
+      folderName: "",
+      mode: "root",
+      language:this.language
+    }
+    let dialogRef = this.dialog.open(AddFolderComponent, {
+      minHeight:"250px",
+      width: '400px',
+      data: dialogData
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        let newFolder: FolderDTO = {
+          folderName: result,
+        }
+        this.menuService.addRoot(newFolder).subscribe(
+          () => this.getMenuData(),
+        );
+      }
+      });
+  }
 
+  addPage(parentId: number): void{
+    let dialogData:PageDialogData = {
+      pageName: "",
+      language:this.language,
+    }
+    let dialogRef = this.dialog.open(AddPageComponent, {
+      minHeight:"170px",
+      width: '435px',
+      data: dialogData,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        let previousTags:string[] = [];
+        this.pageService.getPage(parentId).subscribe(
+          (result) => {
+            previousTags = result.tags || [];
+          },
+          ()=>{},
+          ()=>{
+            let newPage: PageDTO = {
+              pageName: result.pageName,
+              tags: previousTags,
+              content: "",
+            }
+            this.menuService.addPage(newPage, parentId).subscribe(
+              (result) => {
+                this.getMenuData();
+                this.location.replaceState(`/${this.language}/${result.id}`);
+                window.location.reload();
+              },
+            );
+          }
+
+        )
+      }
+    });
+  }
+  deletePage(page:Page, evt: MouseEvent){
+    const elementTargeted = new ElementRef(evt.currentTarget);
+    let dialogData:DeleteDialogData = {
+      isPage: true,
+      name: page.name,
+      confirmDeleted:false,
+      target: elementTargeted,
+      isLeft:true,
+    }
+    let deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
+      minHeight: '110px',
+      minWidth: '200px',
+      panelClass: 'custom-dialog-container',
+      data: dialogData,
+    });
+    deleteDialogRef.afterClosed().subscribe(result =>{
+        if(result){
+          this.pageService.deletePage(page.id).subscribe(
+            () =>{
+              this.openSnackbar(`You deleted the page ${page.name}`)
+              this.getMenuData();
+              if( this.router.url === `/${this.language}/${page.id}`) {
+                const URL = `/${this.language}/home`;
+                this.router.navigateByUrl(URL);
+              }
+            });
+        }
+    })
+  }
+
+  deleteFolder(page:Page, evt: MouseEvent){
+    const elementTargeted = new ElementRef(evt.currentTarget);
+    let dialogData:DeleteDialogData = {
+      isPage: false,
+      name: page.name,
+      confirmDeleted:false,
+      target: elementTargeted,
+      isLeft:true
+    }
+    let deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
+      minHeight: '110px',
+      minWidth: '200px',
+      panelClass: 'custom-dialog-container',
+      data: dialogData,
+    });
+    deleteDialogRef.afterClosed().subscribe(result =>{
+      if(result){
+        this.menuService.deleteFolder(page.id).subscribe(
+          () =>{
+            this.getMenuData();
+            this.openSnackbar(`You deleted folder ${page.name}`)
+            //check all children. If you were on page inside you need to reload. Hard to do for now.
+              const URL = `/${this.language}/home`;
+              this.router.navigateByUrl(URL);
+          });
+      }
+    })
+  }
+  editFolderTags(folderId:number){
+    this.menuService.getFolder(folderId).subscribe(
+      folder => {
+        let dialogData:EditFolderDialogData = {
+          confirmation: false,
+          id: folderId,
+          tags: folder.tags || [],
+          folderName: folder.folderName
+        }
+        let deleteDialogRef = this.dialog.open(EditFolderDialogComponent, {
+          minHeight: '240px',
+          maxHeight: '500px',
+          width: '400px',
+          data: dialogData,
+        });
+        deleteDialogRef.afterClosed().subscribe(
+          result => {
+            const newFolder:FolderDTO = {
+              folderName: dialogData.folderName,
+              tags: dialogData.tags
+
+            }
+            this.menuService.patchFolder(newFolder, dialogData.id).subscribe(
+              () => this.getMenuData(),
+            );
+          }
+        )
+      }
+    )
+  }
+  openSnackbar(message:string){
+    this._snackbar.open(message,'', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 2000,
+      panelClass:['snackbarStyles'],
+    })
+  }
 }

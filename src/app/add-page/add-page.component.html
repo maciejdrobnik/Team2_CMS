@@ -1,0 +1,16 @@
+<div id="fullAddPageDialog">
+<div id="addPageDialog" mat-dialog-content>
+  <p id="addPagePopupHeader">{{addPageField}}</p>
+  <mat-form-field id="addPageInputField" appearance="fill">
+    <mat-label id="pageNameInputLabel">{{nameOfPageField}}</mat-label>
+    <input id="pageNameInput" matInput [(ngModel)]="data.pageName">
+  </mat-form-field>
+</div>
+  <div class="errorMessage">
+    <small *ngIf="isWrong">Too short page name</small>
+  </div>
+<div id="addPageButtons" mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" mat-raised-button color="accent">{{returnField}}</button>
+  <button mat-button (click)="returnPageName()" mat-raised-button color="accent">{{confirmField}}</button>
+</div>
+</div>

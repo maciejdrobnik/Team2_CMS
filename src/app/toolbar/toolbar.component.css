@@ -37,10 +37,27 @@ button {
 .home {
   border-radius: 10%;
   text-decoration: none;
+}
 
+.logout {
+  margin: 0 2em;
+}
+
+
+.logout a:hover {
+  color: #580000;
 }
 
 
 .icons {
   margin-right: 1.1em;
+}
+
+.usernameInfo {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
 }

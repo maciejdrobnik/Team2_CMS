@@ -1,0 +1,88 @@
+#list{
+  font-size: 3rem;
+}
+.mat-dialog-container{
+  padding: 10px;
+}
+.mat-list-base .mat-list-item{
+  width: 200px;
+}
+.mat-list-base{
+  padding-top: 0;
+}
+a{
+  line-height: 0;
+}
+
+.closeButton{
+  float: right;
+  top:-20px;
+  right:-20px;
+}
+
+.confirmChanges{
+  float: right;
+  bottom:0;
+}
+
+.newTagDiv{
+  display: flex;
+  gap: 20px;
+  position: relative;
+  margin-top: 20px
+}
+
+small {
+  color: #8b0002;
+}
+
+.errorMessageDiv{
+  margin-bottom: 20px;
+}
+
+.wrongInput{
+  border: 2px solid #b80202;
+  border-radius: 5px;
+}
+
+.tagNameInput{
+  border: 2px solid;
+  border-radius: 5px;
+}
+
+.listOfTags{
+  position: relative;
+  top: 10px;
+  gap: 5px;
+}
+.tagItem{
+
+  width:100px
+}
+
+.tagBadge {
+  color: white;
+  background-color: #c2402c;
+  border-radius: 20px;
+  padding: 4px 18px;
+  font-size: 17px;
+}
+
+.tagItem mat-icon:hover{
+  cursor: pointer;
+}
+
+.errorMsg {
+  color: #b80202;
+  margin-top: 3px;
+}
+
+.noError {
+  color: #b80202;
+  margin-top: 3px;
+  visibility: hidden;
+}
+
+input:focus {
+  outline: none;
+}

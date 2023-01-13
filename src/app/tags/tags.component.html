@@ -1,0 +1,23 @@
+<button class="closeButton" mat-icon-button aria-label="close dialog" mat-dialog-close>
+  <mat-icon>close</mat-icon>
+</button>
+<h3 *ngIf="!tags.length">No tags right now</h3>
+<mat-list class="listOfTags" role="list">
+  <div id="list" *ngFor="let tag of tags">
+    <mat-list-item class="tagItem" role="listitem">
+      <span class="tagBadge">{{tag}}</span>
+      <a (click)="deleteTag(tag)"><mat-icon>remove</mat-icon></a>
+    </mat-list-item>
+  </div>
+</mat-list>
+<div class="newTagDiv">
+  <input (keyup)="checkKey($event, newTag.value)" [ngClass]="isWrong ? 'wrongInput' : 'tagNameInput'" id="newTag" #newTag  type="text">
+  <button mat-raised-button color="accent" (click)="addTag(newTag.value)">Add Tag</button>
+</div>
+<div class="errorMessageDiv">
+  <p [ngClass]="isWrong? 'errorMsg': 'noError'">
+    {{isWrong? "Invalid Tag name":"​"}}
+  </p>
+</div>
+<button mat-raised-button color="accent" class="confirmChanges" (click)="returnTags(true)">Confirm Changes</button>
+

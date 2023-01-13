@@ -1,0 +1,26 @@
+.full-width {
+  position: relative;
+  width: 90%;
+  margin: 2.5% 5% 0 0 ;
+}
+.input{
+  width: 100%;
+  font-size: 20px;
+}
+.latexInput {
+  height:15vh;
+  caret-color: black;
+}
+.latexOutput {
+  margin: 0 10px;
+  height:15vh;
+}
+.submitButton {
+  margin-bottom: 10px;
+}
+
+.closeButton{
+  float: right;
+  top:-20px;
+  right:-20px;
+}

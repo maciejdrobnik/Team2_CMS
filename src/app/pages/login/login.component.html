@@ -1,0 +1,21 @@
+<div class="main">
+  <div class="content">
+    <p class="welcome">Welcome to Lodz University of Technology Formulas Reference Editor</p>
+    <p class="login">please log in</p>
+    <div class="loginForm" (keyup)="checkEnter($event, username.value, password.value)">
+        <p class="label" >username</p>
+        <input id="username" type="text"  #username>
+        <p class="label" >password</p>
+        <input id="password" type="password"  #password >
+    </div>
+    <p [ngClass]="warning===''? 'noWarning': 'warning'">
+      {{warning!==''? warning:'​'}}
+    </p>
+
+    <button mat-button (click)="logInClick(username.value, password.value)">
+      LOG IN
+    </button>
+
+    <p>If you are a teacher and want to edit or add new pages to Formulas References, pleas contact Dean Office. </p>
+  </div>
+</div>

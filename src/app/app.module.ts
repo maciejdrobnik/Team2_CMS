@@ -22,12 +22,25 @@ import { SearchBarComponent } from './menu-wrapper/search-bar/search-bar.compone
 import {HttpClientModule} from '@angular/common/http';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {KatexModule} from "ng-katex";
+import { AddPageComponent } from './add-page/add-page.component';
+import { LatexDialogComponent } from './latex-dialog/latex-dialog.component';
+import { TextEditorComponent } from './text-editor/text-editor.component';
+import {MatMenuModule} from "@angular/material/menu";
+import { AddFolderComponent } from './add-folder/add-folder.component';
+import { TagsComponent } from './tags/tags.component';
+import {MatListModule} from "@angular/material/list";
+import {DeleteDialogComponent} from "./delete-dialog/delete-dialog.component";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { EditFolderDialogComponent } from './edit-folder-dialog/edit-folder-dialog.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 const appRoutes: Routes = [
   {path: ':lang/home', component: HomeComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: ':lang/:id', component: PageComponent},
+  {path: ':lang/:id/editor', component:TextEditorComponent},
+  {path: 'login', component: LoginComponent},
   {path: '',   redirectTo: 'english/home', pathMatch: 'full' }
 ];
 
@@ -40,7 +53,15 @@ const appRoutes: Routes = [
     PageComponent,
     MenuComponent,
     SearchBarComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AddPageComponent,
+    LatexDialogComponent,
+    TextEditorComponent,
+    AddFolderComponent,
+    TagsComponent,
+    DeleteDialogComponent,
+    EditFolderDialogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +79,9 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    MatMenuModule,
+    MatListModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}

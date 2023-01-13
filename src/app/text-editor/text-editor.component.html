@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-nd-12">
+      <div id="quill-editor">
+        {{this.content}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="editPanel">
+  <button (click)="onSubmit()" mat-raised-button color="accent">Save changes</button>
+  <button (click)="returnToPage()" mat-raised-button color="accent">Return</button>
+</div>
