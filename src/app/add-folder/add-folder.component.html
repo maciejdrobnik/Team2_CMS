@@ -2,8 +2,8 @@
   <div id="addFolderDialog" mat-dialog-content>
     <p id="addFolderPopupHeader">{{addRoot}}</p>
     <mat-form-field id="addFolderInputField" appearance="fill">
-      <mat-label id="pageNameInputLabel">{{nameOfRoot}}</mat-label>
-      <input matInput [(ngModel)]="data.folderName" name="folder">
+      <mat-label id="folderNameInputLabel">{{nameOfRoot}}</mat-label>
+      <input matInput id="folderNameInput" [(ngModel)]="data.folderName" name="folder">
     </mat-form-field>
   </div>
   <div class="errorMessage">

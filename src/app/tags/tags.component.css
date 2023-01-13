@@ -28,21 +28,27 @@ a{
 
 .newTagDiv{
   display: flex;
-  gap: 5px;
+  gap: 20px;
   position: relative;
-  top: 10px;
+  margin-top: 20px
 }
 
 small {
   color: #8b0002;
 }
 
-.errorMessage{
+.errorMessageDiv{
   margin-bottom: 20px;
 }
 
 .wrongInput{
-  border: 1px solid #8b0002;
+  border: 2px solid #b80202;
+  border-radius: 5px;
+}
+
+.tagNameInput{
+  border: 2px solid;
+  border-radius: 5px;
 }
 
 .listOfTags{
@@ -53,7 +59,22 @@ small {
 .tagItem{
   font-size: 17px;
   border-radius: 5px;
-  border: 1px solid #8b0002;
+  border: 1px solid #b80202;
   margin-top: 5px;
   width:100px
+}
+
+.tagItem mat-icon:hover{
+  cursor: pointer;
+}
+
+.errorMsg {
+  color: #b80202;
+  margin-top: 3px;
+}
+
+.noError {
+  color: #b80202;
+  margin-top: 3px;
+  visibility: hidden;
 }

@@ -28,6 +28,10 @@
   margin: 0 5px 0 5px;
 }
 
+#pageNameInput {
+  caret-color: #222222;
+}
+
 #addPagePopupHeader {
   margin-bottom: 20px;
 }

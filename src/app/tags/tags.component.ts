@@ -1,8 +1,6 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {PageService} from "../services/page.service";
-import {PageDTO} from "../services/menu.service";
-import {FormControl, Validators} from "@angular/forms";
 
 
 interface dataToSend {
@@ -24,7 +22,7 @@ export class TagsComponent implements OnInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {tags: string[], id:number}, private pageService: PageService, public dialogReference: MatDialogRef<TagsComponent>) {
-    this.tags = data.tags;
+    this.tags = [...data.tags];
     this.isWrong = false;
     this.confirmation = false;
   }
