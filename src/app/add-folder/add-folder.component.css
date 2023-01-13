@@ -24,16 +24,16 @@
   right: 24px;
   bottom: 10px;
   gap: 5px;
-  padding: 0;
-  margin: 0 5px 0 5px;
 }
 
-.errorMessage {
+.errorMessage{
   position: relative;
   color: #8b0002;
   left: 28px;
   top: -15px;
   width: 50%;
+  padding: 0;
+  margin: 0 5px 0 5px;
 }
 
 #addFolderPopupHeader {
@@ -43,5 +43,13 @@
 #fullAddFolderDialog {
   line-height: 20px;
   color: black;
+}
+
+.errorMessage{
+  position: relative;
+  color: #8b0002;
+  left: 28px;
+  top: -15px;
+  width: 50%;
 }
 
