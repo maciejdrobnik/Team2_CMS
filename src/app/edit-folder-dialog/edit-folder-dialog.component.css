@@ -1,6 +1,5 @@
 #list{
   font-size: 3rem;
-  padding: 5px;
 }
 .mat-dialog-container{
   padding: 10px;
@@ -86,8 +85,7 @@ a {
 
 .tagInput {
   border-radius: 5px;
-  border-width: 2px;
-  border-style: solid;
+  border: 2px solid;
 }
 
 .listOfTags{
@@ -97,11 +95,15 @@ a {
   margin-bottom: 10px;
 }
 .tagItem{
-  font-size: 17px;
-  border-radius: 5px;
-  border: 1px solid #8b0002;
-  margin-top: 5px;
   width:100px
+}
+
+.tagBadge {
+  color: white;
+  background-color: #c2402c;
+  border-radius: 20px;
+  padding: 4px 18px;
+  font-size: 17px;
 }
 
 .editMode {
@@ -124,4 +126,9 @@ a {
 
 .noEditMode p, input {
   height: 20px;
+}
+
+
+input:focus {
+  outline: none;
 }

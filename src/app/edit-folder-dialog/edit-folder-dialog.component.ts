@@ -26,6 +26,12 @@ export class EditFolderDialogComponent implements OnInit {
     this.data.folderName = newName;
     this.editMode = !this.editMode;
   }
+  checkKey(event: KeyboardEvent, newTag: string ) {
+    if(event.key === 'Enter') {
+      this.addTag(newTag)
+    }
+  }
+
   addTag(newTag: string){
     let validator = true;
     this.data.tags.forEach((tag) => {
