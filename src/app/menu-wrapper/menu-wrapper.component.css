@@ -2,10 +2,10 @@ button {
   overflow: hidden;
 }
 
-/* turns of autofocus on mat-button*/
-/*::ng-deep .mat-button-focus-overlay {*/
-/*  display: none;*/
-/*}*/
+ /*turns of autofocus on mat-button*/
+::ng-deep .mat-button-focus-overlay {
+  display: none;
+}
 
 mat-drawer {
   width: 30vw;

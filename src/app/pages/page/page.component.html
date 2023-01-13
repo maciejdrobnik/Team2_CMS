@@ -1,44 +1,44 @@
-<div id="pageContent"></div>
-  <div id="editBox">
-    <ul>
-      <li class="editName">
-        <div *ngIf="!editMode" class="noEditMode">
-          <p>Page name: {{pageName}}</p><a (click)="changeEditMode(pageName)"><mat-icon>edit</mat-icon></a>
+<div class="main">
+  <div id="pageContent"></div>
+  <div class="box">
+    <div id="editBox">
+      <div class="editName">
+        <p>Page name:</p>
+        <div *ngIf="!editMode" class="pageName">
+          <p class="name">{{pageName}}</p>
+          <a  mat-icon-button (click)="changeEditMode(pageName)"><mat-icon>edit</mat-icon></a>
         </div>
-        <div *ngIf="editMode" class="editMode">
-          <p>Page name: </p><input value="{{pageName}}" #newPageName><a (click)="changeEditMode(newPageName.value)"><mat-icon>save</mat-icon></a>
+        <div *ngIf="editMode" class="pageName">
+          <input class="name" value="{{pageName}}" #newPageName>
+          <a mat-icon-button (click)="changeEditMode(newPageName.value)"><mat-icon>save</mat-icon></a>
         </div>
-      </li>
-      <li>
-        <a routerLink="/{{language}}/{{id}}/editor">
-          <button>
+      </div>
+
+      <ul class="editButtons">
+        <li>
+          <a mat-button routerLink="/{{language}}/{{id}}/editor">
             {{editPageField}}
-        </button>
-        </a>
-      </li>
-      <li>
-        <a>
-          <button (click)="deletePage($event)">
-            {{deletePageField}}
-          </button>
-        </a>
-      </li>
-      <li>
-        <a>
-          <button (click)="editTags()">
-            {{editTagsField}}
-          </button>
           </a>
-      </li>
-    </ul>
-    <div id="tags">
-        <h3>Tags:  </h3>
-      <ul>
-        <div *ngFor="let tag of tags">
-          <li>
-            {{tag}}
-          </li>
-        </div>
+        </li>
+        <li>
+          <a mat-button (click)="deletePage($event)">
+            {{deletePageField}}
+          </a>
+        </li>
+        <li>
+          <a mat-button (click)="editTags()">
+            {{editTagsField}}
+          </a>
+        </li>
       </ul>
+      <div id="tags">
+        <h3>Tags:  </h3>
+        <ul><div *ngFor="let tag of tags">
+          <li> {{tag}} </li>
+        </div></ul>
+      </div>
     </div>
   </div>
+
+
+</div>
