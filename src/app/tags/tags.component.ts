@@ -30,6 +30,12 @@ export class TagsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  checkKey(event: KeyboardEvent, newTag: string ) {
+    if(event.key === 'Enter') {
+      this.addTag(newTag)
+    }
+  }
+
   addTag(newTag: string){
     let validator = true;
     this.tags.forEach((tag) =>{
