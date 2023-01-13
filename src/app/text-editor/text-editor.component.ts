@@ -120,7 +120,8 @@ export class TextEditorComponent implements OnInit {
       data: { equation: ''},
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined ) {
+      if(result !== undefined && result !== "\n" && result !== "") {
+        console.log(result);
         // Przeniesienie równania z dialogu do edytora
         this.quill.deleteText(range.index, range.length);
         this.quill.insertEmbed(range.index, "formula", result);

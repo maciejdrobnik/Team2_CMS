@@ -18,9 +18,6 @@ export class LatexDialogComponent {
 
   @HostListener('window:keyup.Enter', ['$event'])
   onDialogClick(event: KeyboardEvent): void {
-    this._matDialogRef.close(this.equation);
+      this._matDialogRef.close(this.equation);
   }
-
-
-
 }
