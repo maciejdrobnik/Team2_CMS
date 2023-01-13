@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChange, ElementRef} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChange} from '@angular/core';
 import { Page } from "../../services/mock-menu-data";
 import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {LanguageService} from "../../services/language.service";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {AddFolderComponent} from "../../add-folder/add-folder.component";
 import {FolderDTO, PageDTO} from "../../services/menu.service";
 import {FolderDialogData} from "../../add-folder/add-folder.component";
@@ -345,7 +345,8 @@ export class MenuComponent implements OnInit {
           folderName: folder.folderName
         }
         let deleteDialogRef = this.dialog.open(EditFolderDialogComponent, {
-          height: '330px',
+          minHeight: '240px',
+          maxHeight: '500px',
           width: '400px',
           data: dialogData,
         });

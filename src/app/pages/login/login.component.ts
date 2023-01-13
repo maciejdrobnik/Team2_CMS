@@ -27,5 +27,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  checkEnter(event: KeyboardEvent, username: string, password: string){
+    if(event.key === 'Enter'){
+      this.logInClick(username, password);
+    }
+  }
+
 
 }
