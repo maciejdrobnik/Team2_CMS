@@ -1,5 +1,6 @@
 mat-drawer-container {
   height: 100%;
+  width: 100%;
 }
 
 mat-drawer {
@@ -16,14 +17,15 @@ mat-drawer {
   flex: 1 1 auto
 }
 
-.main {
+.main_router {
   font-size: 2rem;
-  margin: 0 20vw;
   text-align: justify;
+  margin-top: 5vh;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
-  .main {
+  .main_router {
     margin: 0 3em;
   }
 }
@@ -31,3 +33,4 @@ mat-drawer {
 p {
   text-indent: 20px;
 }
+
