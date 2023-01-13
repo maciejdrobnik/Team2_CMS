@@ -179,8 +179,8 @@ export class MenuComponent implements OnInit {
       language:this.language
     }
     let dialogRef = this.dialog.open(AddFolderComponent, {
-      height: '24vh',
-      width: '25vw',
+      height: '35vh',
+      width: '35vw',
       data: dialogData
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -212,8 +212,8 @@ export class MenuComponent implements OnInit {
       language:this.language
     }
     let dialogRef = this.dialog.open(AddFolderComponent, {
-      height: '24vh',
-      width: '25vw',
+      height: '35vh',
+      width: '35vw',
       data: dialogData
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -234,8 +234,8 @@ export class MenuComponent implements OnInit {
       language:this.language,
     }
     let dialogRef = this.dialog.open(AddPageComponent, {
-      height: '24vh',
-      width: '25vw',
+      height: '35vh',
+      width: '35vw',
       data: dialogData,
     });
     dialogRef.afterClosed().subscribe(result => {

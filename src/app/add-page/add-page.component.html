@@ -1,8 +1,8 @@
 <div id="fullAddPageDialog">
 <div id="addPageDialog" mat-dialog-content>
-  <p>{{addPageField}}</p>
+  <p id="addPagePopupHeader">{{addPageField}}</p>
   <mat-form-field id="addPageInputField" appearance="fill">
-    <mat-label>{{nameOfPageField}}</mat-label>
+    <mat-label id="pageNameInputLabel">{{nameOfPageField}}</mat-label>
     <input matInput [(ngModel)]="data.pageName">
   </mat-form-field>
 </div>

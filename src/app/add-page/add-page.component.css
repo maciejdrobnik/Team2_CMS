@@ -21,5 +21,16 @@
   /*Right jest równy paddingowi elementów dialogu(input i title)*/
   right: 24px;
   gap: 5px;
+  padding: 0;
+  margin: 0 5px 0 5px;
+}
+
+#addPagePopupHeader {
+  margin-bottom: 20px;
+}
+
+#pageNameInputLabel {
+  line-height: 20px;
+  color: black;
 }
 
