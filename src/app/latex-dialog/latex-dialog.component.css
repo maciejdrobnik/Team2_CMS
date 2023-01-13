@@ -18,3 +18,9 @@
 .submitButton {
   margin-bottom: 10px;
 }
+
+.closeButton{
+  float: right;
+  top:-20px;
+  right:-20px;
+}

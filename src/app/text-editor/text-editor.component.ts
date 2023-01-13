@@ -87,7 +87,6 @@ export class TextEditorComponent implements OnInit {
     const currentUrl = this.router.url;
     const last = currentUrl.lastIndexOf("/");
     const returnUrl = currentUrl.slice(0, last);
-    console.log(returnUrl);
     this.router.navigateByUrl(returnUrl);
   }
 
@@ -115,7 +114,7 @@ export class TextEditorComponent implements OnInit {
       data: { equation: ''},
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined ) {
+      if(result !== undefined && result !== "\n" && result !== "") {
         // Przeniesienie równania z dialogu do edytora
         this.quill.deleteText(range.index, range.length);
         this.quill.insertEmbed(range.index, "formula", result);
