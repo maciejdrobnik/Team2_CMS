@@ -3,11 +3,14 @@
     <p id="addFolderPopupHeader">{{addRoot}}</p>
     <mat-form-field id="addFolderInputField" appearance="fill">
       <mat-label id="pageNameInputLabel">{{nameOfRoot}}</mat-label>
-      <input matInput [(ngModel)]="data.folderName">
+      <input matInput [(ngModel)]="data.folderName" name="folder>
     </mat-form-field>
+  </div>
+  <div class="errorMessage">
+    <small *ngIf="isWrong">Invalid Tag name</small>
   </div>
   <div id="addFolderButtons" mat-dialog-actions>
     <button mat-button (click)="onNoClick()" mat-raised-button color="accent">{{returnField}}</button>
-    <button mat-button [mat-dialog-close]="data.folderName" mat-raised-button color="accent">{{confirmField}}</button>
+    <button mat-button (click)="returnFolderName()" mat-raised-button color="accent">{{confirmField}}</button>
   </div>
 </div>

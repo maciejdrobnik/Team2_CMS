@@ -1,16 +1,14 @@
-<div id="pageContent">
-</div>
-<!--<div *ngFor="let page of pageContent">-->
-
-<!--  <div *ngIf="!page.latex; else latex"-->
-<!--       [innerHTML]="page.content">-->
-
-<!--  </div>-->
-<!--  <ng-template class="latexOutput" #latex>-->
-<!--    <ng-katex class="latexFunction" [equation]=page.content></ng-katex>-->
-<!--  </ng-template>-->
+<div id="pageContent"></div>
   <div id="editBox">
     <ul>
+      <li class="editName">
+        <div *ngIf="!editMode" class="noEditMode">
+          <p>Page name: {{pageName}}</p><a (click)="changeEditMode(pageName)"><mat-icon>edit</mat-icon></a>
+        </div>
+        <div *ngIf="editMode" class="editMode">
+          <p>Page name: </p><input value="{{pageName}}" #newPageName><a (click)="changeEditMode(newPageName.value)"><mat-icon>save</mat-icon></a>
+        </div>
+      </li>
       <li>
         <a routerLink="/{{language}}/{{id}}/editor">
           <button>
@@ -19,8 +17,8 @@
         </a>
       </li>
       <li>
-        <a routerLink="/{{language}}/home">
-          <button (click)="deletePage()">
+        <a>
+          <button (click)="deletePage($event)">
             {{deletePageField}}
           </button>
         </a>

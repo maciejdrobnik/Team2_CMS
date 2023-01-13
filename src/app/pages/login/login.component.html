@@ -2,9 +2,19 @@
   <div class="content">
     <p class="welcome">Welcome to Lodz University of Technology Formulas Reference Editor</p>
     <p class="login">please log in</p>
-    <a mat-button routerLink="english/home" (click)="logIn.emit()">
+    <div class="loginForm">
+        <p class="label" >username</p>
+        <input type="text"  #username>
+        <p class="label" >password</p>
+        <input type="password"  #password >
+    </div>
+    <p class="warning" *ngIf="warning">
+      {{warning}}
+    </p>
+
+    <button mat-button (click)="logInClick(username.value, password.value)">
       LOG IN
-    </a>
+    </button>
 
     <p>If you are a teacher and want to edit or add new pages to Formulas References, pleas contact Dean Office. </p>
   </div>
