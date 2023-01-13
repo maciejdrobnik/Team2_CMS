@@ -4,8 +4,6 @@ import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {LanguageService} from "../../services/language.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Location} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
 import {AddFolderComponent} from "../../add-folder/add-folder.component";
 import {FolderDTO, PageDTO} from "../../services/menu.service";
