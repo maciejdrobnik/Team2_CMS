@@ -1,5 +1,8 @@
 <div class="main">
-  <div id="pageContent"></div>
+  <div class="pageContainer">
+    <h1>{{pageName}}</h1>
+    <div id="pageContent"></div>
+  </div>
   <div class="box">
     <div id="editBox">
       <div class="editName">
@@ -16,27 +19,29 @@
 
       <ul class="editButtons">
         <li>
-          <a mat-button routerLink="/{{language}}/{{id}}/editor">
+          <a class="editButton" mat-raised-button color="accent" routerLink="/{{language}}/{{id}}/editor">
             {{editPageField}}
           </a>
         </li>
         <li>
-          <a mat-button (click)="deletePage($event)">
+          <a class="editButton" mat-raised-button color="accent" (click)="deletePage($event)">
             {{deletePageField}}
           </a>
         </li>
         <li>
-          <a mat-button (click)="editTags()">
+          <a class="editButton" mat-raised-button color="accent" (click)="editTags()">
             {{editTagsField}}
           </a>
         </li>
       </ul>
-      <div id="tags">
-        <h3>Tags:  </h3>
-        <ul><div *ngFor="let tag of tags">
-          <li> {{tag}} </li>
-        </div></ul>
-      </div>
+
+        <div id="tags" >
+          <p>Tags: </p>
+            <div class="tagList" *ngFor="let tag of tags">
+                <span class="tagBadge">{{tag}}</span>
+            </div>
+        </div>
+
     </div>
   </div>
 
