@@ -46,8 +46,20 @@ export class MenuService {
     return this.http.post<FolderDTO>(url, folder, {responseType:'json'});
   }
 
+  deleteFolder(id:number): Observable<FolderDTO> {
+    const url = URL + id;
+    return this.http.delete<FolderDTO>(url, {responseType:'json'});
+  }
+
   addPage(page: PageDTO, parentId:number): Observable<PageDTO> {
     const url = PAGE_URL + '/' + 'parent' + '/' + parentId;
     return this.http.post<PageDTO>(url, page, {responseType:'json'});
+  }
+  getFolder(id:number): Observable<FolderDTO>{
+    return this.http.get<FolderDTO>(FOLDER_URL + '/' + id, {responseType:'json'});
+  }
+
+  patchFolder(newFolder: FolderDTO, id:number): Observable<FolderDTO>{
+    return this.http.patch<FolderDTO>(FOLDER_URL + '/' + id,newFolder, {responseType:'json'});
   }
 }
