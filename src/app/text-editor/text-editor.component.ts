@@ -39,14 +39,9 @@ export class TextEditorComponent implements OnInit {
             container: [
               ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
               // ['blockquote', 'code-block'] raczej niepotrzebne, ale może blockquote bym zostawił
-
-              [{'header': 1}, {'header': 2}],               // custom button values
               [{'list': 'ordered'}, {'list': 'bullet'}],
               [{'font': []}],
-              [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
-              [{'header': [1, 2, 3, 4, 5, 6, false]}],
-
-              [{'color': []}, {'background': []}],          // dropdown with defaults from theme
+              [{'header': [1, 2, 3, 4, 5, 6, false]}],       // dropdown with defaults from theme
               [{'align': []}],
               ['clean'],                //ikona jest trochę nieintuicyjna jak dla mnie // remove formatting button
               [ 'link', 'image'] ,                        // link and image, video

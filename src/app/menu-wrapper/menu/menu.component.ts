@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChange} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChange} from '@angular/core';
 import { Page } from "../../services/mock-menu-data";
 import { MenuService } from "../../services/menu.service";
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import {LanguageService} from "../../services/language.service";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {AddFolderComponent} from "../../add-folder/add-folder.component";
 import {FolderDTO, PageDTO} from "../../services/menu.service";
 import {FolderDialogData} from "../../add-folder/add-folder.component";
