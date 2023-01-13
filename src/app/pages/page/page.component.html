@@ -37,9 +37,10 @@
 
         <div id="tags" >
           <p>Tags: </p>
-            <div class="tagList" *ngFor="let tag of showTags">
-                <span class="tagBadge">{{tag}}</span>
-            </div>
+          <p *ngIf="!tags?.length">No tags right now</p>
+          <div class="tagList" *ngFor="let tag of showTags">
+              <span class="tagBadge">{{tag}}</span>
+          </div>
         </div>
 
     </div>

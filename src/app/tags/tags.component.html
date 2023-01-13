@@ -4,11 +4,14 @@
 <h3 *ngIf="!tags.length">No tags right now</h3>
 <mat-list class="listOfTags" role="list">
   <div id="list" *ngFor="let tag of tags">
-    <mat-list-item class="tagItem" role="listitem">{{tag}}  <a (click)="deleteTag(tag)"><mat-icon>remove</mat-icon></a></mat-list-item>
+    <mat-list-item class="tagItem" role="listitem">
+      <span class="tagBadge">{{tag}}</span>
+      <a (click)="deleteTag(tag)"><mat-icon>remove</mat-icon></a>
+    </mat-list-item>
   </div>
 </mat-list>
 <div class="newTagDiv">
-  <input  [ngClass]="isWrong ? 'wrongInput' : 'tagNameInput'" id="newTag" #newTag  type="text">
+  <input (keyup)="checkKey($event, newTag.value)" [ngClass]="isWrong ? 'wrongInput' : 'tagNameInput'" id="newTag" #newTag  type="text">
   <button mat-raised-button color="accent" (click)="addTag(newTag.value)">Add Tag</button>
 </div>
 <div class="errorMessageDiv">

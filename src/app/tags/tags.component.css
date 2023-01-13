@@ -1,6 +1,5 @@
 #list{
   font-size: 3rem;
-  padding: 5px;
 }
 .mat-dialog-container{
   padding: 10px;
@@ -57,11 +56,16 @@ small {
   gap: 5px;
 }
 .tagItem{
-  font-size: 17px;
-  border-radius: 5px;
-  border: 1px solid #b80202;
-  margin-top: 5px;
+
   width:100px
+}
+
+.tagBadge {
+  color: white;
+  background-color: #c2402c;
+  border-radius: 20px;
+  padding: 4px 18px;
+  font-size: 17px;
 }
 
 .tagItem mat-icon:hover{
@@ -77,4 +81,8 @@ small {
   color: #b80202;
   margin-top: 3px;
   visibility: hidden;
+}
+
+input:focus {
+  outline: none;
 }
