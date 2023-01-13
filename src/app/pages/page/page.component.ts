@@ -20,6 +20,7 @@ export class PageComponent implements OnInit {
   pageHTML: string = "";
   tags?:string[] = [];
   pageContent: Array<PageContent> = [];
+  pageName:string;
 
 
   constructor(
@@ -43,6 +44,7 @@ export class PageComponent implements OnInit {
       next: (page: PageDTO) => {
         this.pageHTML = page.content || "";
         this.tags = page.tags;
+        this.pageName = page.pageName || "";
       },
       error: () => {},
       complete: () => {
