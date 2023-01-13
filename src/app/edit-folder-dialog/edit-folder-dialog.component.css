@@ -11,11 +11,39 @@
 .mat-list-base{
   padding-top: 0;
 }
+
+#folderNameInput {
+  height: 1.5em;
+}
+
+#noTagsHeader {
+  margin: 10px 0 10px 0;
+}
+
+.invalidTagMsg {
+  margin-top: 3px;
+  font-size: 1em;
+  color: red;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
 .editorIcon .mat-icon {
+  color: #111111;
   position: absolute;
   top: -3px;
   transform: scale(0.75);
+  cursor: pointer;
 }
+
+
+.editorIcon .mat-icon:hover {
+  color: #8B0002;
+}
+
+
 a {
   position: relative;
   line-height: 0;
@@ -32,26 +60,34 @@ a {
   position: relative;
   left:200px;
   top: 10px;
+  margin-top: 30px;
+}
+
+#removeTagIcon:hover {
+  cursor: pointer;
 }
 
 .newTagDiv{
   display: flex;
-  gap: 5px;
-  position: relative;
-  top: 20px;
-  margin-bottom: 20px;
+  align-items: center;
+  justify-content: start;
+  gap: 30px;
+  margin: 5px 0;
 }
 
-small {
-  color: #8b0002;
-}
-
-.errorMessage{
-  margin-bottom: 20px;
+#newTag {
+  height: 2em;
 }
 
 .wrongInput{
-  border: 1px solid #8b0002;
+  border: 2px solid red;
+  border-radius: 5px;
+}
+
+.tagInput {
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
 }
 
 .listOfTags{

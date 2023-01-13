@@ -345,7 +345,8 @@ export class MenuComponent implements OnInit {
           folderName: folder.folderName
         }
         let deleteDialogRef = this.dialog.open(EditFolderDialogComponent, {
-          height: '330px',
+          minHeight: '240px',
+          maxHeight: '500px',
           width: '400px',
           data: dialogData,
         });

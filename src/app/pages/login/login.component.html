@@ -2,14 +2,14 @@
   <div class="content">
     <p class="welcome">Welcome to Lodz University of Technology Formulas Reference Editor</p>
     <p class="login">please log in</p>
-    <div class="loginForm">
+    <div class="loginForm" (keyup)="checkEnter($event, username.value, password.value)">
         <p class="label" >username</p>
-        <input type="text"  #username>
+        <input id="username" type="text"  #username>
         <p class="label" >password</p>
-        <input type="password"  #password >
+        <input id="password" type="password"  #password >
     </div>
-    <p class="warning" *ngIf="warning">
-      {{warning}}
+    <p [ngClass]="warning===''? 'noWarning': 'warning'">
+      {{warning!==''? warning:'​'}}
     </p>
 
     <button mat-button (click)="logInClick(username.value, password.value)">
