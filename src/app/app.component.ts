@@ -25,7 +25,9 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.loggedIn = this.getLogin();
-    console.log(this.loggedIn)
+    if(!this.loggedIn){
+      this.router.navigateByUrl('login');
+    }
     this.darkModeControl.valueChanges.subscribe((darkMode) => {
       const darkClassName = 'darkMode';
       this.className = darkMode ? darkClassName : '';
@@ -38,10 +40,13 @@ export class AppComponent {
   }
 
   getLogin(): boolean {
-    if(sessionStorage.getItem("loggedIn") ===  null) {
+    const username =  sessionStorage.getItem('username');
+    const logged = sessionStorage.getItem("loggedIn");
+    if(logged ===  null ||
+      username === null || username === '') {
       sessionStorage.setItem('loggedIn', 'false');
     }
-    return Boolean(sessionStorage.getItem("loggedIn"));
+    return sessionStorage.getItem("loggedIn") === 'true';
   }
 
   switchDarkMode(): void {
