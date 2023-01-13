@@ -99,5 +99,21 @@ a {
     }
   }
 
+  .ql-snow .ql-stroke {
+    stroke: red !important;
+  }
+
+  .ql-snow .ql-fill {
+    fill: red !important;
+  }
+
+  .ql-snow .ql-picker {
+    color: red !important;
+  }
+
+  .ql-latex svg {
+    stroke: red !important;
+  }
+
 }
 

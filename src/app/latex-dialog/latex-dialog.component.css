@@ -9,6 +9,7 @@
 }
 .latexInput {
   height:15vh;
+  caret-color: black;
 }
 .latexOutput {
   margin: 0 10px;
