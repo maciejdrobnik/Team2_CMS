@@ -7,7 +7,6 @@ import {PageDTO} from "./menu.service";
 const URL = 'http://localhost:8080/';
 const PAGE_URL = URL + 'page/';
 
-
 let pageDTONotFound: PageDTO = {
   tags: [],
   id: 0,

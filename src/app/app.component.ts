@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class AppComponent {
   title = 'TeamProject';
   menu?: MatDrawer;
+  currentlyOpenPage: number = -1;
   loggedIn = false;
 
   @HostBinding('class') className = '';
@@ -54,6 +55,20 @@ export class AppComponent {
   }
 
 
+  checkClickOutsideMenu(event: any) {
+    const toggleButton = document.getElementById("toggleMenuButton");
+    if(this.menu?.opened && toggleButton && !toggleButton.contains(event.target) ) {
+      const menuElement = document.getElementById("menu");
+      if(menuElement &&  !menuElement.contains(event.target)) {
+        this.menu?.close();
+      }
+    }
+  }
+
+  checkMenuOpen(event: any) {
+    this.currentlyOpenPage = event;
+    this.menu?.toggle();
+  }
   setLogin(event: any, value: boolean) {
     sessionStorage.setItem('username', value ? event : '');
     this.loggedIn = value;
@@ -62,6 +77,4 @@ export class AppComponent {
       this.router.navigateByUrl('login');
     }
   }
-
-
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChange, ViewChild} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
 
 @Component({
@@ -7,18 +7,29 @@ import {MatDrawer} from "@angular/material/sidenav";
   styleUrls: ['./menu-wrapper.component.css']
 })
 export class MenuWrapperComponent implements OnInit {
-
   searchWord: string = '';
-  menuClosed: boolean = false;
+
+
   constructor() { }
 
   @ViewChild('menu', { static: true }) menu: MatDrawer | any;
 
   @Output() init = new EventEmitter<MatDrawer>();
 
+  @Input() menuClosed: boolean = true;
+  @Input() currentlyOpenPage: number = -1;
+
   ngOnInit(): void {
     this.init.emit(this.menu);
   }
+
+  ngOnChanges(changes: { [property: string]: SimpleChange }) {
+    let menuClose:  SimpleChange = changes['menuClosed'];
+    if (menuClose && menuClose.currentValue == true) {
+      this.searchWord = '';
+    }
+  }
+
 
   assignSearchWord(event: string) {
     this.searchWord = event;
@@ -26,9 +37,7 @@ export class MenuWrapperComponent implements OnInit {
 
   closeMenu(){
     this.menu.close();
-    this.menuClosed = !this.menuClosed;
+    this.searchWord = '';
   }
-
-
 
 }
