@@ -11,8 +11,6 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {delay} from "rxjs";
 import {DeleteDialogComponent, DeleteDialogData} from "../../delete-dialog/delete-dialog.component";
 
 interface PageContent {
@@ -32,6 +30,7 @@ export class PageComponent implements OnInit {
   language: string;
   pageHTML: string = "";
   tags?:string[] = [];
+  showTags?: string[] = [];
   pageContent: Array<PageContent> = [];
   editPageField:string;
   deletePageField:string;
@@ -99,6 +98,7 @@ export class PageComponent implements OnInit {
       next: (page: PageDTO) => {
           this.pageHTML = page.content || "";
           this.tags = page.tags;
+          this.showTags = page.tags;
           this.pageName = page.pageName || "";
           },
       error: () => {},
@@ -129,6 +129,7 @@ export class PageComponent implements OnInit {
     deleteDialogRef.afterClosed().subscribe(
       result => {
         if(result){
+          this.openSnackbar(`You deleted the page ${this.pageName}`);
           this.pageService.deletePage(this.id).subscribe(
             () => this.router.navigateByUrl(`/${this.language}/home`)
           )
@@ -147,11 +148,12 @@ export class PageComponent implements OnInit {
   }
 
   editTags(){
+    let tempTags = this.tags;
     const dialogRef = this.matDialog.open(TagsComponent, {
       width: "400px",
-      minHeight:"300px",
+      minHeight:"240px",
       maxHeight:"700px",
-      data: { tags: this.tags, id:this.id},
+      data: { tags: tempTags, id:this.id},
     });
     dialogRef.afterClosed().subscribe(
       data => {
@@ -163,6 +165,8 @@ export class PageComponent implements OnInit {
         this.pageService.patchPage(newPage).subscribe(
           () => {
             this.getPage();
+            // @ts-ignore
+            this.showTags = {...this.tags} || [];
             this.openSnackbar("You edited Tags");
           }
         )

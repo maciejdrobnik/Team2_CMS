@@ -8,11 +8,13 @@
   </div>
 </mat-list>
 <div class="newTagDiv">
-  <input  [ngClass]="isWrong ? 'wrongInput' : ''" id="newTag" #newTag  type="text">
+  <input  [ngClass]="isWrong ? 'wrongInput' : 'tagNameInput'" id="newTag" #newTag  type="text">
   <button mat-raised-button color="accent" (click)="addTag(newTag.value)">Add Tag</button>
 </div>
-<div class="errorMessage">
-  <small *ngIf="isWrong">Invalid Tag name</small>
+<div class="errorMessageDiv">
+  <p [ngClass]="isWrong? 'errorMsg': 'noError'">
+    {{isWrong? "Invalid Tag name":"​"}}
+  </p>
 </div>
 <button mat-raised-button color="accent" class="confirmChanges" (click)="returnTags(true)">Confirm Changes</button>
 

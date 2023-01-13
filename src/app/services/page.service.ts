@@ -38,7 +38,7 @@ export class PageService {
     return this.http.delete(URL + id, {responseType:'json'});
   }
 
-  patchPage(newPage:PageDTO): Observable<any> {
+  patchPage(newPage:PageDTO): Observable<PageDTO> {
     return this.http.patch(PAGE_URL + newPage.id, newPage, {responseType:'json'})
   }
 }

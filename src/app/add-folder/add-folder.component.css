@@ -45,6 +45,14 @@
   color: black;
 }
 
+#folderNameInputLabel {
+  color: #222222;
+}
+
+#folderNameInput {
+  caret-color: #222222;
+}
+
 .errorMessage{
   position: relative;
   color: #8b0002;
