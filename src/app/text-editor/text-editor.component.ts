@@ -21,6 +21,7 @@ export class TextEditorComponent implements OnInit {
   quill:Quill;
   content?:string;
   pageId?:number;
+  tags: string[];
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
@@ -66,6 +67,7 @@ export class TextEditorComponent implements OnInit {
     this.pageService.getPage(Number(this.route.snapshot.paramMap.get('id')) || 0).subscribe(
       page => {
         this.pageId = page.id;
+        this.tags = page.tags || [];
         this.content = page.content;
         this.quill.root.innerHTML = this.content || "";
       }
@@ -79,6 +81,7 @@ export class TextEditorComponent implements OnInit {
     let newPage: PageDTO = {
       content: content,
       id:this.pageId,
+      tags:this.tags,
     }
     this.openSnackbar("You saved your changes")
     this.pageService.patchPage(newPage).subscribe();
