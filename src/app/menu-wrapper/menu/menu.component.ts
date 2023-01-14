@@ -392,10 +392,10 @@ export class MenuComponent implements OnInit {
         });
         deleteDialogRef.afterClosed().subscribe(
           result => {
+            console.log(result.tags)
             const newFolder:FolderDTO = {
-              folderName: dialogData.folderName,
-              tags: dialogData.tags
-
+              folderName: result.folderName,
+              tags: result.tags
             }
             this.menuService.patchFolder(newFolder, dialogData.id).subscribe(
               () => this.getMenuData(),

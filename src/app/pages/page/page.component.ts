@@ -89,7 +89,8 @@ export class PageComponent implements OnInit {
       this.pageName = newPageName;
       const newPage:PageDTO = {
         pageName: this.pageName,
-        id:this.id
+        id:this.id,
+        tags:this.tags,
       }
       this.pageService.patchPage(newPage).subscribe();
     }

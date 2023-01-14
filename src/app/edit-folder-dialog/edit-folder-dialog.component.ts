@@ -55,6 +55,6 @@ export class EditFolderDialogComponent implements OnInit {
   }
   returnFolder(confirm:boolean){
     this.data.confirmation = confirm;
-    this.dialogRef.close();
+    this.dialogRef.close(this.data);
   }
 }
